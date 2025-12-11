@@ -50,7 +50,7 @@ Partial Class frmUser
         pnlBorder.Location = New Point(0, 0)
         pnlBorder.Margin = New Padding(4, 5, 4, 5)
         pnlBorder.Name = "pnlBorder"
-        pnlBorder.Size = New Size(1300, 800)
+        pnlBorder.Size = New Size(1600, 900)
         pnlBorder.TabIndex = 0
         ' 
         ' pnlContainer
@@ -62,7 +62,7 @@ Partial Class frmUser
         pnlContainer.Margin = New Padding(4, 5, 4, 5)
         pnlContainer.Name = "pnlContainer"
         pnlContainer.Padding = New Padding(40, 46, 40, 46)
-        pnlContainer.Size = New Size(900, 677)
+        pnlContainer.Size = New Size(1200, 777)
         pnlContainer.TabIndex = 2
         ' 
         ' pnlHistoryCard
@@ -75,7 +75,7 @@ Partial Class frmUser
         pnlHistoryCard.Margin = New Padding(4, 5, 4, 5)
         pnlHistoryCard.Name = "pnlHistoryCard"
         pnlHistoryCard.Padding = New Padding(27, 31, 27, 31)
-        pnlHistoryCard.Size = New Size(820, 585)
+        pnlHistoryCard.Size = New Size(1120, 685)
         pnlHistoryCard.TabIndex = 0
         ' 
         ' dgvHistory
@@ -112,7 +112,7 @@ Partial Class frmUser
         dgvHistory.RowsDefaultCellStyle = DataGridViewCellStyle2
         dgvHistory.RowTemplate.Height = 40
         dgvHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvHistory.Size = New Size(766, 468)
+        dgvHistory.Size = New Size(1066, 568)
         dgvHistory.TabIndex = 1
         ' 
         ' lblHistoryTitle
@@ -137,7 +137,7 @@ Partial Class frmUser
         pnlHeader.Location = New Point(400, 0)
         pnlHeader.Margin = New Padding(4, 5, 4, 5)
         pnlHeader.Name = "pnlHeader"
-        pnlHeader.Size = New Size(900, 123)
+        pnlHeader.Size = New Size(1200, 123)
         pnlHeader.TabIndex = 1
         ' 
         ' lblWelcome
@@ -164,7 +164,7 @@ Partial Class frmUser
         pnlSidebar.Location = New Point(0, 0)
         pnlSidebar.Margin = New Padding(4, 5, 4, 5)
         pnlSidebar.Name = "pnlSidebar"
-        pnlSidebar.Size = New Size(400, 800)
+        pnlSidebar.Size = New Size(400, 900)
         pnlSidebar.TabIndex = 0
         ' 
         ' btnLogout
@@ -175,7 +175,7 @@ Partial Class frmUser
         btnLogout.FlatStyle = FlatStyle.Flat
         btnLogout.Font = New Font("Segoe UI", 11.0F, FontStyle.Bold)
         btnLogout.ForeColor = Color.FromArgb(CByte(255), CByte(235), CByte(238))
-        btnLogout.Location = New Point(0, 692)
+        btnLogout.Location = New Point(0, 792)
         btnLogout.Margin = New Padding(4, 5, 4, 5)
         btnLogout.Name = "btnLogout"
         btnLogout.Size = New Size(400, 108)
@@ -189,7 +189,7 @@ Partial Class frmUser
         btnRefresh.FlatAppearance.BorderSize = 0
         btnRefresh.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(0), CByte(121), CByte(107))
         btnRefresh.FlatStyle = FlatStyle.Flat
-        btnRefresh.Font = New Font("Segoe UI", 11F)
+        btnRefresh.Font = New Font("Segoe UI", 11.0F)
         btnRefresh.ForeColor = Color.White
         btnRefresh.Location = New Point(0, 401)
         btnRefresh.Margin = New Padding(4, 5, 4, 5)
@@ -207,7 +207,7 @@ Partial Class frmUser
         btnRequestClearance.FlatAppearance.BorderSize = 0
         btnRequestClearance.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(0), CByte(121), CByte(107))
         btnRequestClearance.FlatStyle = FlatStyle.Flat
-        btnRequestClearance.Font = New Font("Segoe UI", 11F)
+        btnRequestClearance.Font = New Font("Segoe UI", 11.0F)
         btnRequestClearance.ForeColor = Color.White
         btnRequestClearance.Location = New Point(0, 293)
         btnRequestClearance.Margin = New Padding(4, 5, 4, 5)
@@ -225,7 +225,7 @@ Partial Class frmUser
         btnReport.FlatAppearance.BorderSize = 0
         btnReport.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(0), CByte(121), CByte(107))
         btnReport.FlatStyle = FlatStyle.Flat
-        btnReport.Font = New Font("Segoe UI", 11F)
+        btnReport.Font = New Font("Segoe UI", 11.0F)
         btnReport.ForeColor = Color.White
         btnReport.Location = New Point(0, 185)
         btnReport.Margin = New Padding(4, 5, 4, 5)
@@ -265,7 +265,7 @@ Partial Class frmUser
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
-        ClientSize = New Size(1300, 800)
+        ClientSize = New Size(1600, 900)
         Controls.Add(pnlBorder)
         FormBorderStyle = FormBorderStyle.None
         Margin = New Padding(4, 5, 4, 5)

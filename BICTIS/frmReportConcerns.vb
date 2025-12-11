@@ -25,7 +25,7 @@ Public Class frmReportConcern
         End If
 
         ' FIX: Save with Category = 'Concern' so it reflects on frmConcerns and shows RED on graph
-        Dim query As String = "INSERT INTO tblIncidents (ComplainantID, RespondentID, IncidentType, Narrative, Status, IncidentDate, Category) " &
+        Dim query As String = "INSERT INTO tblIncidents (IncidentID, ComplainantID, IncidentType, Narrative, Status, IncidentDate, Category) " &
                               "VALUES (@uid, 0, @type, @narr, 'Pending', @date, 'Concern')"
 
         Dim params As New Dictionary(Of String, Object)
