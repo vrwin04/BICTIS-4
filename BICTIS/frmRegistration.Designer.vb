@@ -58,7 +58,7 @@ Partial Class frmRegistration
         lblWelcome.AutoSize = True
         lblWelcome.Font = New Font("Segoe UI Light", 14.0F)
         lblWelcome.ForeColor = Color.WhiteSmoke
-        lblWelcome.Location = New Point(59, 343)
+        lblWelcome.Location = New Point(58, 322)
         lblWelcome.Margin = New Padding(4, 0, 4, 0)
         lblWelcome.Name = "lblWelcome"
         lblWelcome.Size = New Size(278, 32)
@@ -70,7 +70,7 @@ Partial Class frmRegistration
         lblBrand.AutoSize = True
         lblBrand.Font = New Font("Segoe UI", 36.0F, FontStyle.Bold)
         lblBrand.ForeColor = Color.White
-        lblBrand.Location = New Point(47, 262)
+        lblBrand.Location = New Point(47, 246)
         lblBrand.Margin = New Padding(4, 0, 4, 0)
         lblBrand.Name = "lblBrand"
         lblBrand.Size = New Size(183, 81)
@@ -139,7 +139,7 @@ Partial Class frmRegistration
         lblLoginLink.AutoSize = True
         lblLoginLink.Cursor = Cursors.Hand
         lblLoginLink.Font = New Font("Segoe UI", 9.75F, FontStyle.Bold)
-        lblLoginLink.ForeColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        lblLoginLink.ForeColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
         lblLoginLink.Location = New Point(353, 685)
         lblLoginLink.Margin = New Padding(4, 0, 4, 0)
         lblLoginLink.Name = "lblLoginLink"
@@ -161,7 +161,7 @@ Partial Class frmRegistration
         ' 
         ' btnRegister
         ' 
-        btnRegister.BackColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        btnRegister.BackColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
         btnRegister.Cursor = Cursors.Hand
         btnRegister.FlatAppearance.BorderSize = 0
         btnRegister.FlatStyle = FlatStyle.Flat
@@ -309,7 +309,7 @@ Partial Class frmRegistration
         ' 
         lblTitle.AutoSize = True
         lblTitle.Font = New Font("Segoe UI", 24.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblTitle.ForeColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        lblTitle.ForeColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
         lblTitle.Location = New Point(56, 31)
         lblTitle.Margin = New Padding(4, 0, 4, 0)
         lblTitle.Name = "lblTitle"
