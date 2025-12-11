@@ -92,6 +92,7 @@ Public Class adminDashboard
         If chartIncidents Is Nothing Then Exit Function
 
         Dim selection As String = cbIncidentType.Text
+        ' Safety check
         If String.IsNullOrWhiteSpace(selection) Then selection = "All Incidents"
 
         Dim query As String
@@ -105,7 +106,7 @@ Public Class adminDashboard
             params.Add("@type", selection)
         End If
 
-        ' Fetch Data
+        ' Fetch Data Background
         Dim dt As DataTable = Await Session.GetDataTableAsync(query, params)
 
         ' Update UI
@@ -114,6 +115,8 @@ Public Class adminDashboard
 
         Dim seriesName As String = If(isAllIncidents, "Incidents", "Status")
         Dim series As New SysChart.Series(seriesName)
+
+        ' *** CRITICAL FIX: Assign the Series to the ChartArea ***
         series.ChartArea = "ChartArea1"
 
         If isAllIncidents Then
@@ -148,6 +151,7 @@ Public Class adminDashboard
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
             For Each row As DataRow In dt.Rows
                 Dim xVal As String = If(isAllIncidents, row("IncidentType").ToString(), row("Status").ToString())
+                ' Handle nulls
                 If String.IsNullOrEmpty(xVal) Then xVal = "Unknown"
 
                 Dim yVal As Integer = Convert.ToInt32(row("Count"))
@@ -156,7 +160,7 @@ Public Class adminDashboard
                 Dim pIndex As Integer = series.Points.AddXY(xVal, yVal)
                 Dim p As SysChart.DataPoint = series.Points(pIndex)
 
-                ' --- COLOR LOGIC ---
+                ' --- DISTINCT COLOR CODING ---
                 If isAllIncidents Then
                     If blotterTypes.Contains(xVal) Then
                         p.Color = blotterColor
@@ -168,6 +172,7 @@ Public Class adminDashboard
                 End If
             Next
         Else
+            ' Handle empty data gracefully so chart isn't blank
             series.Points.AddXY("No Data", 0)
         End If
 
@@ -177,9 +182,11 @@ Public Class adminDashboard
     ' --- NAVIGATION BUTTONS ---
 
     Private Async Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        ' Reload stats and reset chart to "All Incidents"
         Await LoadStatsAsync()
         If cbIncidentType.Items.Count > 0 Then
             cbIncidentType.SelectedIndex = 0
+            ' Force load if index didn't change (e.g. was already 0)
             Await LoadChartAsync()
         End If
     End Sub

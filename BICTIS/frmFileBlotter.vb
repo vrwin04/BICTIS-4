@@ -60,9 +60,8 @@ Public Class frmFileBlotter
 
         Dim respondentName As String = cbRespondent.Text
 
-        ' If they chose "Resident", we expect them to name the person in the narrative
-        ' or we could have added another textbox, but to keep it simple we rely on the narrative.
-        Dim finalNarrative As String = "[Target: " & respondentName & "] " & txtNarrative.Text
+        ' FIX: Changed "Target" to "Respondent" to match Admin Search logic
+        Dim finalNarrative As String = "[Respondent: " & respondentName & "] " & txtNarrative.Text
 
         ' Determine Category: "Concern" if Health, "Blotter" otherwise
         Dim cat As String = "Blotter"

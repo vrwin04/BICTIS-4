@@ -8,6 +8,7 @@ Public Class frmLogin
             Exit Sub
         End If
 
+        ' NO HASHING - Plain Text Check
         Dim query As String = "SELECT * FROM tblResidents WHERE Username=@user AND [Password]=@pass"
         Dim params As New Dictionary(Of String, Object)
         params.Add("@user", txtUsername.Text)
@@ -16,6 +17,17 @@ Public Class frmLogin
         Dim dt As DataTable = Session.GetDataTable(query, params)
 
         If dt.Rows.Count > 0 Then
+            ' FIX: Check if Account is Active (Soft Delete support)
+            Dim isActive As Boolean = True
+            If dt.Rows(0).Table.Columns.Contains("IsActive") AndAlso Not IsDBNull(dt.Rows(0)("IsActive")) Then
+                isActive = Convert.ToBoolean(dt.Rows(0)("IsActive"))
+            End If
+
+            If Not isActive Then
+                MessageBox.Show("This account has been deactivated. Please contact the Admin.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                Exit Sub
+            End If
+
             Session.CurrentResidentID = Convert.ToInt32(dt.Rows(0)("ResidentID"))
             Session.CurrentUserRole = dt.Rows(0)("Role").ToString()
             Session.CurrentUserName = dt.Rows(0)("Username").ToString()

@@ -6,11 +6,11 @@ Public Class frmManageResidents
     End Sub
 
     Private Async Function LoadResidentsAsync(search As String) As Task
-        Dim query As String = "SELECT ResidentID, Username, FullName, Role FROM tblResidents WHERE Role='User'"
+        ' FIX: Only show Active users (IsActive=True)
+        Dim query As String = "SELECT ResidentID, Username, FullName, Role FROM tblResidents WHERE Role='User' AND IsActive=True"
         Dim params As New Dictionary(Of String, Object)
 
         If Not String.IsNullOrWhiteSpace(search) Then
-            ' Using Parameters is cleaner and safer
             query &= " AND (FullName LIKE @search OR Username LIKE @search)"
             params.Add("@search", "%" & search & "%")
         End If
@@ -21,7 +21,6 @@ Public Class frmManageResidents
 
     ' Async Search on Text Change
     Private Async Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        ' Optional: Small delay could be added here to prevent querying on every single keystroke rapidly
         Await LoadResidentsAsync(txtSearch.Text)
     End Sub
 
@@ -33,9 +32,10 @@ Public Class frmManageResidents
 
         Dim uid As Integer = Convert.ToInt32(dgvResidents.SelectedRows(0).Cells("ResidentID").Value)
 
-        If MessageBox.Show("Delete this resident?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
-            Session.ExecuteQuery("DELETE FROM tblResidents WHERE ResidentID=" & uid)
-            MessageBox.Show("User Deleted.", "Success")
+        ' FIX: Changed to "Deactivate" and used UPDATE instead of DELETE to prevent crashes
+        If MessageBox.Show("Are you sure you want to deactivate this user? They will no longer be able to login.", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+            Session.ExecuteQuery("UPDATE tblResidents SET IsActive=False WHERE ResidentID=" & uid)
+            MessageBox.Show("User Deactivated.", "Success")
             Await LoadResidentsAsync(txtSearch.Text)
         End If
     End Sub
