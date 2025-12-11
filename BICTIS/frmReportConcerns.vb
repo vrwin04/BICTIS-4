@@ -1,6 +1,11 @@
 ﻿Imports System.Collections.Generic
 
 Public Class frmReportConcern
+    ' ** NEW: Delegate and Event Declaration **
+    Public Delegate Sub RefreshDashboardDelegate()
+    Public Event DashboardNeedsRefresh As RefreshDashboardDelegate
+    ' ***************************************
+
     Private Sub frmReportConcern_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' POPULATE DROPDOWN WITH COMMUNITY CONCERNS ONLY
         cbType.Items.Clear()
@@ -14,7 +19,7 @@ Public Class frmReportConcern
             "Curfew Violation",
             "Other"
         })
-        cbType.SelectedIndex = 0
+        If cbType.Items.Count > 0 Then cbType.SelectedIndex = 0
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
@@ -24,21 +29,27 @@ Public Class frmReportConcern
             Exit Sub
         End If
 
-        ' FIX: Save with Category = 'Concern' so it reflects on frmConcerns and shows RED on graph
-        Dim query As String = "INSERT INTO tblIncidents (IncidentID, ComplainantID, IncidentType, Narrative, Status, IncidentDate, Category) " &
-                              "VALUES (@uid, 0, @type, @narr, 'Pending', @date, 'Concern')"
+        Try
+            ' FIX: Save with Category = 'Concern'
+            Dim query As String = "INSERT INTO tblIncidents (ComplainantID, IncidentType, Narrative, Status, IncidentDate, Category) " &
+                                  "VALUES (@uid, @type, @narr, 'Pending', @date, 'Concern')"
 
-        Dim params As New Dictionary(Of String, Object)
-        params.Add("@uid", Session.CurrentResidentID)
-        params.Add("@type", cbType.Text)
-        params.Add("@narr", txtNarrative.Text)
-        params.Add("@date", DateTime.Now.ToString())
+            Dim params As New Dictionary(Of String, Object)
+            params.Add("@uid", Session.CurrentResidentID)
+            params.Add("@type", cbType.Text)
+            params.Add("@narr", txtNarrative.Text)
+            params.Add("@date", DateTime.Now.ToString())
 
-        If Session.ExecuteQuery(query, params) Then
-            MessageBox.Show("Concern reported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.Close()
-        End If
+            If Session.ExecuteQuery(query, params) Then
+                MessageBox.Show("Concern reported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' ** NEW: Trigger the Event to Refresh Dashboard **
+                RaiseEvent DashboardNeedsRefresh()
+
+                Me.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Database Error: " & ex.Message, "Submission Failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
-
-
 End Class

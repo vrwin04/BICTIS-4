@@ -1,7 +1,12 @@
 ﻿Imports System.Collections.Generic
 
 Public Class frmRequestClearance
+    ' Delegate/Event para mag-refresh ang User Dashboard pagkatapos mag-submit
+    Public Delegate Sub RefreshDashboardDelegate()
+    Public Event DashboardNeedsRefresh As RefreshDashboardDelegate
+
     Private Sub frmRequestClearance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' POPULATE PURPOSE
         cbPurpose.Items.Clear()
         cbPurpose.Items.AddRange(New String() {
             "Employment",
@@ -12,43 +17,56 @@ Public Class frmRequestClearance
             "Bank Requirement",
             "Other"
         })
-        cbPurpose.SelectedIndex = 0
+        If cbPurpose.Items.Count > 0 Then cbPurpose.SelectedIndex = 0
+
+        ' ** NEW: POPULATE CERTIFICATE TYPE **
+        cbCertType.Items.Clear()
+        cbCertType.Items.AddRange(New String() {
+            "Barangay Clearance",
+            "Certificate of Residency",
+            "Certificate of Indigency",
+            "First Time Job Seeker"
+        })
+        If cbCertType.Items.Count > 0 Then cbCertType.SelectedIndex = 0
+
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
 
         ' 1. CHECK VALIDATION FOR INPUT
-        If String.IsNullOrWhiteSpace(cbPurpose.Text) Then
-            MessageBox.Show("Please select a purpose.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        If String.IsNullOrWhiteSpace(cbCertType.Text) OrElse String.IsNullOrWhiteSpace(cbPurpose.Text) Then
+            MessageBox.Show("Please select Certificate Type and Purpose.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
-        ' 2. CHECK FOR PENDING CASES [NEW LOGIC]
-        ' Tinitignan nito kung ang user (ComplainantID) o kung siya ang inireklamo (RespondentID) ay may pending na kaso.
-        ' Note: Sa current system niyo, ComplainantID lang ang tiyak na naka-link, pero sinama ko na ang RespondentID para future-proof.
-        Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid OR RespondentID = @uid) AND Status = 'Pending' AND Category='Blotter'"
+        ' 2. CHECK FOR PENDING CASES (Security Block)
+        Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid) AND Status = 'Pending'"
         Dim checkParams As New Dictionary(Of String, Object)
         checkParams.Add("@uid", Session.CurrentResidentID)
 
-        Dim pendingCount As Integer = Session.GetCount(checkQuery, checkParams)
-
-        If pendingCount > 0 Then
+        If Session.GetCount(checkQuery, checkParams) > 0 Then
             MessageBox.Show("ACCESS DENIED: You can't request a clearance because you have a pending case.", "Clearance Blocked", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Exit Sub
         End If
 
-        ' 3. PROCEED TO SUBMIT IF NO PENDING CASE
-        Dim query As String = "INSERT INTO tblClearances (ResidentID, Purpose, Status, DateIssued) VALUES (@uid, @purp, 'Pending', @date)"
+        ' 3. PROCEED TO SUBMIT (FIXED QUERY)
+        ' FIXED: Added CertificateType and DateNeeded parameters
+        Dim query As String = "INSERT INTO tblClearances (ResidentID, CertificateType, Purpose, Status, DateIssued, DateNeeded) VALUES (@uid, @type, @purp, 'Pending', @date, @need)"
+
         Dim params As New Dictionary(Of String, Object)
         params.Add("@uid", Session.CurrentResidentID)
+        params.Add("@type", cbCertType.Text)  ' Kinuha ang value ng Certificate Type
         params.Add("@purp", cbPurpose.Text)
         params.Add("@date", DateTime.Now.ToString())
+        params.Add("@need", dtpNeeded.Value.ToShortDateString()) ' Kinuha ang Date Needed
 
         If Session.ExecuteQuery(query, params) Then
-            MessageBox.Show("Request submitted successfully." & vbCrLf & "Please wait for approval.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Request submitted successfully. Please wait for Admin to schedule your pickup.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Trigger the dashboard refresh event
+            RaiseEvent DashboardNeedsRefresh()
+
             Me.Close()
         End If
     End Sub
-
-
 End Class
