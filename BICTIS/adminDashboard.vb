@@ -1,5 +1,4 @@
-﻿' Add specific references
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Imports System.Data
 Imports System.Collections.Generic
 Imports System.Threading.Tasks
@@ -10,9 +9,14 @@ Public Class adminDashboard
     Private Async Sub adminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblPageTitle.Text = "Dashboard - " & Session.CurrentUserRole
         Try
+            ' Remove handler temporarily to avoid triggering during load
             RemoveHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
+
             LoadFilterOptions()
+
+            ' Re-attach handler
             AddHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
+
             Await LoadStatsAsync()
             Await LoadChartAsync()
         Catch ex As Exception
@@ -37,10 +41,10 @@ Public Class adminDashboard
     End Sub
 
     ' --- MENU BUTTONS ---
-    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+    Private Async Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         pnlMainContent.Controls.Clear()
         pnlMainContent.Controls.Add(pnlDashboardView) ' Ibalik ang dashboard stats
-        _ = LoadStatsAsync() ' Reload stats (discard task)
+        Await LoadStatsAsync() ' Reload stats properly
     End Sub
 
     Private Sub btnProjects_Click(sender As Object, e As EventArgs) Handles btnProjects.Click
@@ -56,7 +60,6 @@ Public Class adminDashboard
     End Sub
 
     Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click
-        ' Placeholder for reports form
         MessageBox.Show("Reports module coming soon.", "Info")
     End Sub
 
@@ -69,11 +72,11 @@ Public Class adminDashboard
         End If
     End Sub
 
-    ' --- DASHBOARD LOGIC (Keep existing stats logic) ---
+    ' --- DASHBOARD LOGIC ---
     Private Async Function LoadStatsAsync() As Task
         Dim taskUserCount = Session.GetCountAsync("SELECT COUNT(*) FROM tblResidents WHERE Role='User'")
         Dim taskPending = Session.GetCountAsync("SELECT COUNT(*) FROM tblIncidents WHERE Status='Pending'")
-        Dim taskProjects = Session.GetCountAsync("SELECT COUNT(*) FROM tblProjects") ' PROJECT COUNT NA
+        Dim taskProjects = Session.GetCountAsync("SELECT COUNT(*) FROM tblProjects")
         Dim taskConcerns = Session.GetCountAsync("SELECT COUNT(*) FROM tblIncidents WHERE Category='Concern'")
 
         Dim userCount As Integer = Await taskUserCount
@@ -86,7 +89,11 @@ Public Class adminDashboard
         lblTotalProjects.Text = projects.ToString()
         lblTotalConcerns.Text = concerns.ToString()
 
-        If pending > 0 Then lblPendingCases.ForeColor = Color.Red Else lblPendingCases.ForeColor = Color.Green
+        If pending > 0 Then
+            lblPendingCases.ForeColor = Color.Red
+        Else
+            lblPendingCases.ForeColor = Color.Green
+        End If
     End Function
 
     Private Sub LoadFilterOptions()
@@ -102,6 +109,7 @@ Public Class adminDashboard
 
     Private Async Function LoadChartAsync() As Task
         If chartIncidents Is Nothing Then Exit Function
+
         Dim selection As String = cbIncidentType.Text
         If String.IsNullOrWhiteSpace(selection) Then selection = "All Incidents"
 
@@ -127,7 +135,9 @@ Public Class adminDashboard
 
         If dt.Rows.Count > 0 Then
             For Each row As DataRow In dt.Rows
-                s.Points.AddXY(row(0).ToString(), row("Count"))
+                Dim xVal As String = row(0).ToString()
+                Dim yVal As Integer = Convert.ToInt32(row("Count"))
+                s.Points.AddXY(xVal, yVal)
             Next
         Else
             s.Points.AddXY("No Data", 0)

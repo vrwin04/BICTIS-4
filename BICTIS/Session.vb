@@ -8,7 +8,7 @@ Imports System.Text ' Added for Text processing
 
 Public Module Session
     ' CONFIGURATION
-    Public dbFile As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BICTIS_DB.accdb")
+    Public dbFile As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BarangayDB.accdb")
     Private ReadOnly connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & dbFile & ";Persist Security Info=False;"
 
     ' USER STATE
