@@ -98,7 +98,8 @@ Partial Class frmProjects
         '
         'btnUpdate
         '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
         Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(46, 204, 113)
         Me.btnUpdate.FlatAppearance.BorderSize = 0
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -113,7 +114,8 @@ Partial Class frmProjects
         '
         'btnAdd
         '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
         Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(52, 152, 219)
         Me.btnAdd.FlatAppearance.BorderSize = 0
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -128,6 +130,8 @@ Partial Class frmProjects
         '
         'cbStatus
         '
+        Me.cbStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbStatus.BackColor = System.Drawing.Color.WhiteSmoke
         Me.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -151,6 +155,8 @@ Partial Class frmProjects
         '
         'txtDescription
         '
+        Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDescription.BackColor = System.Drawing.Color.WhiteSmoke
         Me.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.0!)
@@ -173,6 +179,8 @@ Partial Class frmProjects
         '
         'txtExpenses
         '
+        Me.txtExpenses.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExpenses.BackColor = System.Drawing.Color.WhiteSmoke
         Me.txtExpenses.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtExpenses.Font = New System.Drawing.Font("Segoe UI", 11.0!)
@@ -194,6 +202,8 @@ Partial Class frmProjects
         '
         'txtBudget
         '
+        Me.txtBudget.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBudget.BackColor = System.Drawing.Color.WhiteSmoke
         Me.txtBudget.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtBudget.Font = New System.Drawing.Font("Segoe UI", 11.0!)
@@ -215,6 +225,8 @@ Partial Class frmProjects
         '
         'txtProjectName
         '
+        Me.txtProjectName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtProjectName.BackColor = System.Drawing.Color.WhiteSmoke
         Me.txtProjectName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtProjectName.Font = New System.Drawing.Font("Segoe UI", 11.0!)

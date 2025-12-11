@@ -9,14 +9,9 @@ Public Class adminDashboard
     Private Async Sub adminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblPageTitle.Text = "Dashboard - " & Session.CurrentUserRole
         Try
-            ' Remove handler temporarily to avoid triggering during load
             RemoveHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
-
             LoadFilterOptions()
-
-            ' Re-attach handler
             AddHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
-
             Await LoadStatsAsync()
             Await LoadChartAsync()
         Catch ex As Exception
@@ -26,9 +21,7 @@ Public Class adminDashboard
 
     ' --- PANEL SWITCH LOGIC ---
     Public Sub LoadForm(ByVal form As Object)
-        ' Linisin ang laman ng Main Content
         pnlMainContent.Controls.Clear()
-
         Dim f As Form = TryCast(form, Form)
         If f IsNot Nothing Then
             f.TopLevel = False
@@ -43,16 +36,12 @@ Public Class adminDashboard
     ' --- MENU BUTTONS ---
     Private Async Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         pnlMainContent.Controls.Clear()
-        pnlMainContent.Controls.Add(pnlDashboardView) ' Ibalik ang dashboard stats
-        Await LoadStatsAsync() ' Reload stats properly
+        pnlMainContent.Controls.Add(pnlDashboardView)
+        Await LoadStatsAsync()
     End Sub
 
     Private Sub btnProjects_Click(sender As Object, e As EventArgs) Handles btnProjects.Click
         LoadForm(New frmProjects())
-    End Sub
-
-    Private Sub btnResidents_Click(sender As Object, e As EventArgs) Handles btnResidents.Click
-        LoadForm(New frmManageResidents())
     End Sub
 
     Private Sub btnConcerns_Click(sender As Object, e As EventArgs) Handles btnConcerns.Click
@@ -61,6 +50,10 @@ Public Class adminDashboard
 
     Private Sub btnClearance_Click(sender As Object, e As EventArgs) Handles btnClearance.Click
         LoadForm(New frmClearance())
+    End Sub
+
+    Private Sub btnResidents_Click(sender As Object, e As EventArgs) Handles btnResidents.Click
+        LoadForm(New frmManageResidents())
     End Sub
 
     Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click

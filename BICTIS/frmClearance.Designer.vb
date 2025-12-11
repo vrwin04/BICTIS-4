@@ -17,8 +17,6 @@ Partial Class frmClearance
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.lblTitle = New System.Windows.Forms.Label()
         Me.pnlControls = New System.Windows.Forms.Panel()
         Me.dtpPickup = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -27,31 +25,9 @@ Partial Class frmClearance
         Me.btnReject = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvRequests = New System.Windows.Forms.DataGridView()
-        Me.pnlHeader.SuspendLayout()
         Me.pnlControls.SuspendLayout()
         CType(Me.dgvRequests, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'pnlHeader
-        '
-        Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
-        Me.pnlHeader.Controls.Add(Me.lblTitle)
-        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
-        Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(900, 60)
-        Me.pnlHeader.TabIndex = 0
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(20, 15)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(252, 30)
-        Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "CLEARANCE REQUESTS"
         '
         'pnlControls
         '
@@ -165,7 +141,7 @@ Partial Class frmClearance
         Me.dgvRequests.ColumnHeadersHeight = 40
         Me.dgvRequests.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvRequests.EnableHeadersVisualStyles = False
-        Me.dgvRequests.Location = New System.Drawing.Point(0, 60)
+        Me.dgvRequests.Location = New System.Drawing.Point(0, 0)
         Me.dgvRequests.Name = "dgvRequests"
         Me.dgvRequests.ReadOnly = True
         Me.dgvRequests.RowHeadersVisible = False
@@ -174,9 +150,8 @@ Partial Class frmClearance
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(200, 230, 225)
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
         Me.dgvRequests.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvRequests.RowTemplate.Height = 35
         Me.dgvRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvRequests.Size = New System.Drawing.Size(900, 460)
+        Me.dgvRequests.Size = New System.Drawing.Size(900, 520)
         Me.dgvRequests.TabIndex = 2
         '
         'frmClearance
@@ -186,14 +161,10 @@ Partial Class frmClearance
         Me.ClientSize = New System.Drawing.Size(900, 600)
         Me.Controls.Add(Me.dgvRequests)
         Me.Controls.Add(Me.pnlControls)
-        Me.Controls.Add(Me.pnlHeader)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmClearance"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Clearance Management"
-        Me.pnlHeader.ResumeLayout(False)
-        Me.pnlHeader.PerformLayout()
         Me.pnlControls.ResumeLayout(False)
         Me.pnlControls.PerformLayout()
         CType(Me.dgvRequests, System.ComponentModel.ISupportInitialize).EndInit()
@@ -201,8 +172,6 @@ Partial Class frmClearance
 
     End Sub
 
-    Friend WithEvents pnlHeader As Panel
-    Friend WithEvents lblTitle As Label
     Friend WithEvents pnlControls As Panel
     Friend WithEvents dgvRequests As DataGridView
     Friend WithEvents btnPrint As Button

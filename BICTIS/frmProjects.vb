@@ -2,7 +2,8 @@
 
 Public Class frmProjects
     Private Sub frmProjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblTitle.Text = "PROJECT MONITORING"
+        ' Tinanggal ko na ang lblTitle.Text dito para iwas error. 
+        ' Naka-set na ito sa Designer.
         LoadProjects()
         cbStatus.Items.Clear()
         cbStatus.Items.AddRange(New String() {"Planning", "Ongoing", "Completed"})
@@ -77,6 +78,4 @@ Public Class frmProjects
         txtExpenses.Clear()
         cbStatus.SelectedIndex = -1
     End Sub
-
-
 End Class
