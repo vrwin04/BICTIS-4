@@ -27,7 +27,7 @@ Partial Class frmFileBlotter
         Me.cbType = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlLine3 = New System.Windows.Forms.Panel()
-        Me.txtRespondent = New System.Windows.Forms.TextBox()
+        Me.cbRespondent = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.pnlContent.SuspendLayout()
@@ -67,7 +67,7 @@ Partial Class frmFileBlotter
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(200, 25)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "FILE BLOTTER CASE"
+        Me.lblTitle.Text = "FILE INCIDENT / CASE"
         '
         'pnlContent
         '
@@ -80,7 +80,7 @@ Partial Class frmFileBlotter
         Me.pnlContent.Controls.Add(Me.cbType)
         Me.pnlContent.Controls.Add(Me.Label1)
         Me.pnlContent.Controls.Add(Me.pnlLine3)
-        Me.pnlContent.Controls.Add(Me.txtRespondent)
+        Me.pnlContent.Controls.Add(Me.cbRespondent)
         Me.pnlContent.Controls.Add(Me.Label3)
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(0, 60)
@@ -100,7 +100,7 @@ Partial Class frmFileBlotter
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(400, 50)
         Me.btnSubmit.TabIndex = 6
-        Me.btnSubmit.Text = "FILE BLOTTER"
+        Me.btnSubmit.Text = "SUBMIT CASE"
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
         'pnlLine2
@@ -171,15 +171,17 @@ Partial Class frmFileBlotter
         Me.pnlLine3.Size = New System.Drawing.Size(400, 2)
         Me.pnlLine3.TabIndex = 11
         '
-        'txtRespondent
+        'cbRespondent
         '
-        Me.txtRespondent.BackColor = System.Drawing.Color.White
-        Me.txtRespondent.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtRespondent.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.txtRespondent.Location = New System.Drawing.Point(50, 45)
-        Me.txtRespondent.Name = "txtRespondent"
-        Me.txtRespondent.Size = New System.Drawing.Size(400, 22)
-        Me.txtRespondent.TabIndex = 0
+        Me.cbRespondent.BackColor = System.Drawing.Color.White
+        Me.cbRespondent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRespondent.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbRespondent.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.cbRespondent.FormattingEnabled = True
+        Me.cbRespondent.Location = New System.Drawing.Point(50, 42)
+        Me.cbRespondent.Name = "cbRespondent"
+        Me.cbRespondent.Size = New System.Drawing.Size(400, 28)
+        Me.cbRespondent.TabIndex = 0
         '
         'Label3
         '
@@ -188,9 +190,9 @@ Partial Class frmFileBlotter
         Me.Label3.ForeColor = System.Drawing.Color.Gray
         Me.Label3.Location = New System.Drawing.Point(46, 20)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(180, 19)
+        Me.Label3.Size = New System.Drawing.Size(205, 19)
         Me.Label3.TabIndex = 10
-        Me.Label3.Text = "Name of Respondent (Who?):"
+        Me.Label3.Text = "Select Department / Jurisdiction:"
         '
         'frmFileBlotter
         '
@@ -223,6 +225,6 @@ Partial Class frmFileBlotter
     Friend WithEvents pnlLine2 As Panel
     Friend WithEvents btnSubmit As Button
     Friend WithEvents Label3 As Label
-    Friend WithEvents txtRespondent As TextBox
+    Friend WithEvents cbRespondent As ComboBox
     Friend WithEvents pnlLine3 As Panel
 End Class
