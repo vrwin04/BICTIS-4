@@ -24,11 +24,11 @@ Public Class frmRegistration
             Exit Sub
         End If
 
-        ' Insert (Using HashPassword)
+        ' Insert (Plain Text Password)
         Dim query As String = "INSERT INTO tblResidents (Username, [Password], Role, FullName, IsActive) VALUES (@user, @pass, 'User', @full, True)"
         Dim params As New Dictionary(Of String, Object)
         params.Add("@user", txtUsername.Text)
-        params.Add("@pass", Session.HashPassword(txtPassword.Text)) ' FIX: Hash the password
+        params.Add("@pass", txtPassword.Text) ' No Hashing
         params.Add("@full", txtFullName.Text)
 
         If Session.ExecuteQuery(query, params) Then

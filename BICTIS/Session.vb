@@ -15,7 +15,7 @@ Public Module Session
     Public CurrentUserName As String = ""
     Public CurrentFullName As String = ""
 
-    ' --- SYNCHRONOUS METHODS (Keep for backward compatibility) ---
+    ' --- DATABASE METHODS ---
     Public Function GetDataTable(query As String, Optional parameters As Dictionary(Of String, Object) = Nothing) As DataTable
         Dim dt As New DataTable()
         Using conn As New OleDbConnection(connectionString)
@@ -80,8 +80,7 @@ Public Module Session
         End Using
     End Function
 
-    ' --- NEW: ASYNCHRONOUS METHODS (For Efficiency) ---
-
+    ' --- ASYNCHRONOUS METHODS ---
     Public Async Function GetDataTableAsync(query As String, Optional parameters As Dictionary(Of String, Object) = Nothing) As Task(Of DataTable)
         Dim dt As New DataTable()
         Using conn As New OleDbConnection(connectionString)
@@ -92,8 +91,7 @@ Public Module Session
                     Next
                 End If
                 Try
-                    Await conn.OpenAsync() ' Async Open
-                    ' OleDbDataAdapter doesn't support async Fill directly, so we wrap it
+                    Await conn.OpenAsync()
                     Await Task.Run(Sub()
                                        Dim adapter As New OleDbDataAdapter(cmd)
                                        adapter.Fill(dt)
