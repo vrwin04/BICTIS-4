@@ -60,12 +60,11 @@ Public Class frmFileBlotter
 
         Dim respondentName As String = cbRespondent.Text
 
-        ' FIX: Changed "Target" to "Respondent" to match Admin Search logic
+        ' Tag the respondent for Admin filtering
         Dim finalNarrative As String = "[Respondent: " & respondentName & "] " & txtNarrative.Text
 
-        ' Determine Category: "Concern" if Health, "Blotter" otherwise
+        ' FIX: Always save as 'Blotter' so it reflects on frmBlotter
         Dim cat As String = "Blotter"
-        If respondentName = "Barangay Health Office" Then cat = "Concern"
 
         Dim query As String = "INSERT INTO tblIncidents (ComplainantID, RespondentID, IncidentType, Narrative, Status, IncidentDate, Category) " &
                               "VALUES (@uid, 0, @type, @narr, 'Pending', @date, @cat)"
@@ -78,7 +77,7 @@ Public Class frmFileBlotter
         params.Add("@cat", cat)
 
         If Session.ExecuteQuery(query, params) Then
-            MessageBox.Show("Case filed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Blotter case filed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.Close()
         End If
     End Sub

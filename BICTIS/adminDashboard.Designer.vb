@@ -296,7 +296,7 @@ Partial Class adminDashboard
         ' 
         lblTotalBlotter.AutoSize = True
         lblTotalBlotter.Font = New Font("Segoe UI", 36.0F, FontStyle.Bold)
-        lblTotalBlotter.ForeColor = Color.FromArgb(CByte(192), CByte(57), CByte(43))
+        lblTotalBlotter.ForeColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
         lblTotalBlotter.Location = New Point(27, 62)
         lblTotalBlotter.Margin = New Padding(4, 0, 4, 0)
         lblTotalBlotter.Name = "lblTotalBlotter"
@@ -318,7 +318,7 @@ Partial Class adminDashboard
         ' 
         ' Panel3
         ' 
-        Panel3.BackColor = Color.FromArgb(CByte(192), CByte(57), CByte(43))
+        Panel3.BackColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
         Panel3.Dock = DockStyle.Left
         Panel3.Location = New Point(0, 0)
         Panel3.Margin = New Padding(4, 5, 4, 5)
@@ -342,7 +342,7 @@ Partial Class adminDashboard
         ' 
         lblTotalConcerns.AutoSize = True
         lblTotalConcerns.Font = New Font("Segoe UI", 36.0F, FontStyle.Bold)
-        lblTotalConcerns.ForeColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
+        lblTotalConcerns.ForeColor = Color.FromArgb(CByte(192), CByte(57), CByte(43))
         lblTotalConcerns.Location = New Point(27, 62)
         lblTotalConcerns.Margin = New Padding(4, 0, 4, 0)
         lblTotalConcerns.Name = "lblTotalConcerns"
@@ -364,7 +364,7 @@ Partial Class adminDashboard
         ' 
         ' Panel4
         ' 
-        Panel4.BackColor = Color.FromArgb(CByte(41), CByte(128), CByte(185))
+        Panel4.BackColor = Color.FromArgb(CByte(192), CByte(57), CByte(43))
         Panel4.Dock = DockStyle.Left
         Panel4.Location = New Point(0, 0)
         Panel4.Margin = New Padding(4, 5, 4, 5)

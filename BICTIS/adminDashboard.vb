@@ -135,17 +135,19 @@ Public Class adminDashboard
         Dim concernColor As Color = Color.FromArgb(41, 128, 185) ' Blue
         Dim neutralColor As Color = Color.Gray
 
-        ' Lists for Classification
+        ' Comprehensive Lists for Color Coding
         Dim blotterTypes As New List(Of String) From {
-            "Physical Injury", "Theft / Robbery", "Property / Land Dispute",
-            "Harassment / Threats", "Unjust Vexation", "Malicious Mischief",
-            "Estafa / Swindling", "Libel / Slander", "Collection of Debt", "Civil Dispute"
+            "Physical Injury", "Theft / Robbery", "Theft", "Property / Land Dispute",
+            "Harassment / Threats", "Threats", "Unjust Vexation", "Malicious Mischief",
+            "Estafa / Swindling", "Libel / Slander", "Gossip / Slander",
+            "Collection of Debt", "Civil Dispute", "Other Civil Dispute",
+            "Property Damage", "Curfew Violation", "Public Disturbance"
         }
 
         Dim concernTypes As New List(Of String) From {
             "Noise Complaint", "Waste Disposal / Trash", "Suspicious Activity",
-            "Public Disturbance", "Broken Street Light / Infrastructure",
-            "Animal Control / Stray Pets", "Curfew Violation", "Sanitation Issue"
+            "Broken Street Light / Infrastructure",
+            "Animal Control / Stray Pets", "Sanitation Issue"
         }
 
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
