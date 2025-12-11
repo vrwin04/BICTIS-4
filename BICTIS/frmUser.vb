@@ -9,12 +9,14 @@ Public Class frmUser
     Private Sub LoadHistory()
         ' Load both Blotters and Concerns for this user
         Dim sql As String = "SELECT IncidentID, Category, IncidentType, Status, IncidentDate FROM tblIncidents " &
-                              "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID DESC"
+                            "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID DESC"
 
         ' Use generic GetDataTable
         Dim dt As DataTable = Session.GetDataTable(sql)
         dgvHistory.DataSource = dt
     End Sub
+
+    ' --- ACTION BUTTONS ---
 
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
         ' OPEN CONCERN FORM
@@ -30,7 +32,7 @@ Public Class frmUser
         LoadHistory() ' Refresh after closing
     End Sub
 
-    ' *** NEW: OPEN CLEARANCE FORM ***
+    ' *** ADDED BACK: REQUEST CLEARANCE ***
     Private Sub btnRequestClearance_Click(sender As Object, e As EventArgs) Handles btnRequestClearance.Click
         Dim frm As New frmRequestClearance()
         frm.ShowDialog()
@@ -40,7 +42,8 @@ Public Class frmUser
         LoadHistory()
     End Sub
 
-    ' VIEW DETAILS ON DOUBLE CLICK
+    ' --- VIEW DETAILS ---
+
     Private Sub dgvHistory_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvHistory.CellDoubleClick
         If e.RowIndex >= 0 Then
             Dim id As Integer = Convert.ToInt32(dgvHistory.Rows(e.RowIndex).Cells("IncidentID").Value)
@@ -50,10 +53,14 @@ Public Class frmUser
         End If
     End Sub
 
+    ' --- LOGOUT ---
+
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        Session.CurrentResidentID = 0
-        Dim login As New frmLogin()
-        login.Show()
-        Me.Close()
+        If MessageBox.Show("Are you sure you want to sign out?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            Session.CurrentResidentID = 0
+            Dim login As New frmLogin()
+            login.Show()
+            Me.Close()
+        End If
     End Sub
 End Class
