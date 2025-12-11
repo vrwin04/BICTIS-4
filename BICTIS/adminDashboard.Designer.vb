@@ -35,6 +35,14 @@ Partial Class adminDashboard
         lblPendingCases = New Label()
         Label3 = New Label()
         Panel2 = New Panel()
+        pnlCard3 = New Panel()
+        lblTotalBlotter = New Label()
+        Label4 = New Label()
+        Panel3 = New Panel()
+        pnlCard4 = New Panel()
+        lblTotalConcerns = New Label()
+        Label5 = New Label()
+        Panel4 = New Panel()
         pnlHeader = New Panel()
         lblPageTitle = New Label()
         pnlSidebar = New Panel()
@@ -54,6 +62,8 @@ Partial Class adminDashboard
         pnlStatsRow.SuspendLayout()
         pnlCard1.SuspendLayout()
         pnlCard2.SuspendLayout()
+        pnlCard3.SuspendLayout()
+        pnlCard4.SuspendLayout()
         pnlHeader.SuspendLayout()
         pnlSidebar.SuspendLayout()
         pnlLogo.SuspendLayout()
@@ -169,6 +179,8 @@ Partial Class adminDashboard
         ' 
         pnlStatsRow.Controls.Add(pnlCard1)
         pnlStatsRow.Controls.Add(pnlCard2)
+        pnlStatsRow.Controls.Add(pnlCard3)
+        pnlStatsRow.Controls.Add(pnlCard4)
         pnlStatsRow.Dock = DockStyle.Top
         pnlStatsRow.Location = New Point(27, 31)
         pnlStatsRow.Margin = New Padding(4, 5, 4, 5)
@@ -183,9 +195,9 @@ Partial Class adminDashboard
         pnlCard1.Controls.Add(Label1)
         pnlCard1.Controls.Add(Panel1)
         pnlCard1.Location = New Point(4, 5)
-        pnlCard1.Margin = New Padding(4, 5, 27, 5)
+        pnlCard1.Margin = New Padding(4, 5, 10, 5)
         pnlCard1.Name = "pnlCard1"
-        pnlCard1.Size = New Size(333, 185)
+        pnlCard1.Size = New Size(290, 185)
         pnlCard1.TabIndex = 0
         ' 
         ' lblTotalUsers
@@ -228,10 +240,10 @@ Partial Class adminDashboard
         pnlCard2.Controls.Add(lblPendingCases)
         pnlCard2.Controls.Add(Label3)
         pnlCard2.Controls.Add(Panel2)
-        pnlCard2.Location = New Point(368, 5)
-        pnlCard2.Margin = New Padding(4, 5, 4, 5)
+        pnlCard2.Location = New Point(308, 5)
+        pnlCard2.Margin = New Padding(4, 5, 10, 5)
         pnlCard2.Name = "pnlCard2"
-        pnlCard2.Size = New Size(333, 185)
+        pnlCard2.Size = New Size(290, 185)
         pnlCard2.TabIndex = 1
         ' 
         ' lblPendingCases
@@ -267,6 +279,98 @@ Partial Class adminDashboard
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(7, 185)
         Panel2.TabIndex = 2
+        ' 
+        ' pnlCard3
+        ' 
+        pnlCard3.BackColor = Color.White
+        pnlCard3.Controls.Add(lblTotalBlotter)
+        pnlCard3.Controls.Add(Label4)
+        pnlCard3.Controls.Add(Panel3)
+        pnlCard3.Location = New Point(612, 5)
+        pnlCard3.Margin = New Padding(4, 5, 10, 5)
+        pnlCard3.Name = "pnlCard3"
+        pnlCard3.Size = New Size(290, 185)
+        pnlCard3.TabIndex = 2
+        ' 
+        ' lblTotalBlotter
+        ' 
+        lblTotalBlotter.AutoSize = True
+        lblTotalBlotter.Font = New Font("Segoe UI", 36.0F, FontStyle.Bold)
+        lblTotalBlotter.ForeColor = Color.DarkOrange
+        lblTotalBlotter.Location = New Point(27, 62)
+        lblTotalBlotter.Margin = New Padding(4, 0, 4, 0)
+        lblTotalBlotter.Name = "lblTotalBlotter"
+        lblTotalBlotter.Size = New Size(70, 81)
+        lblTotalBlotter.TabIndex = 1
+        lblTotalBlotter.Text = "0"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        Label4.ForeColor = Color.Gray
+        Label4.Location = New Point(27, 23)
+        Label4.Margin = New Padding(4, 0, 4, 0)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(137, 23)
+        Label4.TabIndex = 0
+        Label4.Text = "TOTAL BLOTTER"
+        ' 
+        ' Panel3
+        ' 
+        Panel3.BackColor = Color.DarkOrange
+        Panel3.Dock = DockStyle.Left
+        Panel3.Location = New Point(0, 0)
+        Panel3.Margin = New Padding(4, 5, 4, 5)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New Size(7, 185)
+        Panel3.TabIndex = 2
+        ' 
+        ' pnlCard4
+        ' 
+        pnlCard4.BackColor = Color.White
+        pnlCard4.Controls.Add(lblTotalConcerns)
+        pnlCard4.Controls.Add(Label5)
+        pnlCard4.Controls.Add(Panel4)
+        pnlCard4.Location = New Point(916, 5)
+        pnlCard4.Margin = New Padding(4, 5, 10, 5)
+        pnlCard4.Name = "pnlCard4"
+        pnlCard4.Size = New Size(290, 185)
+        pnlCard4.TabIndex = 3
+        ' 
+        ' lblTotalConcerns
+        ' 
+        lblTotalConcerns.AutoSize = True
+        lblTotalConcerns.Font = New Font("Segoe UI", 36.0F, FontStyle.Bold)
+        lblTotalConcerns.ForeColor = Color.ForestGreen
+        lblTotalConcerns.Location = New Point(27, 62)
+        lblTotalConcerns.Margin = New Padding(4, 0, 4, 0)
+        lblTotalConcerns.Name = "lblTotalConcerns"
+        lblTotalConcerns.Size = New Size(70, 81)
+        lblTotalConcerns.TabIndex = 1
+        lblTotalConcerns.Text = "0"
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        Label5.ForeColor = Color.Gray
+        Label5.Location = New Point(27, 23)
+        Label5.Margin = New Padding(4, 0, 4, 0)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(153, 23)
+        Label5.TabIndex = 0
+        Label5.Text = "TOTAL CONCERNS"
+        ' 
+        ' Panel4
+        ' 
+        Panel4.BackColor = Color.ForestGreen
+        Panel4.Dock = DockStyle.Left
+        Panel4.Location = New Point(0, 0)
+        Panel4.Margin = New Padding(4, 5, 4, 5)
+        Panel4.Name = "Panel4"
+        Panel4.Size = New Size(7, 185)
+        Panel4.TabIndex = 2
         ' 
         ' pnlHeader
         ' 
@@ -467,6 +571,10 @@ Partial Class adminDashboard
         pnlCard1.PerformLayout()
         pnlCard2.ResumeLayout(False)
         pnlCard2.PerformLayout()
+        pnlCard3.ResumeLayout(False)
+        pnlCard3.PerformLayout()
+        pnlCard4.ResumeLayout(False)
+        pnlCard4.PerformLayout()
         pnlHeader.ResumeLayout(False)
         pnlHeader.PerformLayout()
         pnlSidebar.ResumeLayout(False)
@@ -498,6 +606,14 @@ Partial Class adminDashboard
     Friend WithEvents lblPendingCases As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlCard3 As Panel
+    Friend WithEvents lblTotalBlotter As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents pnlCard4 As Panel
+    Friend WithEvents lblTotalConcerns As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Panel4 As Panel
     Friend WithEvents pnlChartSection As Panel
     Friend WithEvents pnlFilterBar As Panel
     Friend WithEvents cbIncidentType As ComboBox
