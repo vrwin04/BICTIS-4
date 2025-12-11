@@ -1,5 +1,5 @@
 ﻿Imports System.Collections.Generic
-Imports System.Drawing.Printing ' NEW: Required for printing
+Imports System.Drawing.Printing
 
 Public Class frmClearance
     ' Variables to hold data for printing
@@ -12,9 +12,14 @@ Public Class frmClearance
     End Sub
 
     Private Sub LoadRequests()
-        ' Join on ResidentID to get Full Name
-        Dim sql As String = "SELECT c.ClearanceID, u.FullName, c.Purpose, c.DateIssued, c.Status FROM tblClearances c INNER JOIN tblResidents u ON c.ResidentID = u.ResidentID ORDER BY c.DateIssued DESC"
+        ' Join on ResidentID to get Full Name, kailangan natin ang ResidentID sa select statement para sa validation
+        Dim sql As String = "SELECT c.ClearanceID, c.ResidentID, u.FullName, c.Purpose, c.DateIssued, c.Status FROM tblClearances c INNER JOIN tblResidents u ON c.ResidentID = u.ResidentID ORDER BY c.DateIssued DESC"
         dgvRequests.DataSource = Session.GetDataTable(sql)
+
+        ' Hide ResidentID column (optional UI fix)
+        If dgvRequests.Columns.Contains("ResidentID") Then
+            dgvRequests.Columns("ResidentID").Visible = False
+        End If
     End Sub
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
@@ -25,6 +30,20 @@ Public Class frmClearance
 
         Dim row As DataGridViewRow = dgvRequests.SelectedRows(0)
         Dim cid As Integer = Convert.ToInt32(row.Cells("ClearanceID").Value)
+        Dim residentID As Integer = Convert.ToInt32(row.Cells("ResidentID").Value) ' Kunin ang ID ng resident
+
+        ' *** BLOCKER LOGIC: CHECK FOR PENDING CASES BEFORE PRINTING ***
+        Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid OR RespondentID = @uid) AND Status = 'Pending'"
+        Dim checkParams As New Dictionary(Of String, Object)
+        checkParams.Add("@uid", residentID)
+
+        Dim pendingCount As Integer = Session.GetCount(checkQuery, checkParams)
+
+        If pendingCount > 0 Then
+            MessageBox.Show("CANNOT PRINT: Ang resident na ito ay may PENDING na kaso sa barangay. Resolbahin muna ang kaso bago bigyan ng clearance.", "Restriction", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            Exit Sub
+        End If
+        ' **************************************************************
 
         ' Store data for the print document
         printName = row.Cells("FullName").Value.ToString()
