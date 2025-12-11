@@ -109,7 +109,7 @@ Public Class frmClearance
 
         ' HEADER (FIXED: Gumamit ng CSng() para i-convert ang Double result sa Single)
         e.Graphics.DrawString("REPUBLIC OF THE PHILIPPINES", fontSub, Brushes.Black, CSng(e.PageBounds.Width / 2), 50, center)
-        e.Graphics.DrawString("BARANGAY BICTIS", fontHeader, Brushes.Black, CSng(e.PageBounds.Width / 2), 80, center)
+        e.Graphics.DrawString("BARANGAY TARTARIA", fontHeader, Brushes.Black, CSng(e.PageBounds.Width / 2), 80, center)
         e.Graphics.DrawString("OFFICE OF THE PUNONG BARANGAY", fontSub, Brushes.Black, CSng(e.PageBounds.Width / 2), 110, center)
 
         ' TITLE
