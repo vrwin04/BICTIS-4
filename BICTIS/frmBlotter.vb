@@ -8,21 +8,34 @@ Public Class frmBlotter
     End Sub
 
     Private Sub LoadDropdowns()
+        ' 1. Status Dropdown
         cbStatus.Items.Clear()
         cbStatus.Items.AddRange(New String() {"Resolved", "Dismissed", "Escalated"})
         cbStatus.SelectedIndex = 0
 
+        ' 2. Complainant Dropdown (Residents)
         Dim dt As DataTable = Session.GetDataTable("SELECT ResidentID, FullName FROM tblResidents WHERE Role='User'")
         cbComplainant.DataSource = dt
         cbComplainant.DisplayMember = "FullName"
         cbComplainant.ValueMember = "ResidentID"
         cbComplainant.SelectedIndex = -1
 
+        ' 3. Respondent Dropdown (Departments)
         cbRespondent.DataSource = Nothing
         cbRespondent.Items.Clear()
-        ' Added "All Departments" for filter viewing
-        cbRespondent.Items.AddRange(New String() {"Peace and Order Committee", "Lupon Tagapamayapa", "Barangay Health Office", "Resident (See Narrative)"})
-        cbRespondent.SelectedIndex = -1 ' Start empty
+
+        ' Add "All Incidents" for filtering view
+        cbRespondent.Items.Add("All Incidents")
+
+        ' Add Specific Departments
+        cbRespondent.Items.AddRange(New String() {
+            "Peace and Order Committee",
+            "Lupon Tagapamayapa",
+            "Barangay Health Office",
+            "Resident (See Narrative)"
+        })
+
+        cbRespondent.SelectedIndex = 0 ' Default to All
     End Sub
 
     Private Sub LoadIncidents(Optional filterByRespondent As String = "")
@@ -33,8 +46,8 @@ Public Class frmBlotter
 
         Dim params As New Dictionary(Of String, Object)
 
-        ' Filter logic: Check if the Respondent string exists in the Narrative
-        If Not String.IsNullOrEmpty(filterByRespondent) AndAlso filterByRespondent <> "Resident (See Narrative)" Then
+        ' Grid Filter Logic
+        If Not String.IsNullOrEmpty(filterByRespondent) AndAlso filterByRespondent <> "All Incidents" Then
             sql &= "AND i.Narrative LIKE @resp "
             params.Add("@resp", "%[Respondent: " & filterByRespondent & "]%")
         End If
@@ -44,35 +57,81 @@ Public Class frmBlotter
         dgvCases.DataSource = Session.GetDataTable(sql, params)
     End Sub
 
-    ' *** NEW: Auto-Filter when selecting a Respondent ***
+    ' *** MAIN LOGIC FIX: Change Incident Options based on Job/Jurisdiction ***
     Private Sub cbRespondent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRespondent.SelectedIndexChanged
-        If cbRespondent.SelectedIndex <> -1 Then
-            LoadIncidents(cbRespondent.Text)
-        End If
-    End Sub
+        If cbRespondent.SelectedItem Is Nothing Then Exit Sub
 
-    ' *** NEW: Double Click to View Details ***
-    Private Sub dgvCases_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCases.CellDoubleClick
-        If e.RowIndex >= 0 Then
-            Dim id As Integer = Convert.ToInt32(dgvCases.Rows(e.RowIndex).Cells("IncidentID").Value)
-            Dim detailsForm As New frmCaseDetails()
-            detailsForm.LoadData(id)
-            detailsForm.ShowDialog()
-        End If
-    End Sub
+        Dim selectedRespondent As String = cbRespondent.Text
 
-    Private Sub cbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStatus.SelectedIndexChanged
-        If cbStatus.Text <> "" Then
-            btnResolve.Text = "SET STATUS TO " & cbStatus.Text.ToUpper()
+        ' 1. Update Grid Filter
+        LoadIncidents(selectedRespondent)
+
+        ' 2. Update Incident Types based on the "Job" of the Department
+        cbIncidentType.Items.Clear()
+
+        Select Case selectedRespondent
+            Case "Peace and Order Committee"
+                ' Security, Curfew, Violence
+                cbIncidentType.Items.AddRange(New String() {
+                    "Physical Injury",
+                    "Theft / Robbery",
+                    "Harassment / Threats",
+                    "Curfew Violation",
+                    "Public Disturbance",
+                    "Suspicious Activity",
+                    "Malicious Mischief"
+                })
+
+            Case "Lupon Tagapamayapa"
+                ' Civil Disputes, Mediation
+                cbIncidentType.Items.AddRange(New String() {
+                    "Property / Land Dispute",
+                    "Unjust Vexation",
+                    "Estafa / Swindling",
+                    "Libel / Slander",
+                    "Collection of Debt",
+                    "Other Civil Dispute"
+                })
+
+            Case "Barangay Health Office"
+                ' Health, Sanitation, Environment
+                cbIncidentType.Items.AddRange(New String() {
+                    "Waste Disposal / Trash",
+                    "Animal Control / Stray Pets",
+                    "Noise Complaint",
+                    "Sanitation Issue"
+                })
+
+            Case "Resident (See Narrative)", "All Incidents"
+                ' Show Everything if specific department is not selected for filing
+                cbIncidentType.Items.AddRange(New String() {
+                    "Physical Injury", "Theft / Robbery", "Property / Land Dispute",
+                    "Harassment / Threats", "Unjust Vexation", "Malicious Mischief",
+                    "Estafa / Swindling", "Libel / Slander", "Noise Complaint",
+                    "Curfew Violation", "Other"
+                })
+        End Select
+
+        ' Reset selection
+        If cbIncidentType.Items.Count > 0 Then
+            cbIncidentType.SelectedIndex = 0
         End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If cbComplainant.SelectedValue Is Nothing OrElse String.IsNullOrWhiteSpace(cbComplainant.Text) Then
+        ' Validation
+        If cbComplainant.SelectedValue Is Nothing Then
             MessageBox.Show("Please select a Complainant.", "Missing Info", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
-        If String.IsNullOrWhiteSpace(cbRespondent.Text) OrElse String.IsNullOrWhiteSpace(cbIncidentType.Text) OrElse String.IsNullOrWhiteSpace(txtNarrative.Text) Then
+
+        ' Cannot file against "All Incidents"
+        If cbRespondent.Text = "All Incidents" Or String.IsNullOrWhiteSpace(cbRespondent.Text) Then
+            MessageBox.Show("Please select a specific Department/Respondent to file this case.", "Invalid Respondent", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        If String.IsNullOrWhiteSpace(cbIncidentType.Text) OrElse String.IsNullOrWhiteSpace(txtNarrative.Text) Then
             MessageBox.Show("Please complete all fields.", "Missing Info", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
@@ -92,9 +151,7 @@ Public Class frmBlotter
         If Session.ExecuteQuery(query, params) Then
             MessageBox.Show("Blotter case filed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtNarrative.Clear()
-            cbIncidentType.SelectedIndex = -1
-            cbComplainant.SelectedIndex = -1
-            ' Refresh list, keeping current filter
+            ' Refresh the list
             LoadIncidents(cbRespondent.Text)
         End If
     End Sub
@@ -110,14 +167,29 @@ Public Class frmBlotter
         Dim newStatus As String = cbStatus.Text
 
         If currentStatus <> "Pending" Then
-            MessageBox.Show("This case is already closed (" & currentStatus & ") and cannot be modified.", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            MessageBox.Show("This case is already closed (" & currentStatus & ").", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Exit Sub
         End If
 
-        If MessageBox.Show("Mark case as " & newStatus & "? This cannot be undone.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+        If MessageBox.Show("Mark case as " & newStatus & "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
             Session.ExecuteQuery("UPDATE tblIncidents SET Status='" & newStatus & "' WHERE IncidentID=" & id)
             LoadIncidents(cbRespondent.Text)
             MessageBox.Show("Case updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub dgvCases_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCases.CellDoubleClick
+        If e.RowIndex >= 0 Then
+            Dim id As Integer = Convert.ToInt32(dgvCases.Rows(e.RowIndex).Cells("IncidentID").Value)
+            Dim detailsForm As New frmCaseDetails()
+            detailsForm.LoadData(id)
+            detailsForm.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub cbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStatus.SelectedIndexChanged
+        If cbStatus.Text <> "" Then
+            btnResolve.Text = "SET STATUS TO " & cbStatus.Text.ToUpper()
         End If
     End Sub
 
