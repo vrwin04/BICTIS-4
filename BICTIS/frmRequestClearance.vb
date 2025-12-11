@@ -16,6 +16,7 @@ Public Class frmRequestClearance
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+
         ' 1. CHECK VALIDATION FOR INPUT
         If String.IsNullOrWhiteSpace(cbPurpose.Text) Then
             MessageBox.Show("Please select a purpose.", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -25,7 +26,7 @@ Public Class frmRequestClearance
         ' 2. CHECK FOR PENDING CASES [NEW LOGIC]
         ' Tinitignan nito kung ang user (ComplainantID) o kung siya ang inireklamo (RespondentID) ay may pending na kaso.
         ' Note: Sa current system niyo, ComplainantID lang ang tiyak na naka-link, pero sinama ko na ang RespondentID para future-proof.
-        Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid OR RespondentID = @uid) AND Status = 'Pending'"
+        Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid OR RespondentID = @uid) AND Status = 'Pending' AND Category='Blotter'"
         Dim checkParams As New Dictionary(Of String, Object)
         checkParams.Add("@uid", Session.CurrentResidentID)
 

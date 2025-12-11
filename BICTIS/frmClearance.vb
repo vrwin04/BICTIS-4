@@ -100,7 +100,16 @@ Public Class frmClearance
 
     Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
         If dgvRequests.SelectedRows.Count = 0 Then Exit Sub
-        Dim cid As Integer = Convert.ToInt32(dgvRequests.SelectedRows(0).Cells("ClearanceID").Value)
+
+        Dim row As DataGridViewRow = dgvRequests.SelectedRows(0)
+        Dim cid As Integer = Convert.ToInt32(row.Cells("ClearanceID").Value)
+        Dim currentStatus As String = row.Cells("Status").Value.ToString()
+
+
+        If currentStatus = "Approved" Then
+            MessageBox.Show("This request is already APPROVED and cannot be rejected.", "Action Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            Exit Sub
+        End If
 
         If MessageBox.Show("Reject this request?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
             Session.ExecuteQuery("UPDATE tblClearances SET Status='Rejected' WHERE ClearanceID=" & cid)

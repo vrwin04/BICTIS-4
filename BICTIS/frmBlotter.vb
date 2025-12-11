@@ -23,22 +23,18 @@ Public Class frmBlotter
         ' 3. Respondent Dropdown (Departments)
         cbRespondent.DataSource = Nothing
         cbRespondent.Items.Clear()
-
-        ' Add "All Incidents" for filtering view
         cbRespondent.Items.Add("All Incidents")
-
-        ' Add Specific Departments
         cbRespondent.Items.AddRange(New String() {
             "Peace and Order Committee",
             "Lupon Tagapamayapa",
             "Barangay Health Office",
             "Resident (See Narrative)"
         })
-
-        cbRespondent.SelectedIndex = 0 ' Default to All
+        cbRespondent.SelectedIndex = 0
     End Sub
 
-    Private Sub LoadIncidents(Optional filterByRespondent As String = "")
+    ' IMPROVED: LoadIncidents now supports Search
+    Private Sub LoadIncidents(Optional filterByRespondent As String = "", Optional searchTerm As String = "")
         Dim sql As String = "SELECT i.IncidentID, i.IncidentType, u.FullName AS Complainant, i.Status, i.IncidentDate, i.Narrative " &
                             "FROM tblIncidents i " &
                             "LEFT JOIN tblResidents u ON i.ComplainantID = u.ResidentID " &
@@ -46,10 +42,16 @@ Public Class frmBlotter
 
         Dim params As New Dictionary(Of String, Object)
 
-        ' Grid Filter Logic
+        ' Filter by Respondent/Department
         If Not String.IsNullOrEmpty(filterByRespondent) AndAlso filterByRespondent <> "All Incidents" Then
             sql &= "AND i.Narrative LIKE @resp "
             params.Add("@resp", "%[Respondent: " & filterByRespondent & "]%")
+        End If
+
+        ' SEARCH FUNCTIONALITY (Addresses Retrieval Gap)
+        If Not String.IsNullOrEmpty(searchTerm) Then
+            sql &= "AND (u.FullName LIKE @search OR i.IncidentType LIKE @search OR i.Narrative LIKE @search) "
+            params.Add("@search", "%" & searchTerm & "%")
         End If
 
         sql &= "ORDER BY i.IncidentID DESC"
@@ -57,65 +59,33 @@ Public Class frmBlotter
         dgvCases.DataSource = Session.GetDataTable(sql, params)
     End Sub
 
-    ' *** MAIN LOGIC FIX: Change Incident Options based on Job/Jurisdiction ***
+    ' Search Box Event Handler
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        LoadIncidents(cbRespondent.Text, txtSearch.Text)
+    End Sub
+
     Private Sub cbRespondent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRespondent.SelectedIndexChanged
         If cbRespondent.SelectedItem Is Nothing Then Exit Sub
 
         Dim selectedRespondent As String = cbRespondent.Text
 
-        ' 1. Update Grid Filter
-        LoadIncidents(selectedRespondent)
+        ' Update Grid Filter
+        LoadIncidents(selectedRespondent, txtSearch.Text)
 
-        ' 2. Update Incident Types based on the "Job" of the Department
+        ' Update Incident Types dynamically
         cbIncidentType.Items.Clear()
-
         Select Case selectedRespondent
             Case "Peace and Order Committee"
-                ' Security, Curfew, Violence
-                cbIncidentType.Items.AddRange(New String() {
-                    "Physical Injury",
-                    "Theft / Robbery",
-                    "Harassment / Threats",
-                    "Curfew Violation",
-                    "Public Disturbance",
-                    "Suspicious Activity",
-                    "Malicious Mischief"
-                })
-
+                cbIncidentType.Items.AddRange(New String() {"Physical Injury", "Theft / Robbery", "Harassment / Threats", "Curfew Violation", "Public Disturbance", "Suspicious Activity", "Malicious Mischief"})
             Case "Lupon Tagapamayapa"
-                ' Civil Disputes, Mediation
-                cbIncidentType.Items.AddRange(New String() {
-                    "Property / Land Dispute",
-                    "Unjust Vexation",
-                    "Estafa / Swindling",
-                    "Libel / Slander",
-                    "Collection of Debt",
-                    "Other Civil Dispute"
-                })
-
+                cbIncidentType.Items.AddRange(New String() {"Property / Land Dispute", "Unjust Vexation", "Estafa / Swindling", "Libel / Slander", "Collection of Debt", "Other Civil Dispute"})
             Case "Barangay Health Office"
-                ' Health, Sanitation, Environment
-                cbIncidentType.Items.AddRange(New String() {
-                    "Waste Disposal / Trash",
-                    "Animal Control / Stray Pets",
-                    "Noise Complaint",
-                    "Sanitation Issue"
-                })
-
+                cbIncidentType.Items.AddRange(New String() {"Waste Disposal / Trash", "Animal Control / Stray Pets", "Noise Complaint", "Sanitation Issue"})
             Case "Resident (See Narrative)", "All Incidents"
-                ' Show Everything if specific department is not selected for filing
-                cbIncidentType.Items.AddRange(New String() {
-                    "Physical Injury", "Theft / Robbery", "Property / Land Dispute",
-                    "Harassment / Threats", "Unjust Vexation", "Malicious Mischief",
-                    "Estafa / Swindling", "Libel / Slander", "Noise Complaint",
-                    "Curfew Violation", "Other"
-                })
+                cbIncidentType.Items.AddRange(New String() {"Physical Injury", "Theft / Robbery", "Property / Land Dispute", "Harassment / Threats", "Unjust Vexation", "Malicious Mischief", "Estafa / Swindling", "Libel / Slander", "Noise Complaint", "Curfew Violation", "Other"})
         End Select
 
-        ' Reset selection
-        If cbIncidentType.Items.Count > 0 Then
-            cbIncidentType.SelectedIndex = 0
-        End If
+        If cbIncidentType.Items.Count > 0 Then cbIncidentType.SelectedIndex = 0
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -125,7 +95,6 @@ Public Class frmBlotter
             Exit Sub
         End If
 
-        ' Cannot file against "All Incidents"
         If cbRespondent.Text = "All Incidents" Or String.IsNullOrWhiteSpace(cbRespondent.Text) Then
             MessageBox.Show("Please select a specific Department/Respondent to file this case.", "Invalid Respondent", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
@@ -149,9 +118,11 @@ Public Class frmBlotter
         params.Add("@date", DateTime.Now.ToString())
 
         If Session.ExecuteQuery(query, params) Then
+            ' AUDIT LOG
+            Session.LogActivity("Filed Blotter Case. Complainant ID: " & cbComplainant.SelectedValue.ToString())
+
             MessageBox.Show("Blotter case filed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtNarrative.Clear()
-            ' Refresh the list
             LoadIncidents(cbRespondent.Text)
         End If
     End Sub
@@ -173,6 +144,10 @@ Public Class frmBlotter
 
         If MessageBox.Show("Mark case as " & newStatus & "?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
             Session.ExecuteQuery("UPDATE tblIncidents SET Status='" & newStatus & "' WHERE IncidentID=" & id)
+
+            ' AUDIT LOG
+            Session.LogActivity("Updated Case #" & id & " to " & newStatus)
+
             LoadIncidents(cbRespondent.Text)
             MessageBox.Show("Case updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If

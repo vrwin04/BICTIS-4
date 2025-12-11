@@ -2,7 +2,9 @@
 Imports System.IO
 Imports System.Windows.Forms
 Imports System.Collections.Generic
-Imports System.Threading.Tasks ' NEW: Required for Async
+Imports System.Threading.Tasks
+Imports System.Security.Cryptography ' Added for Encryption
+Imports System.Text ' Added for Text processing
 
 Public Module Session
     ' CONFIGURATION
@@ -14,6 +16,30 @@ Public Module Session
     Public CurrentUserRole As String = ""
     Public CurrentUserName As String = ""
     Public CurrentFullName As String = ""
+
+    ' --- SECURITY: HASHING FUNCTION (SHA256) ---
+    ' This converts plain text passwords into a secure hash string.
+    Public Function ComputeHash(rawData As String) As String
+        Using sha256Hash As SHA256 = SHA256.Create()
+            Dim bytes As Byte() = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData))
+            Dim builder As New StringBuilder()
+            For Each b As Byte In bytes
+                builder.Append(b.ToString("x2"))
+            Next
+            Return builder.ToString()
+        End Using
+    End Function
+
+    ' --- AUDIT TRAIL FUNCTION ---
+    ' Logs user actions into the database for accountability.
+    Public Sub LogActivity(action As String)
+        Dim query As String = "INSERT INTO tblAuditLogs (Username, [Action], [Timestamp]) VALUES (@user, @act, @time)"
+        Dim params As New Dictionary(Of String, Object)
+        params.Add("@user", If(String.IsNullOrEmpty(CurrentUserName), "Guest", CurrentUserName))
+        params.Add("@act", action)
+        params.Add("@time", DateTime.Now.ToString())
+        ExecuteQuery(query, params)
+    End Sub
 
     ' --- DATABASE METHODS ---
     Public Function GetDataTable(query As String, Optional parameters As Dictionary(Of String, Object) = Nothing) As DataTable
