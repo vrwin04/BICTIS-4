@@ -47,6 +47,8 @@ Partial Class adminDashboard
         lblPageTitle = New Label()
         pnlSidebar = New Panel()
         btnLogout = New Button()
+        ' NEW PRINT BUTTON
+        btnPrintReport = New Button()
         btnClearance = New Button()
         btnConcerns = New Button()
         btnBlotter = New Button()
@@ -399,6 +401,8 @@ Partial Class adminDashboard
         ' 
         pnlSidebar.BackColor = Color.FromArgb(CByte(44), CByte(62), CByte(80))
         pnlSidebar.Controls.Add(btnLogout)
+        ' NEW PRINT BUTTON
+        pnlSidebar.Controls.Add(btnPrintReport)
         pnlSidebar.Controls.Add(btnClearance)
         pnlSidebar.Controls.Add(btnConcerns)
         pnlSidebar.Controls.Add(btnBlotter)
@@ -429,6 +433,25 @@ Partial Class adminDashboard
         btnLogout.Text = "Sign Out"
         btnLogout.UseVisualStyleBackColor = False
         ' 
+        ' btnPrintReport (NEW)
+        ' 
+        btnPrintReport.BackColor = Color.FromArgb(CByte(44), CByte(62), CByte(80))
+        btnPrintReport.Dock = DockStyle.Top
+        btnPrintReport.FlatAppearance.BorderSize = 0
+        btnPrintReport.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(52), CByte(73), CByte(94))
+        btnPrintReport.FlatStyle = FlatStyle.Flat
+        btnPrintReport.Font = New Font("Segoe UI", 11.0F)
+        btnPrintReport.ForeColor = Color.WhiteSmoke
+        btnPrintReport.Location = New Point(0, 583)
+        btnPrintReport.Margin = New Padding(4, 5, 4, 5)
+        btnPrintReport.Name = "btnPrintReport"
+        btnPrintReport.Padding = New Padding(27, 0, 0, 0)
+        btnPrintReport.Size = New Size(320, 92)
+        btnPrintReport.TabIndex = 4
+        btnPrintReport.Text = "Print Reports"
+        btnPrintReport.TextAlign = ContentAlignment.MiddleLeft
+        btnPrintReport.UseVisualStyleBackColor = False
+        '
         ' btnClearance
         ' 
         btnClearance.BackColor = Color.FromArgb(CByte(44), CByte(62), CByte(80))
@@ -620,4 +643,6 @@ Partial Class adminDashboard
     Friend WithEvents Label2 As Label
     Friend WithEvents lblChartTitle As Label
     Friend WithEvents chartIncidents As System.Windows.Forms.DataVisualization.Charting.Chart
+    ' DECLARED MISSING BUTTON
+    Friend WithEvents btnPrintReport As Button
 End Class

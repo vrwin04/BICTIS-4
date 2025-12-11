@@ -1,21 +1,25 @@
-﻿Imports SysChart = System.Windows.Forms.DataVisualization.Charting
+﻿' ALIAS TO FIX CHART ERRORS
+Imports SysChart = System.Windows.Forms.DataVisualization.Charting
 Imports System.Windows.Forms
 Imports System.Data
 Imports System.Collections.Generic
-Imports System.Threading.Tasks
-Imports System.Drawing
-Imports System.Drawing.Printing ' Added for Reporting
+Imports System.Threading.Tasks ' Required for Async
+Imports System.Drawing ' Required for Color
 
 Public Class adminDashboard
     Private Async Sub adminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblPageTitle.Text = "Dashboard - " & Session.CurrentUserRole
 
         Try
+            ' 1. Load Filters FIRST.
             RemoveHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
             LoadFilterOptions()
             AddHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
 
+            ' 2. Load Stats
             Await LoadStatsAsync()
+
+            ' 3. Force the Chart to load now that everything is ready
             Await LoadChartAsync()
 
         Catch ex As Exception
@@ -23,43 +27,63 @@ Public Class adminDashboard
         End Try
     End Sub
 
-    ' --- STATISTICS LOADER ---
     Private Async Function LoadStatsAsync() As Task
+        ' Fetch all counts in parallel for speed
         Dim taskUserCount = Session.GetCountAsync("SELECT COUNT(*) FROM tblResidents WHERE Role='User'")
         Dim taskPending = Session.GetCountAsync("SELECT COUNT(*) FROM tblIncidents WHERE Status='Pending'")
         Dim taskBlotter = Session.GetCountAsync("SELECT COUNT(*) FROM tblIncidents WHERE Category='Blotter'")
         Dim taskConcerns = Session.GetCountAsync("SELECT COUNT(*) FROM tblIncidents WHERE Category='Concern'")
 
+        ' Wait for all
         Dim userCount As Integer = Await taskUserCount
         Dim pending As Integer = Await taskPending
         Dim blotter As Integer = Await taskBlotter
         Dim concerns As Integer = Await taskConcerns
 
+        ' Update UI
         lblTotalUsers.Text = userCount.ToString()
         lblPendingCases.Text = pending.ToString()
         lblTotalBlotter.Text = blotter.ToString()
         lblTotalConcerns.Text = concerns.ToString()
 
+        ' Pending Cases Color Logic
         If pending > 0 Then
             lblPendingCases.ForeColor = Color.Red
         Else
             lblPendingCases.ForeColor = Color.Green
         End If
 
-        lblTotalBlotter.ForeColor = Color.FromArgb(41, 128, 185)
-        lblTotalConcerns.ForeColor = Color.FromArgb(192, 57, 43)
+        ' FIX: Ensure Text Colors match the Graph Colors
+        lblTotalBlotter.ForeColor = Color.FromArgb(41, 128, 185) ' Blue
+        lblTotalConcerns.ForeColor = Color.FromArgb(192, 57, 43) ' Red
     End Function
 
     Private Sub LoadFilterOptions()
         cbIncidentType.Items.Clear()
         cbIncidentType.Items.Add("All Incidents")
-        cbIncidentType.Items.AddRange(New String() {
-            "Physical Injury", "Theft / Robbery", "Property / Land Dispute", "Harassment / Threats",
-            "Unjust Vexation", "Malicious Mischief", "Estafa / Swindling", "Libel / Slander",
-            "Noise Complaint", "Waste Disposal / Trash", "Suspicious Activity", "Public Disturbance",
-            "Broken Street Light / Infrastructure", "Animal Control / Stray Pets", "Curfew Violation", "Other"
-        })
 
+        ' --- BLOTTER CASES ---
+        cbIncidentType.Items.Add("Physical Injury")
+        cbIncidentType.Items.Add("Theft / Robbery")
+        cbIncidentType.Items.Add("Property / Land Dispute")
+        cbIncidentType.Items.Add("Harassment / Threats")
+        cbIncidentType.Items.Add("Unjust Vexation")
+        cbIncidentType.Items.Add("Malicious Mischief")
+        cbIncidentType.Items.Add("Estafa / Swindling")
+        cbIncidentType.Items.Add("Libel / Slander")
+
+        ' --- COMMUNITY CONCERNS ---
+        cbIncidentType.Items.Add("Noise Complaint")
+        cbIncidentType.Items.Add("Waste Disposal / Trash")
+        cbIncidentType.Items.Add("Suspicious Activity")
+        cbIncidentType.Items.Add("Public Disturbance")
+        cbIncidentType.Items.Add("Broken Street Light / Infrastructure")
+        cbIncidentType.Items.Add("Animal Control / Stray Pets")
+        cbIncidentType.Items.Add("Curfew Violation")
+
+        cbIncidentType.Items.Add("Other")
+
+        ' Default Selection
         If cbIncidentType.Items.Count > 0 Then
             cbIncidentType.SelectedIndex = 0
         End If
@@ -69,11 +93,11 @@ Public Class adminDashboard
         Await LoadChartAsync()
     End Sub
 
-    ' --- CHART LOADER ---
     Private Async Function LoadChartAsync() As Task
         If chartIncidents Is Nothing Then Exit Function
 
         Dim selection As String = cbIncidentType.Text
+        ' Safety check
         If String.IsNullOrWhiteSpace(selection) Then selection = "All Incidents"
 
         Dim query As String
@@ -81,19 +105,24 @@ Public Class adminDashboard
         Dim isAllIncidents As Boolean = (selection = "All Incidents")
 
         If isAllIncidents Then
+            ' FIX: Group by Category as well so we can check it for coloring
             query = "SELECT IncidentType, Category, COUNT(*) as [Count] FROM tblIncidents GROUP BY IncidentType, Category"
         Else
             query = "SELECT Status, COUNT(*) as [Count] FROM tblIncidents WHERE IncidentType=@type GROUP BY Status"
             params.Add("@type", selection)
         End If
 
+        ' Fetch Data Background
         Dim dt As DataTable = Await Session.GetDataTableAsync(query, params)
 
+        ' Update UI
         chartIncidents.Series.Clear()
         chartIncidents.Titles.Clear()
 
         Dim seriesName As String = If(isAllIncidents, "Incidents", "Status")
         Dim series As New SysChart.Series(seriesName)
+
+        ' *** CRITICAL FIX: Assign the Series to the ChartArea ***
         series.ChartArea = "ChartArea1"
 
         If isAllIncidents Then
@@ -107,20 +136,33 @@ Public Class adminDashboard
 
         series.IsValueShownAsLabel = True
 
-        Dim blotterColor As Color = Color.FromArgb(41, 128, 185)
-        Dim concernColor As Color = Color.FromArgb(192, 57, 43)
+        ' Define Colors
+        Dim blotterColor As Color = Color.FromArgb(41, 128, 185) ' Blue
+        Dim concernColor As Color = Color.FromArgb(192, 57, 43) ' Red
         Dim neutralColor As Color = Color.Gray
 
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
             For Each row As DataRow In dt.Rows
-                Dim xVal As String = If(isAllIncidents, row("IncidentType").ToString(), row("Status").ToString())
-                Dim category As String = If(isAllIncidents, row("Category").ToString(), "")
+                Dim xVal As String = ""
+                Dim category As String = ""
+
+                If isAllIncidents Then
+                    xVal = row("IncidentType").ToString()
+                    category = row("Category").ToString() ' Get Category for Coloring
+                Else
+                    xVal = row("Status").ToString()
+                End If
+
+                ' Handle nulls
                 If String.IsNullOrEmpty(xVal) Then xVal = "Unknown"
 
                 Dim yVal As Integer = Convert.ToInt32(row("Count"))
+
+                ' Add Point
                 Dim pIndex As Integer = series.Points.AddXY(xVal, yVal)
                 Dim p As SysChart.DataPoint = series.Points(pIndex)
 
+                ' --- COLOR LOGIC BASED ON DATABASE CATEGORY ---
                 If isAllIncidents Then
                     If category = "Blotter" Then
                         p.Color = blotterColor
@@ -132,62 +174,21 @@ Public Class adminDashboard
                 End If
             Next
         Else
+            ' Handle empty data gracefully so chart isn't blank
             series.Points.AddXY("No Data", 0)
         End If
 
         chartIncidents.Series.Add(series)
     End Function
 
-    ' --- REPORTING FEATURE (Addresses Automated Reports Gap) ---
-    Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click
-        Dim pd As New PrintDocument()
-        AddHandler pd.PrintPage, AddressOf PrintReportHandler
-        Dim ppd As New PrintPreviewDialog()
-        ppd.Document = pd
-        ppd.ShowDialog()
+    ' --- NAVIGATION BUTTONS ---
 
-        ' Audit Log
-        Session.LogActivity("Generated Monthly Accomplishment Report")
-    End Sub
-
-    Private Sub PrintReportHandler(sender As Object, e As PrintPageEventArgs)
-        Dim g As Graphics = e.Graphics
-        Dim titleFont As New Font("Arial", 18, FontStyle.Bold)
-        Dim headerFont As New Font("Arial", 12, FontStyle.Bold)
-        Dim bodyFont As New Font("Arial", 12, FontStyle.Regular)
-        Dim yPos As Integer = 50
-
-        ' Header
-        g.DrawString("BARANGAY TARTARIA ACCOMPLISHMENT REPORT", titleFont, Brushes.Black, New PointF(100, yPos))
-        yPos += 40
-        g.DrawString("Generated on: " & DateTime.Now.ToString("MMMM dd, yyyy"), bodyFont, Brushes.Black, New PointF(100, yPos))
-        yPos += 60
-
-        ' Statistics Summary
-        g.DrawString("EXECUTIVE SUMMARY", headerFont, Brushes.Black, New PointF(100, yPos))
-        yPos += 30
-        g.DrawString("Total Residents Registered: " & lblTotalUsers.Text, bodyFont, Brushes.Black, New PointF(120, yPos))
-        yPos += 25
-        g.DrawString("Total Blotter Cases Filed: " & lblTotalBlotter.Text, bodyFont, Brushes.Black, New PointF(120, yPos))
-        yPos += 25
-        g.DrawString("Total Resident Concerns: " & lblTotalConcerns.Text, bodyFont, Brushes.Black, New PointF(120, yPos))
-        yPos += 25
-        g.DrawString("Pending / Unresolved Cases: " & lblPendingCases.Text, bodyFont, Brushes.Black, New PointF(120, yPos))
-        yPos += 60
-
-        ' Chart Placeholder (Simple representation)
-        g.DrawString("CASE BREAKDOWN", headerFont, Brushes.Black, New PointF(100, yPos))
-        yPos += 30
-        g.DrawString("(See attached visual charts for detailed breakdown)", bodyFont, Brushes.Italic, New PointF(120, yPos))
-
-        ' Ideally, you would draw the chart image here, but text summary is good for basic requirement.
-    End Sub
-
-    ' --- NAVIGATION ---
     Private Async Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        ' Reload stats and reset chart to "All Incidents"
         Await LoadStatsAsync()
         If cbIncidentType.Items.Count > 0 Then
             cbIncidentType.SelectedIndex = 0
+            ' Force load if index didn't change (e.g. was already 0)
             Await LoadChartAsync()
         End If
     End Sub
@@ -219,7 +220,6 @@ Public Class adminDashboard
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         If MessageBox.Show("Sign out?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Session.LogActivity("Admin Logout: " & Session.CurrentUserName)
             Session.CurrentResidentID = 0
             Dim login As New frmLogin()
             login.Show()

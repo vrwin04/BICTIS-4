@@ -37,6 +37,10 @@ Partial Class frmBlotter
         Me.cbComplainant = New System.Windows.Forms.ComboBox()
         Me.pnlGrid = New System.Windows.Forms.Panel()
         Me.dgvCases = New System.Windows.Forms.DataGridView()
+        ' NEW SEARCH CONTROLS
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+
         Me.pnlHeader.SuspendLayout()
         Me.pnlEditor.SuspendLayout()
         Me.pnlGrid.SuspendLayout()
@@ -46,6 +50,9 @@ Partial Class frmBlotter
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
+        ' Added Search Controls to Header
+        Me.pnlHeader.Controls.Add(Me.Label7)
+        Me.pnlHeader.Controls.Add(Me.txtSearch)
         Me.pnlHeader.Controls.Add(Me.btnClose)
         Me.pnlHeader.Controls.Add(Me.lblTitle)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
@@ -79,6 +86,25 @@ Partial Class frmBlotter
         Me.lblTitle.Size = New System.Drawing.Size(225, 30)
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "BLOTTER MANAGER"
+        '
+        ' txtSearch (NEW)
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.txtSearch.Location = New System.Drawing.Point(600, 22)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(250, 27)
+        Me.txtSearch.TabIndex = 2
+        '
+        ' Label7 (NEW)
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label7.ForeColor = System.Drawing.Color.White
+        Me.Label7.Location = New System.Drawing.Point(540, 26)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(52, 19)
+        Me.Label7.TabIndex = 3
+        Me.Label7.Text = "Search:"
         '
         'pnlEditor
         '
@@ -356,4 +382,7 @@ Partial Class frmBlotter
     Friend WithEvents btnSave As Button
     Friend WithEvents btnResolve As Button
     Friend WithEvents Label6 As Label
+    ' DECLARED MISSING VARIABLES
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents Label7 As Label
 End Class
