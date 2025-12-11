@@ -12,8 +12,6 @@ Public Class adminDashboard
 
         Try
             ' 1. Load Filters FIRST.
-            ' We temporarily remove the handler to prevent the event from firing 
-            ' while we are still setting up the items.
             RemoveHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
             LoadFilterOptions()
             AddHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
@@ -94,7 +92,6 @@ Public Class adminDashboard
         If chartIncidents Is Nothing Then Exit Function
 
         Dim selection As String = cbIncidentType.Text
-        ' Safety check
         If String.IsNullOrWhiteSpace(selection) Then selection = "All Incidents"
 
         Dim query As String
@@ -108,7 +105,7 @@ Public Class adminDashboard
             params.Add("@type", selection)
         End If
 
-        ' Fetch Data Background
+        ' Fetch Data
         Dim dt As DataTable = Await Session.GetDataTableAsync(query, params)
 
         ' Update UI
@@ -117,8 +114,6 @@ Public Class adminDashboard
 
         Dim seriesName As String = If(isAllIncidents, "Incidents", "Status")
         Dim series As New SysChart.Series(seriesName)
-
-        ' *** CRITICAL FIX: Assign the Series to the ChartArea ***
         series.ChartArea = "ChartArea1"
 
         If isAllIncidents Then
@@ -132,10 +127,27 @@ Public Class adminDashboard
 
         series.IsValueShownAsLabel = True
 
+        ' Define Colors
+        Dim blotterColor As Color = Color.FromArgb(192, 57, 43) ' Red
+        Dim concernColor As Color = Color.FromArgb(41, 128, 185) ' Blue
+        Dim neutralColor As Color = Color.Gray
+
+        ' Lists for Classification
+        Dim blotterTypes As New List(Of String) From {
+            "Physical Injury", "Theft / Robbery", "Property / Land Dispute",
+            "Harassment / Threats", "Unjust Vexation", "Malicious Mischief",
+            "Estafa / Swindling", "Libel / Slander", "Collection of Debt", "Civil Dispute"
+        }
+
+        Dim concernTypes As New List(Of String) From {
+            "Noise Complaint", "Waste Disposal / Trash", "Suspicious Activity",
+            "Public Disturbance", "Broken Street Light / Infrastructure",
+            "Animal Control / Stray Pets", "Curfew Violation", "Sanitation Issue"
+        }
+
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
             For Each row As DataRow In dt.Rows
                 Dim xVal As String = If(isAllIncidents, row("IncidentType").ToString(), row("Status").ToString())
-                ' Handle nulls
                 If String.IsNullOrEmpty(xVal) Then xVal = "Unknown"
 
                 Dim yVal As Integer = Convert.ToInt32(row("Count"))
@@ -144,35 +156,18 @@ Public Class adminDashboard
                 Dim pIndex As Integer = series.Points.AddXY(xVal, yVal)
                 Dim p As SysChart.DataPoint = series.Points(pIndex)
 
-                ' --- DISTINCT COLOR CODING ---
+                ' --- COLOR LOGIC ---
                 If isAllIncidents Then
-                    Select Case xVal
-                        ' CRIMES (Warm/Dark Colors)
-                        Case "Physical Injury" : p.Color = Color.Crimson
-                        Case "Theft / Robbery" : p.Color = Color.DarkRed
-                        Case "Harassment / Threats" : p.Color = Color.OrangeRed
-                        Case "Unjust Vexation" : p.Color = Color.Purple
-                        Case "Malicious Mischief" : p.Color = Color.DarkMagenta
-                        Case "Estafa / Swindling" : p.Color = Color.Indigo
-                        Case "Libel / Slander" : p.Color = Color.SlateBlue
-                        Case "Property / Land Dispute" : p.Color = Color.SaddleBrown
-
-                        ' CONCERNS (Cool/Earth Colors)
-                        Case "Noise Complaint" : p.Color = Color.DarkOrange
-                        Case "Waste Disposal / Trash" : p.Color = Color.ForestGreen
-                        Case "Suspicious Activity" : p.Color = Color.DimGray
-                        Case "Public Disturbance" : p.Color = Color.Goldenrod
-                        Case "Broken Street Light / Infrastructure" : p.Color = Color.Teal
-                        Case "Animal Control / Stray Pets" : p.Color = Color.OliveDrab
-                        Case "Curfew Violation" : p.Color = Color.MidnightBlue
-
-                        Case "Other" : p.Color = Color.Gray
-                        Case Else : p.Color = Color.SteelBlue
-                    End Select
+                    If blotterTypes.Contains(xVal) Then
+                        p.Color = blotterColor
+                    ElseIf concernTypes.Contains(xVal) Then
+                        p.Color = concernColor
+                    Else
+                        p.Color = neutralColor
+                    End If
                 End If
             Next
         Else
-            ' Handle empty data gracefully so chart isn't blank
             series.Points.AddXY("No Data", 0)
         End If
 
@@ -182,11 +177,9 @@ Public Class adminDashboard
     ' --- NAVIGATION BUTTONS ---
 
     Private Async Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-        ' Reload stats and reset chart to "All Incidents"
         Await LoadStatsAsync()
         If cbIncidentType.Items.Count > 0 Then
             cbIncidentType.SelectedIndex = 0
-            ' Force load if index didn't change (e.g. was already 0)
             Await LoadChartAsync()
         End If
     End Sub
