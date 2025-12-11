@@ -20,6 +20,7 @@ Partial Class adminDashboard
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.pnlBorder = New System.Windows.Forms.Panel()
         Me.pnlMainContent = New System.Windows.Forms.Panel()
+        Me.pnlDashboardView = New System.Windows.Forms.Panel()
         Me.pnlChartSection = New System.Windows.Forms.Panel()
         Me.chartIncidents = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlFilterBar = New System.Windows.Forms.Panel()
@@ -36,7 +37,7 @@ Partial Class adminDashboard
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.pnlCard3 = New System.Windows.Forms.Panel()
-        Me.lblTotalBlotter = New System.Windows.Forms.Label()
+        Me.lblTotalProjects = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.pnlCard4 = New System.Windows.Forms.Panel()
@@ -50,13 +51,13 @@ Partial Class adminDashboard
         Me.btnPrintReport = New System.Windows.Forms.Button()
         Me.btnClearance = New System.Windows.Forms.Button()
         Me.btnConcerns = New System.Windows.Forms.Button()
-        Me.btnBlotter = New System.Windows.Forms.Button()
-        Me.btnResidents = New System.Windows.Forms.Button()
+        Me.btnProjects = New System.Windows.Forms.Button()
         Me.btnHome = New System.Windows.Forms.Button()
         Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.lblLogo = New System.Windows.Forms.Label()
         Me.pnlBorder.SuspendLayout()
         Me.pnlMainContent.SuspendLayout()
+        Me.pnlDashboardView.SuspendLayout()
         Me.pnlChartSection.SuspendLayout()
         CType(Me.chartIncidents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlFilterBar.SuspendLayout()
@@ -84,14 +85,23 @@ Partial Class adminDashboard
         '
         'pnlMainContent
         '
-        Me.pnlMainContent.Controls.Add(Me.pnlChartSection)
-        Me.pnlMainContent.Controls.Add(Me.pnlStatsRow)
+        Me.pnlMainContent.Controls.Add(Me.pnlDashboardView)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMainContent.Location = New System.Drawing.Point(320, 108)
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Padding = New System.Windows.Forms.Padding(27, 31, 27, 31)
         Me.pnlMainContent.Size = New System.Drawing.Size(1274, 786)
         Me.pnlMainContent.TabIndex = 2
+        '
+        'pnlDashboardView
+        '
+        Me.pnlDashboardView.Controls.Add(Me.pnlChartSection)
+        Me.pnlDashboardView.Controls.Add(Me.pnlStatsRow)
+        Me.pnlDashboardView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlDashboardView.Location = New System.Drawing.Point(0, 0)
+        Me.pnlDashboardView.Name = "pnlDashboardView"
+        Me.pnlDashboardView.Padding = New System.Windows.Forms.Padding(27, 31, 27, 31)
+        Me.pnlDashboardView.Size = New System.Drawing.Size(1274, 786)
+        Me.pnlDashboardView.TabIndex = 0
         '
         'pnlChartSection
         '
@@ -270,7 +280,7 @@ Partial Class adminDashboard
         'pnlCard3
         '
         Me.pnlCard3.BackColor = System.Drawing.Color.White
-        Me.pnlCard3.Controls.Add(Me.lblTotalBlotter)
+        Me.pnlCard3.Controls.Add(Me.lblTotalProjects)
         Me.pnlCard3.Controls.Add(Me.Label4)
         Me.pnlCard3.Controls.Add(Me.Panel3)
         Me.pnlCard3.Location = New System.Drawing.Point(612, 5)
@@ -279,16 +289,16 @@ Partial Class adminDashboard
         Me.pnlCard3.Size = New System.Drawing.Size(290, 185)
         Me.pnlCard3.TabIndex = 2
         '
-        'lblTotalBlotter
+        'lblTotalProjects
         '
-        Me.lblTotalBlotter.AutoSize = True
-        Me.lblTotalBlotter.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Bold)
-        Me.lblTotalBlotter.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185)
-        Me.lblTotalBlotter.Location = New System.Drawing.Point(27, 62)
-        Me.lblTotalBlotter.Name = "lblTotalBlotter"
-        Me.lblTotalBlotter.Size = New System.Drawing.Size(56, 65)
-        Me.lblTotalBlotter.TabIndex = 1
-        Me.lblTotalBlotter.Text = "0"
+        Me.lblTotalProjects.AutoSize = True
+        Me.lblTotalProjects.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTotalProjects.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185)
+        Me.lblTotalProjects.Location = New System.Drawing.Point(27, 62)
+        Me.lblTotalProjects.Name = "lblTotalProjects"
+        Me.lblTotalProjects.Size = New System.Drawing.Size(56, 65)
+        Me.lblTotalProjects.TabIndex = 1
+        Me.lblTotalProjects.Text = "0"
         '
         'Label4
         '
@@ -297,9 +307,9 @@ Partial Class adminDashboard
         Me.Label4.ForeColor = System.Drawing.Color.Gray
         Me.Label4.Location = New System.Drawing.Point(27, 23)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(113, 19)
+        Me.Label4.Size = New System.Drawing.Size(123, 19)
         Me.Label4.TabIndex = 0
-        Me.Label4.Text = "TOTAL BLOTTER"
+        Me.Label4.Text = "TOTAL PROJECTS"
         '
         'Panel3
         '
@@ -378,12 +388,10 @@ Partial Class adminDashboard
         '
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
-        ' ADDED PRINT BUTTON HERE
         Me.pnlSidebar.Controls.Add(Me.btnPrintReport)
         Me.pnlSidebar.Controls.Add(Me.btnClearance)
         Me.pnlSidebar.Controls.Add(Me.btnConcerns)
-        Me.pnlSidebar.Controls.Add(Me.btnBlotter)
-        Me.pnlSidebar.Controls.Add(Me.btnResidents)
+        Me.pnlSidebar.Controls.Add(Me.btnProjects)
         Me.pnlSidebar.Controls.Add(Me.btnHome)
         Me.pnlSidebar.Controls.Add(Me.pnlLogo)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
@@ -417,7 +425,7 @@ Partial Class adminDashboard
         Me.btnPrintReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPrintReport.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnPrintReport.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnPrintReport.Location = New System.Drawing.Point(0, 583)
+        Me.btnPrintReport.Location = New System.Drawing.Point(0, 491)
         Me.btnPrintReport.Name = "btnPrintReport"
         Me.btnPrintReport.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnPrintReport.Size = New System.Drawing.Size(320, 92)
@@ -435,7 +443,7 @@ Partial Class adminDashboard
         Me.btnClearance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearance.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnClearance.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnClearance.Location = New System.Drawing.Point(0, 491)
+        Me.btnClearance.Location = New System.Drawing.Point(0, 399)
         Me.btnClearance.Name = "btnClearance"
         Me.btnClearance.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnClearance.Size = New System.Drawing.Size(320, 92)
@@ -453,7 +461,7 @@ Partial Class adminDashboard
         Me.btnConcerns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConcerns.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnConcerns.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnConcerns.Location = New System.Drawing.Point(0, 399)
+        Me.btnConcerns.Location = New System.Drawing.Point(0, 307)
         Me.btnConcerns.Name = "btnConcerns"
         Me.btnConcerns.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnConcerns.Size = New System.Drawing.Size(320, 92)
@@ -462,41 +470,23 @@ Partial Class adminDashboard
         Me.btnConcerns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnConcerns.UseVisualStyleBackColor = False
         '
-        'btnBlotter
+        'btnProjects
         '
-        Me.btnBlotter.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
-        Me.btnBlotter.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnBlotter.FlatAppearance.BorderSize = 0
-        Me.btnBlotter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(52, 73, 94)
-        Me.btnBlotter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBlotter.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.btnBlotter.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnBlotter.Location = New System.Drawing.Point(0, 307)
-        Me.btnBlotter.Name = "btnBlotter"
-        Me.btnBlotter.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnBlotter.Size = New System.Drawing.Size(320, 92)
-        Me.btnBlotter.TabIndex = 2
-        Me.btnBlotter.Text = "Incident Blotter"
-        Me.btnBlotter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnBlotter.UseVisualStyleBackColor = False
-        '
-        'btnResidents
-        '
-        Me.btnResidents.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
-        Me.btnResidents.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnResidents.FlatAppearance.BorderSize = 0
-        Me.btnResidents.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(52, 73, 94)
-        Me.btnResidents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnResidents.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.btnResidents.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnResidents.Location = New System.Drawing.Point(0, 215)
-        Me.btnResidents.Name = "btnResidents"
-        Me.btnResidents.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnResidents.Size = New System.Drawing.Size(320, 92)
-        Me.btnResidents.TabIndex = 1
-        Me.btnResidents.Text = "Manage Residents"
-        Me.btnResidents.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnResidents.UseVisualStyleBackColor = False
+        Me.btnProjects.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
+        Me.btnProjects.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnProjects.FlatAppearance.BorderSize = 0
+        Me.btnProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(52, 73, 94)
+        Me.btnProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProjects.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.btnProjects.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.btnProjects.Location = New System.Drawing.Point(0, 215)
+        Me.btnProjects.Name = "btnProjects"
+        Me.btnProjects.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
+        Me.btnProjects.Size = New System.Drawing.Size(320, 92)
+        Me.btnProjects.TabIndex = 1
+        Me.btnProjects.Text = "Project Monitoring"
+        Me.btnProjects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProjects.UseVisualStyleBackColor = False
         '
         'btnHome
         '
@@ -551,6 +541,7 @@ Partial Class adminDashboard
         Me.Text = "Admin Dashboard"
         Me.pnlBorder.ResumeLayout(False)
         Me.pnlMainContent.ResumeLayout(False)
+        Me.pnlDashboardView.ResumeLayout(False)
         Me.pnlChartSection.ResumeLayout(False)
         CType(Me.chartIncidents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlFilterBar.ResumeLayout(False)
@@ -577,15 +568,15 @@ Partial Class adminDashboard
     Friend WithEvents pnlSidebar As Panel
     Friend WithEvents pnlLogo As Panel
     Friend WithEvents lblLogo As Label
-    Friend WithEvents btnBlotter As Button
+    Friend WithEvents btnProjects As Button
     Friend WithEvents btnConcerns As Button
-    Friend WithEvents btnResidents As Button
     Friend WithEvents btnClearance As Button
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnHome As Button
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblPageTitle As Label
     Friend WithEvents pnlMainContent As Panel
+    Friend WithEvents pnlDashboardView As Panel
     Friend WithEvents pnlStatsRow As FlowLayoutPanel
     Friend WithEvents pnlCard1 As Panel
     Friend WithEvents lblTotalUsers As Label
@@ -596,7 +587,7 @@ Partial Class adminDashboard
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents pnlCard3 As Panel
-    Friend WithEvents lblTotalBlotter As Label
+    Friend WithEvents lblTotalProjects As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents pnlCard4 As Panel
@@ -609,6 +600,5 @@ Partial Class adminDashboard
     Friend WithEvents Label2 As Label
     Friend WithEvents lblChartTitle As Label
     Friend WithEvents chartIncidents As System.Windows.Forms.DataVisualization.Charting.Chart
-    ' DECLARATION OF NEW PRINT BUTTON
     Friend WithEvents btnPrintReport As Button
 End Class

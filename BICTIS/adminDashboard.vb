@@ -200,7 +200,7 @@ Public Class adminDashboard
     End Sub
 
     Private Async Sub btnBlotter_Click(sender As Object, e As EventArgs) Handles btnBlotter.Click
-        Dim frm As New frmBlotter()
+        Dim frm As New frmProjects()
         frm.ShowDialog()
         Await LoadStatsAsync()
         Await LoadChartAsync()

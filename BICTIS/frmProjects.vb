@@ -1,6 +1,6 @@
 ﻿Imports System.Collections.Generic
 
-Public Class frmBlotter
+Public Class frmProjects
     Private Sub frmBlotter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblTitle.Text = "BLOTTER CASES (Admin)"
         LoadDropdowns()

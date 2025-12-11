@@ -21,6 +21,9 @@ Partial Class frmClearance
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.pnlControls = New System.Windows.Forms.Panel()
+        Me.dtpPickup = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnSchedule = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnReject = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -69,6 +72,9 @@ Partial Class frmClearance
         'pnlControls
         '
         Me.pnlControls.BackColor = System.Drawing.Color.White
+        Me.pnlControls.Controls.Add(Me.dtpPickup)
+        Me.pnlControls.Controls.Add(Me.Label2)
+        Me.pnlControls.Controls.Add(Me.btnSchedule)
         Me.pnlControls.Controls.Add(Me.Label1)
         Me.pnlControls.Controls.Add(Me.btnReject)
         Me.pnlControls.Controls.Add(Me.btnPrint)
@@ -77,6 +83,39 @@ Partial Class frmClearance
         Me.pnlControls.Name = "pnlControls"
         Me.pnlControls.Size = New System.Drawing.Size(900, 80)
         Me.pnlControls.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label2.Location = New System.Drawing.Point(280, 15)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(107, 19)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Pickup Schedule"
+        '
+        'dtpPickup
+        '
+        Me.dtpPickup.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.dtpPickup.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpPickup.Location = New System.Drawing.Point(284, 37)
+        Me.dtpPickup.Name = "dtpPickup"
+        Me.dtpPickup.Size = New System.Drawing.Size(120, 25)
+        Me.dtpPickup.TabIndex = 5
+        '
+        'btnSchedule
+        '
+        Me.btnSchedule.BackColor = System.Drawing.Color.Orange
+        Me.btnSchedule.FlatAppearance.BorderSize = 0
+        Me.btnSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSchedule.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSchedule.ForeColor = System.Drawing.Color.White
+        Me.btnSchedule.Location = New System.Drawing.Point(415, 20)
+        Me.btnSchedule.Name = "btnSchedule"
+        Me.btnSchedule.Size = New System.Drawing.Size(120, 40)
+        Me.btnSchedule.TabIndex = 3
+        Me.btnSchedule.Text = "SET SCHEDULE"
+        Me.btnSchedule.UseVisualStyleBackColor = False
         '
         'btnPrint
         '
@@ -113,9 +152,9 @@ Partial Class frmClearance
         Me.Label1.ForeColor = System.Drawing.Color.Gray
         Me.Label1.Location = New System.Drawing.Point(20, 30)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(325, 19)
+        Me.Label1.Size = New System.Drawing.Size(220, 19)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Select a request to process. Approved items can be printed."
+        Me.Label1.Text = "Note: Set schedule before printing."
         '
         'dgvRequests
         '
@@ -180,4 +219,7 @@ Partial Class frmClearance
     Friend WithEvents btnPrint As Button
     Friend WithEvents btnReject As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents btnSchedule As Button
+    Friend WithEvents dtpPickup As DateTimePicker
+    Friend WithEvents Label2 As Label
 End Class

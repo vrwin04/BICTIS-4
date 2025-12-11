@@ -20,11 +20,14 @@ Partial Class frmRequestClearance
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.pnlContent = New System.Windows.Forms.Panel()
         Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.pnlLine1 = New System.Windows.Forms.Panel()
         Me.cbPurpose = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.pnlLine1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtNote = New System.Windows.Forms.TextBox()
+        Me.cbCertType = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtpNeeded = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.pnlContent.SuspendLayout()
         Me.SuspendLayout()
@@ -68,6 +71,10 @@ Partial Class frmRequestClearance
         'pnlContent
         '
         Me.pnlContent.BackColor = System.Drawing.Color.White
+        Me.pnlContent.Controls.Add(Me.dtpNeeded)
+        Me.pnlContent.Controls.Add(Me.Label4)
+        Me.pnlContent.Controls.Add(Me.cbCertType)
+        Me.pnlContent.Controls.Add(Me.Label3)
         Me.pnlContent.Controls.Add(Me.btnSubmit)
         Me.pnlContent.Controls.Add(Me.pnlLine1)
         Me.pnlContent.Controls.Add(Me.cbPurpose)
@@ -76,15 +83,37 @@ Partial Class frmRequestClearance
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(0, 60)
         Me.pnlContent.Name = "pnlContent"
-        Me.pnlContent.Size = New System.Drawing.Size(400, 340)
+        Me.pnlContent.Size = New System.Drawing.Size(400, 440)
         Me.pnlContent.TabIndex = 1
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label3.ForeColor = System.Drawing.Color.Gray
+        Me.Label3.Location = New System.Drawing.Point(46, 30)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(107, 19)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Certificate Type:"
+        '
+        'cbCertType
+        '
+        Me.cbCertType.BackColor = System.Drawing.Color.White
+        Me.cbCertType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbCertType.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.cbCertType.FormattingEnabled = True
+        Me.cbCertType.Location = New System.Drawing.Point(50, 55)
+        Me.cbCertType.Name = "cbCertType"
+        Me.cbCertType.Size = New System.Drawing.Size(300, 28)
+        Me.cbCertType.TabIndex = 6
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(46, 50)
+        Me.Label1.Location = New System.Drawing.Point(46, 100)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(147, 19)
         Me.Label1.TabIndex = 0
@@ -96,15 +125,35 @@ Partial Class frmRequestClearance
         Me.cbPurpose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbPurpose.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cbPurpose.FormattingEnabled = True
-        Me.cbPurpose.Location = New System.Drawing.Point(50, 80)
+        Me.cbPurpose.Location = New System.Drawing.Point(50, 125)
         Me.cbPurpose.Name = "cbPurpose"
         Me.cbPurpose.Size = New System.Drawing.Size(300, 28)
         Me.cbPurpose.TabIndex = 1
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label4.ForeColor = System.Drawing.Color.Gray
+        Me.Label4.Location = New System.Drawing.Point(46, 170)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(95, 19)
+        Me.Label4.TabIndex = 7
+        Me.Label4.Text = "Date Needed:"
+        '
+        'dtpNeeded
+        '
+        Me.dtpNeeded.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.dtpNeeded.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpNeeded.Location = New System.Drawing.Point(50, 195)
+        Me.dtpNeeded.Name = "dtpNeeded"
+        Me.dtpNeeded.Size = New System.Drawing.Size(300, 27)
+        Me.dtpNeeded.TabIndex = 8
+        '
         'pnlLine1
         '
         Me.pnlLine1.BackColor = System.Drawing.Color.Silver
-        Me.pnlLine1.Location = New System.Drawing.Point(50, 110)
+        Me.pnlLine1.Location = New System.Drawing.Point(50, 240)
         Me.pnlLine1.Name = "pnlLine1"
         Me.pnlLine1.Size = New System.Drawing.Size(300, 2)
         Me.pnlLine1.TabIndex = 2
@@ -114,11 +163,11 @@ Partial Class frmRequestClearance
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic)
         Me.Label2.ForeColor = System.Drawing.Color.DimGray
-        Me.Label2.Location = New System.Drawing.Point(50, 130)
+        Me.Label2.Location = New System.Drawing.Point(50, 260)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(280, 45)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Note: Processing may take 1-3 business days." & vbCrLf & "Please bring a valid ID when claiming your document."
+        Me.Label2.Text = "Note: Admin will set the schedule for pickup."
         '
         'btnSubmit
         '
@@ -128,7 +177,7 @@ Partial Class frmRequestClearance
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
         Me.btnSubmit.ForeColor = System.Drawing.Color.White
-        Me.btnSubmit.Location = New System.Drawing.Point(50, 240)
+        Me.btnSubmit.Location = New System.Drawing.Point(50, 320)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(300, 50)
         Me.btnSubmit.TabIndex = 4
@@ -139,7 +188,7 @@ Partial Class frmRequestClearance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(400, 400)
+        Me.ClientSize = New System.Drawing.Size(400, 500)
         Me.Controls.Add(Me.pnlContent)
         Me.Controls.Add(Me.pnlHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -151,7 +200,6 @@ Partial Class frmRequestClearance
         Me.pnlContent.ResumeLayout(False)
         Me.pnlContent.PerformLayout()
         Me.ResumeLayout(False)
-
     End Sub
 
     Friend WithEvents pnlHeader As Panel
@@ -163,5 +211,8 @@ Partial Class frmRequestClearance
     Friend WithEvents pnlLine1 As Panel
     Friend WithEvents btnSubmit As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents txtNote As TextBox
+    Friend WithEvents cbCertType As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents dtpNeeded As DateTimePicker
+    Friend WithEvents Label4 As Label
 End Class
