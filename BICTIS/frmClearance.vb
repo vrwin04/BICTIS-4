@@ -1,121 +1,62 @@
-﻿Imports System.Collections.Generic
-Imports System.Drawing.Printing
+﻿Imports System.Drawing.Printing ' Huwag kalimutan i-import ito sa pinakataas
 
-Public Class frmClearance
-    ' Variables to hold data for printing
-    Private printName As String = ""
-    Private printPurpose As String = ""
-    Private printDate As String = ""
+' Sa loob ng Class frmClearance
+Private WithEvents PrintDoc As New PrintDocument()
+Private SelectedClearanceID As Integer = 0
+Private SelectedResidentName As String = ""
+Private SelectedPurpose As String = ""
 
-    Private Sub frmClearance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadRequests()
-    End Sub
+Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+    If dgvRequests.SelectedRows.Count = 0 Then
+        MessageBox.Show("Please select a request first.", "Select Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Exit Sub
+    End If
 
-    Private Sub LoadRequests()
-        ' Join on ResidentID to get Full Name, kailangan natin ang ResidentID sa select statement para sa validation
-        Dim sql As String = "SELECT c.ClearanceID, c.ResidentID, u.FullName, c.Purpose, c.DateIssued, c.Status FROM tblClearances c INNER JOIN tblResidents u ON c.ResidentID = u.ResidentID ORDER BY c.DateIssued DESC"
-        dgvRequests.DataSource = Session.GetDataTable(sql)
+    ' Kunin ang details ng pipiliin
+    SelectedClearanceID = dgvRequests.SelectedRows(0).Cells("ClearanceID").Value
+    ' Assumes column name in Grid is 'FullName' or similar (adjust based on your grid columns)
+    SelectedResidentName = dgvRequests.SelectedRows(0).Cells(1).Value.ToString()
+    SelectedPurpose = dgvRequests.SelectedRows(0).Cells("Purpose").Value.ToString()
 
-        ' Hide ResidentID column (optional UI fix)
-        If dgvRequests.Columns.Contains("ResidentID") Then
-            dgvRequests.Columns("ResidentID").Visible = False
-        End If
-    End Sub
+    ' Ipakita ang Print Preview
+    Dim ppd As New PrintPreviewDialog()
+    ppd.Document = PrintDoc
+    ppd.WindowState = FormWindowState.Maximized
+    ppd.ShowDialog()
 
-    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        If dgvRequests.SelectedRows.Count = 0 Then
-            MessageBox.Show("Please select a request to print.", "Select Request", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
-        End If
+    ' Update Status to Completed after printing
+    Dim query As String = "UPDATE tblClearances SET Status='Completed' WHERE ClearanceID=" & SelectedClearanceID
+    Session.ExecuteQuery(query)
+    ' ReloadRequests() ' Call your load function here if it exists
+End Sub
 
-        Dim row As DataGridViewRow = dgvRequests.SelectedRows(0)
-        Dim cid As Integer = Convert.ToInt32(row.Cells("ClearanceID").Value)
-        Dim residentID As Integer = Convert.ToInt32(row.Cells("ResidentID").Value) ' Kunin ang ID ng resident
+Private Sub PrintDoc_PrintPage(sender As Object, e As PrintPageEventArgs) Handles PrintDoc.PrintPage
+    ' LAYOUT NG CERTIFICATE
+    Dim fontHeader As New Font("Times New Roman", 18, FontStyle.Bold)
+    Dim fontSub As New Font("Arial", 12, FontStyle.Regular)
+    Dim fontBody As New Font("Arial", 14, FontStyle.Regular)
 
-        ' *** BLOCKER LOGIC: CHECK FOR PENDING CASES BEFORE PRINTING ***
-        Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid OR RespondentID = @uid) AND Status = 'Pending'"
-        Dim checkParams As New Dictionary(Of String, Object)
-        checkParams.Add("@uid", residentID)
+    Dim center As New StringFormat()
+    center.Alignment = StringAlignment.Center
 
-        Dim pendingCount As Integer = Session.GetCount(checkQuery, checkParams)
+    ' Header
+    e.Graphics.DrawString("REPUBLIC OF THE PHILIPPINES", fontSub, Brushes.Black, e.PageBounds.Width / 2, 50, center)
+    e.Graphics.DrawString("BARANGAY BICTIS", fontHeader, Brushes.Black, e.PageBounds.Width / 2, 80, center)
+    e.Graphics.DrawString("OFFICE OF THE PUNONG BARANGAY", fontSub, Brushes.Black, e.PageBounds.Width / 2, 110, center)
 
-        If pendingCount > 0 Then
-            MessageBox.Show("CANNOT PRINT: Ang resident na ito ay may PENDING na kaso sa barangay. Resolbahin muna ang kaso bago bigyan ng clearance.", "Restriction", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            Exit Sub
-        End If
-        ' **************************************************************
+    ' Title
+    e.Graphics.DrawString("BARANGAY CLEARANCE", New Font("Arial", 24, FontStyle.Bold Or FontStyle.Underline), Brushes.Black, e.PageBounds.Width / 2, 180, center)
 
-        ' Store data for the print document
-        printName = row.Cells("FullName").Value.ToString()
-        printPurpose = row.Cells("Purpose").Value.ToString()
-        printDate = DateTime.Now.ToString("MMMM dd, yyyy")
+    ' Body
+    Dim bodyText As String = vbCrLf & vbCrLf & "TO WHOM IT MAY CONCERN:" & vbCrLf & vbCrLf &
+                             "This is to certify that " & SelectedResidentName.ToUpper() & ", of legal age, is a resident of this Barangay." & vbCrLf & vbCrLf &
+                             "This certification is issued upon request for the purpose of: " & SelectedPurpose.ToUpper() & "." & vbCrLf & vbCrLf &
+                             "Given this " & DateTime.Now.ToString("MMMM dd, yyyy") & "."
 
-        ' Update status in DB
-        Session.ExecuteQuery("UPDATE tblClearances SET Status='Approved' WHERE ClearanceID=" & cid)
+    Dim rect As New RectangleF(100, 250, e.PageBounds.Width - 200, 400)
+    e.Graphics.DrawString(bodyText, fontBody, Brushes.Black, rect)
 
-        ' Launch Print Preview
-        Dim pd As New PrintDocument()
-        AddHandler pd.PrintPage, AddressOf PrintPageHandler
-
-        Dim ppd As New PrintPreviewDialog()
-        ppd.Document = pd
-        ppd.ShowDialog()
-
-        LoadRequests()
-    End Sub
-
-    Private Sub PrintPageHandler(sender As Object, e As PrintPageEventArgs)
-        ' Define Fonts
-        Dim titleFont As New Font("Arial", 24, FontStyle.Bold)
-        Dim headerFont As New Font("Arial", 14, FontStyle.Regular)
-        Dim bodyFont As New Font("Arial", 12, FontStyle.Regular)
-
-        Dim g As Graphics = e.Graphics
-        Dim margin As Integer = 50
-        Dim yPos As Integer = 100
-
-        ' Draw Header
-        g.DrawString("BARANGAY CLEARANCE", titleFont, Brushes.Black, New PointF(180, yPos))
-        yPos += 80
-
-        g.DrawString("TO WHOM IT MAY CONCERN:", headerFont, Brushes.Black, New PointF(margin, yPos))
-        yPos += 60
-
-        ' Draw Body
-        Dim bodyText As String = "This is to certify that " & printName.ToUpper() & ", a resident of this Barangay, " &
-                                 "has no derogatory record on file as of this date." & vbCrLf & vbCrLf &
-                                 "This clearance is issued for the purpose of: " & printPurpose.ToUpper() & "."
-
-        Dim rect As New RectangleF(margin, yPos, e.PageBounds.Width - (margin * 2), 300)
-        g.DrawString(bodyText, bodyFont, Brushes.Black, rect)
-
-        ' Draw Footer
-        yPos += 250
-        g.DrawString("Issued this " & printDate, bodyFont, Brushes.Black, New PointF(margin, yPos))
-
-        yPos += 100
-        g.DrawString("_______________________", bodyFont, Brushes.Black, New PointF(450, yPos))
-        g.DrawString("Barangay Captain", bodyFont, Brushes.Black, New PointF(480, yPos + 30))
-    End Sub
-
-    Private Sub btnReject_Click(sender As Object, e As EventArgs) Handles btnReject.Click
-        If dgvRequests.SelectedRows.Count = 0 Then Exit Sub
-
-        Dim row As DataGridViewRow = dgvRequests.SelectedRows(0)
-        Dim cid As Integer = Convert.ToInt32(row.Cells("ClearanceID").Value)
-        Dim currentStatus As String = row.Cells("Status").Value.ToString()
-
-
-        If currentStatus = "Approved" Then
-            MessageBox.Show("This request is already APPROVED and cannot be rejected.", "Action Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            Exit Sub
-        End If
-
-        If MessageBox.Show("Reject this request?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
-            Session.ExecuteQuery("UPDATE tblClearances SET Status='Rejected' WHERE ClearanceID=" & cid)
-            LoadRequests()
-        End If
-    End Sub
-
-
-End Class
+    ' Footer / Signature
+    e.Graphics.DrawString("Hon. Captain Name", fontHeader, Brushes.Black, e.PageBounds.Width - 250, 700)
+    e.Graphics.DrawString("Punong Barangay", fontSub, Brushes.Black, e.PageBounds.Width - 230, 725)
+End Sub
