@@ -19,7 +19,6 @@ Partial Class frmClearance
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.pnlControls = New System.Windows.Forms.Panel()
         Me.dtpPickup = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,7 +35,6 @@ Partial Class frmClearance
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
-        Me.pnlHeader.Controls.Add(Me.btnClose)
         Me.pnlHeader.Controls.Add(Me.lblTitle)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
@@ -55,20 +53,6 @@ Partial Class frmClearance
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "CLEARANCE REQUESTS"
         '
-        'btnClose
-        '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.FlatAppearance.BorderSize = 0
-        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClose.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.btnClose.ForeColor = System.Drawing.Color.White
-        Me.btnClose.Location = New System.Drawing.Point(850, 10)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(40, 40)
-        Me.btnClose.TabIndex = 1
-        Me.btnClose.Text = "X"
-        Me.btnClose.UseVisualStyleBackColor = True
-        '
         'pnlControls
         '
         Me.pnlControls.BackColor = System.Drawing.Color.White
@@ -86,6 +70,7 @@ Partial Class frmClearance
         '
         'Label2
         '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label2.Location = New System.Drawing.Point(280, 15)
@@ -96,6 +81,7 @@ Partial Class frmClearance
         '
         'dtpPickup
         '
+        Me.dtpPickup.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dtpPickup.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.dtpPickup.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpPickup.Location = New System.Drawing.Point(284, 37)
@@ -105,6 +91,7 @@ Partial Class frmClearance
         '
         'btnSchedule
         '
+        Me.btnSchedule.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSchedule.BackColor = System.Drawing.Color.Orange
         Me.btnSchedule.FlatAppearance.BorderSize = 0
         Me.btnSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -119,6 +106,7 @@ Partial Class frmClearance
         '
         'btnPrint
         '
+        Me.btnPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPrint.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
         Me.btnPrint.FlatAppearance.BorderSize = 0
         Me.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -133,6 +121,7 @@ Partial Class frmClearance
         '
         'btnReject
         '
+        Me.btnReject.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnReject.BackColor = System.Drawing.Color.IndianRed
         Me.btnReject.FlatAppearance.BorderSize = 0
         Me.btnReject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -147,6 +136,7 @@ Partial Class frmClearance
         '
         'Label1
         '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Italic)
         Me.Label1.ForeColor = System.Drawing.Color.Gray
@@ -213,7 +203,6 @@ Partial Class frmClearance
 
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblTitle As Label
-    Friend WithEvents btnClose As Button
     Friend WithEvents pnlControls As Panel
     Friend WithEvents dgvRequests As DataGridView
     Friend WithEvents btnPrint As Button

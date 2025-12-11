@@ -74,7 +74,7 @@ Partial Class adminDashboard
         '
         'pnlBorder
         '
-        Me.pnlBorder.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlBorder.BackColor = System.Drawing.Color.FromArgb(236, 240, 241) ' Softer Gray Background
         Me.pnlBorder.Controls.Add(Me.pnlMainContent)
         Me.pnlBorder.Controls.Add(Me.pnlHeader)
         Me.pnlBorder.Controls.Add(Me.pnlSidebar)
@@ -88,9 +88,10 @@ Partial Class adminDashboard
         '
         Me.pnlMainContent.Controls.Add(Me.pnlDashboardView)
         Me.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMainContent.Location = New System.Drawing.Point(320, 108)
+        Me.pnlMainContent.Location = New System.Drawing.Point(320, 80) ' Adjusted top to 80
         Me.pnlMainContent.Name = "pnlMainContent"
-        Me.pnlMainContent.Size = New System.Drawing.Size(1274, 786)
+        Me.pnlMainContent.Padding = New System.Windows.Forms.Padding(20)
+        Me.pnlMainContent.Size = New System.Drawing.Size(1274, 814)
         Me.pnlMainContent.TabIndex = 2
         '
         'pnlDashboardView
@@ -98,10 +99,9 @@ Partial Class adminDashboard
         Me.pnlDashboardView.Controls.Add(Me.pnlChartSection)
         Me.pnlDashboardView.Controls.Add(Me.pnlStatsRow)
         Me.pnlDashboardView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDashboardView.Location = New System.Drawing.Point(0, 0)
+        Me.pnlDashboardView.Location = New System.Drawing.Point(20, 20)
         Me.pnlDashboardView.Name = "pnlDashboardView"
-        Me.pnlDashboardView.Padding = New System.Windows.Forms.Padding(27, 31, 27, 31)
-        Me.pnlDashboardView.Size = New System.Drawing.Size(1274, 786)
+        Me.pnlDashboardView.Size = New System.Drawing.Size(1234, 774)
         Me.pnlDashboardView.TabIndex = 0
         '
         'pnlChartSection
@@ -110,10 +110,10 @@ Partial Class adminDashboard
         Me.pnlChartSection.Controls.Add(Me.chartIncidents)
         Me.pnlChartSection.Controls.Add(Me.pnlFilterBar)
         Me.pnlChartSection.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlChartSection.Location = New System.Drawing.Point(27, 246)
+        Me.pnlChartSection.Location = New System.Drawing.Point(0, 220)
         Me.pnlChartSection.Name = "pnlChartSection"
-        Me.pnlChartSection.Padding = New System.Windows.Forms.Padding(13, 15, 13, 15)
-        Me.pnlChartSection.Size = New System.Drawing.Size(1220, 509)
+        Me.pnlChartSection.Padding = New System.Windows.Forms.Padding(20)
+        Me.pnlChartSection.Size = New System.Drawing.Size(1234, 554)
         Me.pnlChartSection.TabIndex = 1
         '
         'chartIncidents
@@ -123,13 +123,13 @@ Partial Class adminDashboard
         Me.chartIncidents.Dock = System.Windows.Forms.DockStyle.Fill
         Legend1.Name = "Legend1"
         Me.chartIncidents.Legends.Add(Legend1)
-        Me.chartIncidents.Location = New System.Drawing.Point(13, 92)
+        Me.chartIncidents.Location = New System.Drawing.Point(20, 80)
         Me.chartIncidents.Name = "chartIncidents"
         Series1.ChartArea = "ChartArea1"
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.chartIncidents.Series.Add(Series1)
-        Me.chartIncidents.Size = New System.Drawing.Size(1194, 402)
+        Me.chartIncidents.Size = New System.Drawing.Size(1194, 454)
         Me.chartIncidents.TabIndex = 1
         Me.chartIncidents.Text = "Chart1"
         '
@@ -139,9 +139,9 @@ Partial Class adminDashboard
         Me.pnlFilterBar.Controls.Add(Me.Label2)
         Me.pnlFilterBar.Controls.Add(Me.lblChartTitle)
         Me.pnlFilterBar.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlFilterBar.Location = New System.Drawing.Point(13, 15)
+        Me.pnlFilterBar.Location = New System.Drawing.Point(20, 20)
         Me.pnlFilterBar.Name = "pnlFilterBar"
-        Me.pnlFilterBar.Size = New System.Drawing.Size(1194, 77)
+        Me.pnlFilterBar.Size = New System.Drawing.Size(1194, 60)
         Me.pnlFilterBar.TabIndex = 0
         '
         'cbIncidentType
@@ -150,33 +150,33 @@ Partial Class adminDashboard
         Me.cbIncidentType.BackColor = System.Drawing.Color.WhiteSmoke
         Me.cbIncidentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbIncidentType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cbIncidentType.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cbIncidentType.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cbIncidentType.FormattingEnabled = True
-        Me.cbIncidentType.Location = New System.Drawing.Point(906, 18)
+        Me.cbIncidentType.Location = New System.Drawing.Point(906, 15)
         Me.cbIncidentType.Name = "cbIncidentType"
-        Me.cbIncidentType.Size = New System.Drawing.Size(265, 25)
+        Me.cbIncidentType.Size = New System.Drawing.Size(265, 28)
         Me.cbIncidentType.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.DimGray
-        Me.Label2.Location = New System.Drawing.Point(786, 23)
+        Me.Label2.Location = New System.Drawing.Point(786, 19)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(84, 17)
+        Me.Label2.Size = New System.Drawing.Size(96, 19)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Filter Graph:"
         '
         'lblChartTitle
         '
         Me.lblChartTitle.AutoSize = True
-        Me.lblChartTitle.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.lblChartTitle.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64)
-        Me.lblChartTitle.Location = New System.Drawing.Point(13, 18)
+        Me.lblChartTitle.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lblChartTitle.ForeColor = System.Drawing.Color.FromArgb(44, 62, 80)
+        Me.lblChartTitle.Location = New System.Drawing.Point(0, 15)
         Me.lblChartTitle.Name = "lblChartTitle"
-        Me.lblChartTitle.Size = New System.Drawing.Size(147, 21)
+        Me.lblChartTitle.Size = New System.Drawing.Size(176, 25)
         Me.lblChartTitle.TabIndex = 0
         Me.lblChartTitle.Text = "Incident Analytics"
         '
@@ -187,9 +187,9 @@ Partial Class adminDashboard
         Me.pnlStatsRow.Controls.Add(Me.pnlCard3)
         Me.pnlStatsRow.Controls.Add(Me.pnlCard4)
         Me.pnlStatsRow.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlStatsRow.Location = New System.Drawing.Point(27, 31)
+        Me.pnlStatsRow.Location = New System.Drawing.Point(0, 0)
         Me.pnlStatsRow.Name = "pnlStatsRow"
-        Me.pnlStatsRow.Size = New System.Drawing.Size(1220, 215)
+        Me.pnlStatsRow.Size = New System.Drawing.Size(1234, 220)
         Me.pnlStatsRow.TabIndex = 0
         '
         'pnlCard1
@@ -198,31 +198,31 @@ Partial Class adminDashboard
         Me.pnlCard1.Controls.Add(Me.lblTotalUsers)
         Me.pnlCard1.Controls.Add(Me.Label1)
         Me.pnlCard1.Controls.Add(Me.Panel1)
-        Me.pnlCard1.Location = New System.Drawing.Point(4, 5)
-        Me.pnlCard1.Margin = New System.Windows.Forms.Padding(4, 5, 10, 5)
+        Me.pnlCard1.Location = New System.Drawing.Point(0, 0)
+        Me.pnlCard1.Margin = New System.Windows.Forms.Padding(0, 0, 20, 20)
         Me.pnlCard1.Name = "pnlCard1"
-        Me.pnlCard1.Size = New System.Drawing.Size(290, 185)
+        Me.pnlCard1.Size = New System.Drawing.Size(280, 180)
         Me.pnlCard1.TabIndex = 0
         '
         'lblTotalUsers
         '
         Me.lblTotalUsers.AutoSize = True
-        Me.lblTotalUsers.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTotalUsers.Font = New System.Drawing.Font("Segoe UI", 42.0!, System.Drawing.FontStyle.Bold)
         Me.lblTotalUsers.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185)
-        Me.lblTotalUsers.Location = New System.Drawing.Point(27, 62)
+        Me.lblTotalUsers.Location = New System.Drawing.Point(30, 60)
         Me.lblTotalUsers.Name = "lblTotalUsers"
-        Me.lblTotalUsers.Size = New System.Drawing.Size(56, 65)
+        Me.lblTotalUsers.Size = New System.Drawing.Size(65, 74)
         Me.lblTotalUsers.TabIndex = 1
         Me.lblTotalUsers.Text = "0"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(27, 23)
+        Me.Label1.Location = New System.Drawing.Point(30, 25)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(127, 19)
+        Me.Label1.Size = New System.Drawing.Size(140, 20)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "TOTAL RESIDENTS"
         '
@@ -232,7 +232,7 @@ Partial Class adminDashboard
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(7, 185)
+        Me.Panel1.Size = New System.Drawing.Size(8, 180)
         Me.Panel1.TabIndex = 2
         '
         'pnlCard2
@@ -241,31 +241,31 @@ Partial Class adminDashboard
         Me.pnlCard2.Controls.Add(Me.lblPendingCases)
         Me.pnlCard2.Controls.Add(Me.Label3)
         Me.pnlCard2.Controls.Add(Me.Panel2)
-        Me.pnlCard2.Location = New System.Drawing.Point(308, 5)
-        Me.pnlCard2.Margin = New System.Windows.Forms.Padding(4, 5, 10, 5)
+        Me.pnlCard2.Location = New System.Drawing.Point(300, 0)
+        Me.pnlCard2.Margin = New System.Windows.Forms.Padding(0, 0, 20, 20)
         Me.pnlCard2.Name = "pnlCard2"
-        Me.pnlCard2.Size = New System.Drawing.Size(290, 185)
+        Me.pnlCard2.Size = New System.Drawing.Size(280, 180)
         Me.pnlCard2.TabIndex = 1
         '
         'lblPendingCases
         '
         Me.lblPendingCases.AutoSize = True
-        Me.lblPendingCases.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Bold)
+        Me.lblPendingCases.Font = New System.Drawing.Font("Segoe UI", 42.0!, System.Drawing.FontStyle.Bold)
         Me.lblPendingCases.ForeColor = System.Drawing.Color.Crimson
-        Me.lblPendingCases.Location = New System.Drawing.Point(27, 62)
+        Me.lblPendingCases.Location = New System.Drawing.Point(30, 60)
         Me.lblPendingCases.Name = "lblPendingCases"
-        Me.lblPendingCases.Size = New System.Drawing.Size(56, 65)
+        Me.lblPendingCases.Size = New System.Drawing.Size(65, 74)
         Me.lblPendingCases.TabIndex = 1
         Me.lblPendingCases.Text = "0"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.Color.Gray
-        Me.Label3.Location = New System.Drawing.Point(27, 23)
+        Me.Label3.Location = New System.Drawing.Point(30, 25)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(117, 19)
+        Me.Label3.Size = New System.Drawing.Size(126, 20)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "PENDING CASES"
         '
@@ -275,7 +275,7 @@ Partial Class adminDashboard
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(7, 185)
+        Me.Panel2.Size = New System.Drawing.Size(8, 180)
         Me.Panel2.TabIndex = 2
         '
         'pnlCard3
@@ -284,31 +284,31 @@ Partial Class adminDashboard
         Me.pnlCard3.Controls.Add(Me.lblTotalProjects)
         Me.pnlCard3.Controls.Add(Me.Label4)
         Me.pnlCard3.Controls.Add(Me.Panel3)
-        Me.pnlCard3.Location = New System.Drawing.Point(612, 5)
-        Me.pnlCard3.Margin = New System.Windows.Forms.Padding(4, 5, 10, 5)
+        Me.pnlCard3.Location = New System.Drawing.Point(600, 0)
+        Me.pnlCard3.Margin = New System.Windows.Forms.Padding(0, 0, 20, 20)
         Me.pnlCard3.Name = "pnlCard3"
-        Me.pnlCard3.Size = New System.Drawing.Size(290, 185)
+        Me.pnlCard3.Size = New System.Drawing.Size(280, 180)
         Me.pnlCard3.TabIndex = 2
         '
         'lblTotalProjects
         '
         Me.lblTotalProjects.AutoSize = True
-        Me.lblTotalProjects.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTotalProjects.Font = New System.Drawing.Font("Segoe UI", 42.0!, System.Drawing.FontStyle.Bold)
         Me.lblTotalProjects.ForeColor = System.Drawing.Color.FromArgb(41, 128, 185)
-        Me.lblTotalProjects.Location = New System.Drawing.Point(27, 62)
+        Me.lblTotalProjects.Location = New System.Drawing.Point(30, 60)
         Me.lblTotalProjects.Name = "lblTotalProjects"
-        Me.lblTotalProjects.Size = New System.Drawing.Size(56, 65)
+        Me.lblTotalProjects.Size = New System.Drawing.Size(65, 74)
         Me.lblTotalProjects.TabIndex = 1
         Me.lblTotalProjects.Text = "0"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.Color.Gray
-        Me.Label4.Location = New System.Drawing.Point(27, 23)
+        Me.Label4.Location = New System.Drawing.Point(30, 25)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(123, 19)
+        Me.Label4.Size = New System.Drawing.Size(133, 20)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "TOTAL PROJECTS"
         '
@@ -318,7 +318,7 @@ Partial Class adminDashboard
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(7, 185)
+        Me.Panel3.Size = New System.Drawing.Size(8, 180)
         Me.Panel3.TabIndex = 2
         '
         'pnlCard4
@@ -326,32 +326,32 @@ Partial Class adminDashboard
         Me.pnlCard4.BackColor = System.Drawing.Color.White
         Me.pnlCard4.Controls.Add(Me.lblTotalConcerns)
         Me.pnlCard4.Controls.Add(Me.Label5)
-        Me.pnlCard4.Controls.Add(Panel4)
-        Me.pnlCard4.Location = New System.Drawing.Point(916, 5)
-        Me.pnlCard4.Margin = New System.Windows.Forms.Padding(4, 5, 10, 5)
+        Me.pnlCard4.Controls.Add(Me.Panel4)
+        Me.pnlCard4.Location = New System.Drawing.Point(900, 0)
+        Me.pnlCard4.Margin = New System.Windows.Forms.Padding(0, 0, 20, 20)
         Me.pnlCard4.Name = "pnlCard4"
-        Me.pnlCard4.Size = New System.Drawing.Size(290, 185)
+        Me.pnlCard4.Size = New System.Drawing.Size(280, 180)
         Me.pnlCard4.TabIndex = 3
         '
         'lblTotalConcerns
         '
         Me.lblTotalConcerns.AutoSize = True
-        Me.lblTotalConcerns.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTotalConcerns.Font = New System.Drawing.Font("Segoe UI", 42.0!, System.Drawing.FontStyle.Bold)
         Me.lblTotalConcerns.ForeColor = System.Drawing.Color.FromArgb(192, 57, 43)
-        Me.lblTotalConcerns.Location = New System.Drawing.Point(27, 62)
+        Me.lblTotalConcerns.Location = New System.Drawing.Point(30, 60)
         Me.lblTotalConcerns.Name = "lblTotalConcerns"
-        Me.lblTotalConcerns.Size = New System.Drawing.Size(56, 65)
+        Me.lblTotalConcerns.Size = New System.Drawing.Size(65, 74)
         Me.lblTotalConcerns.TabIndex = 1
         Me.lblTotalConcerns.Text = "0"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.Color.Gray
-        Me.Label5.Location = New System.Drawing.Point(27, 23)
+        Me.Label5.Location = New System.Drawing.Point(30, 25)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(126, 19)
+        Me.Label5.Size = New System.Drawing.Size(140, 20)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "TOTAL CONCERNS"
         '
@@ -361,7 +361,7 @@ Partial Class adminDashboard
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(7, 185)
+        Me.Panel4.Size = New System.Drawing.Size(8, 180)
         Me.Panel4.TabIndex = 2
         '
         'pnlHeader
@@ -371,17 +371,17 @@ Partial Class adminDashboard
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(320, 0)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(1274, 108)
+        Me.pnlHeader.Size = New System.Drawing.Size(1274, 80)
         Me.pnlHeader.TabIndex = 1
         '
         'lblPageTitle
         '
         Me.lblPageTitle.AutoSize = True
-        Me.lblPageTitle.Font = New System.Drawing.Font("Segoe UI", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.lblPageTitle.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold)
         Me.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(44, 62, 80)
-        Me.lblPageTitle.Location = New System.Drawing.Point(33, 31)
+        Me.lblPageTitle.Location = New System.Drawing.Point(20, 25)
         Me.lblPageTitle.Name = "lblPageTitle"
-        Me.lblPageTitle.Size = New System.Drawing.Size(206, 30)
+        Me.lblPageTitle.Size = New System.Drawing.Size(225, 32)
         Me.lblPageTitle.TabIndex = 0
         Me.lblPageTitle.Text = "Admin Dashboard"
         '
@@ -411,9 +411,9 @@ Partial Class adminDashboard
         Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
         Me.btnLogout.ForeColor = System.Drawing.Color.LightGray
-        Me.btnLogout.Location = New System.Drawing.Point(0, 802)
+        Me.btnLogout.Location = New System.Drawing.Point(0, 824)
         Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(320, 92)
+        Me.btnLogout.Size = New System.Drawing.Size(320, 70)
         Me.btnLogout.TabIndex = 6
         Me.btnLogout.Text = "Sign Out"
         Me.btnLogout.UseVisualStyleBackColor = False
@@ -427,10 +427,10 @@ Partial Class adminDashboard
         Me.btnPrintReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPrintReport.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnPrintReport.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnPrintReport.Location = New System.Drawing.Point(0, 583)
+        Me.btnPrintReport.Location = New System.Drawing.Point(0, 470)
         Me.btnPrintReport.Name = "btnPrintReport"
-        Me.btnPrintReport.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnPrintReport.Size = New System.Drawing.Size(320, 92)
+        Me.btnPrintReport.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
+        Me.btnPrintReport.Size = New System.Drawing.Size(320, 70)
         Me.btnPrintReport.TabIndex = 5
         Me.btnPrintReport.Text = "Print Reports"
         Me.btnPrintReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -445,10 +445,10 @@ Partial Class adminDashboard
         Me.btnClearance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearance.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnClearance.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnClearance.Location = New System.Drawing.Point(0, 491)
+        Me.btnClearance.Location = New System.Drawing.Point(0, 400)
         Me.btnClearance.Name = "btnClearance"
-        Me.btnClearance.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnClearance.Size = New System.Drawing.Size(320, 92)
+        Me.btnClearance.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
+        Me.btnClearance.Size = New System.Drawing.Size(320, 70)
         Me.btnClearance.TabIndex = 4
         Me.btnClearance.Text = "Manage Clearances"
         Me.btnClearance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -463,10 +463,10 @@ Partial Class adminDashboard
         Me.btnConcerns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConcerns.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnConcerns.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnConcerns.Location = New System.Drawing.Point(0, 399)
+        Me.btnConcerns.Location = New System.Drawing.Point(0, 330)
         Me.btnConcerns.Name = "btnConcerns"
-        Me.btnConcerns.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnConcerns.Size = New System.Drawing.Size(320, 92)
+        Me.btnConcerns.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
+        Me.btnConcerns.Size = New System.Drawing.Size(320, 70)
         Me.btnConcerns.TabIndex = 3
         Me.btnConcerns.Text = "Barangay Concerns"
         Me.btnConcerns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -481,10 +481,10 @@ Partial Class adminDashboard
         Me.btnResidents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResidents.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnResidents.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnResidents.Location = New System.Drawing.Point(0, 307)
+        Me.btnResidents.Location = New System.Drawing.Point(0, 260)
         Me.btnResidents.Name = "btnResidents"
-        Me.btnResidents.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnResidents.Size = New System.Drawing.Size(320, 92)
+        Me.btnResidents.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
+        Me.btnResidents.Size = New System.Drawing.Size(320, 70)
         Me.btnResidents.TabIndex = 2
         Me.btnResidents.Text = "Manage Residents"
         Me.btnResidents.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -499,10 +499,10 @@ Partial Class adminDashboard
         Me.btnProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnProjects.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnProjects.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnProjects.Location = New System.Drawing.Point(0, 215)
+        Me.btnProjects.Location = New System.Drawing.Point(0, 190)
         Me.btnProjects.Name = "btnProjects"
-        Me.btnProjects.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnProjects.Size = New System.Drawing.Size(320, 92)
+        Me.btnProjects.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
+        Me.btnProjects.Size = New System.Drawing.Size(320, 70)
         Me.btnProjects.TabIndex = 1
         Me.btnProjects.Text = "Project Monitoring"
         Me.btnProjects.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -517,10 +517,10 @@ Partial Class adminDashboard
         Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnHome.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnHome.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnHome.Location = New System.Drawing.Point(0, 123)
+        Me.btnHome.Location = New System.Drawing.Point(0, 120)
         Me.btnHome.Name = "btnHome"
-        Me.btnHome.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
-        Me.btnHome.Size = New System.Drawing.Size(320, 92)
+        Me.btnHome.Padding = New System.Windows.Forms.Padding(30, 0, 0, 0)
+        Me.btnHome.Size = New System.Drawing.Size(320, 70)
         Me.btnHome.TabIndex = 0
         Me.btnHome.Text = "Home"
         Me.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -533,17 +533,17 @@ Partial Class adminDashboard
         Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
         Me.pnlLogo.Name = "pnlLogo"
-        Me.pnlLogo.Size = New System.Drawing.Size(320, 123)
+        Me.pnlLogo.Size = New System.Drawing.Size(320, 120)
         Me.pnlLogo.TabIndex = 0
         '
         'lblLogo
         '
         Me.lblLogo.AutoSize = True
-        Me.lblLogo.Font = New System.Drawing.Font("Segoe UI", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.lblLogo.Font = New System.Drawing.Font("Segoe UI", 24.0!, System.Drawing.FontStyle.Bold)
         Me.lblLogo.ForeColor = System.Drawing.Color.White
-        Me.lblLogo.Location = New System.Drawing.Point(87, 31)
+        Me.lblLogo.Location = New System.Drawing.Point(30, 35)
         Me.lblLogo.Name = "lblLogo"
-        Me.lblLogo.Size = New System.Drawing.Size(112, 37)
+        Me.lblLogo.Size = New System.Drawing.Size(132, 45)
         Me.lblLogo.TabIndex = 0
         Me.lblLogo.Text = "ADMIN"
         '
@@ -551,7 +551,7 @@ Partial Class adminDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DimGray
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1600, 900)
         Me.Controls.Add(Me.pnlBorder)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
