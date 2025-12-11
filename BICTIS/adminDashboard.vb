@@ -57,7 +57,8 @@ Public Class adminDashboard
     End Sub
 
     Private Sub btnPrintReport_Click(sender As Object, e As EventArgs) Handles btnPrintReport.Click
-        MessageBox.Show("Reports module coming soon.", "Info")
+        Dim frm As New frmReports()
+        frm.ShowDialog()
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
