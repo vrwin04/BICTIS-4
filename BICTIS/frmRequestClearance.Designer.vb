@@ -16,7 +16,6 @@ Partial Class frmRequestClearance
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.pnlContent = New System.Windows.Forms.Panel()
         Me.btnSubmit = New System.Windows.Forms.Button()
@@ -35,27 +34,12 @@ Partial Class frmRequestClearance
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
-        Me.pnlHeader.Controls.Add(Me.btnClose)
         Me.pnlHeader.Controls.Add(Me.lblTitle)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(400, 60)
+        Me.pnlHeader.Size = New System.Drawing.Size(900, 60)
         Me.pnlHeader.TabIndex = 0
-        '
-        'btnClose
-        '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.FlatAppearance.BorderSize = 0
-        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClose.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.btnClose.ForeColor = System.Drawing.Color.White
-        Me.btnClose.Location = New System.Drawing.Point(350, 10)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(40, 40)
-        Me.btnClose.TabIndex = 1
-        Me.btnClose.Text = "X"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'lblTitle
         '
@@ -83,7 +67,8 @@ Partial Class frmRequestClearance
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(0, 60)
         Me.pnlContent.Name = "pnlContent"
-        Me.pnlContent.Size = New System.Drawing.Size(400, 440)
+        Me.pnlContent.Padding = New System.Windows.Forms.Padding(40)
+        Me.pnlContent.Size = New System.Drawing.Size(900, 540)
         Me.pnlContent.TabIndex = 1
         '
         'Label3
@@ -91,7 +76,7 @@ Partial Class frmRequestClearance
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label3.ForeColor = System.Drawing.Color.Gray
-        Me.Label3.Location = New System.Drawing.Point(46, 30)
+        Me.Label3.Location = New System.Drawing.Point(46, 40)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(107, 19)
         Me.Label3.TabIndex = 5
@@ -99,13 +84,15 @@ Partial Class frmRequestClearance
         '
         'cbCertType
         '
-        Me.cbCertType.BackColor = System.Drawing.Color.White
+        Me.cbCertType.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.cbCertType.BackColor = System.Drawing.Color.WhiteSmoke
         Me.cbCertType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cbCertType.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.cbCertType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cbCertType.FormattingEnabled = True
-        Me.cbCertType.Location = New System.Drawing.Point(50, 55)
+        Me.cbCertType.Location = New System.Drawing.Point(50, 65)
         Me.cbCertType.Name = "cbCertType"
-        Me.cbCertType.Size = New System.Drawing.Size(300, 28)
+        Me.cbCertType.Size = New System.Drawing.Size(500, 29)
         Me.cbCertType.TabIndex = 6
         '
         'Label1
@@ -113,7 +100,7 @@ Partial Class frmRequestClearance
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(46, 100)
+        Me.Label1.Location = New System.Drawing.Point(46, 120)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(147, 19)
         Me.Label1.TabIndex = 0
@@ -121,13 +108,15 @@ Partial Class frmRequestClearance
         '
         'cbPurpose
         '
-        Me.cbPurpose.BackColor = System.Drawing.Color.White
+        Me.cbPurpose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.cbPurpose.BackColor = System.Drawing.Color.WhiteSmoke
         Me.cbPurpose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cbPurpose.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.cbPurpose.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cbPurpose.FormattingEnabled = True
-        Me.cbPurpose.Location = New System.Drawing.Point(50, 125)
+        Me.cbPurpose.Location = New System.Drawing.Point(50, 145)
         Me.cbPurpose.Name = "cbPurpose"
-        Me.cbPurpose.Size = New System.Drawing.Size(300, 28)
+        Me.cbPurpose.Size = New System.Drawing.Size(500, 29)
         Me.cbPurpose.TabIndex = 1
         '
         'Label4
@@ -135,7 +124,7 @@ Partial Class frmRequestClearance
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.Label4.ForeColor = System.Drawing.Color.Gray
-        Me.Label4.Location = New System.Drawing.Point(46, 170)
+        Me.Label4.Location = New System.Drawing.Point(46, 200)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(95, 19)
         Me.Label4.TabIndex = 7
@@ -143,27 +132,31 @@ Partial Class frmRequestClearance
         '
         'dtpNeeded
         '
-        Me.dtpNeeded.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.dtpNeeded.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.dtpNeeded.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.dtpNeeded.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpNeeded.Location = New System.Drawing.Point(50, 195)
+        Me.dtpNeeded.Location = New System.Drawing.Point(50, 225)
         Me.dtpNeeded.Name = "dtpNeeded"
-        Me.dtpNeeded.Size = New System.Drawing.Size(300, 27)
+        Me.dtpNeeded.Size = New System.Drawing.Size(500, 29)
         Me.dtpNeeded.TabIndex = 8
         '
         'pnlLine1
         '
-        Me.pnlLine1.BackColor = System.Drawing.Color.Silver
-        Me.pnlLine1.Location = New System.Drawing.Point(50, 240)
+        Me.pnlLine1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.pnlLine1.BackColor = System.Drawing.Color.LightGray
+        Me.pnlLine1.Location = New System.Drawing.Point(50, 280)
         Me.pnlLine1.Name = "pnlLine1"
-        Me.pnlLine1.Size = New System.Drawing.Size(300, 2)
+        Me.pnlLine1.Size = New System.Drawing.Size(500, 2)
         Me.pnlLine1.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic)
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Italic)
         Me.Label2.ForeColor = System.Drawing.Color.DimGray
-        Me.Label2.Location = New System.Drawing.Point(50, 260)
+        Me.Label2.Location = New System.Drawing.Point(50, 300)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(280, 45)
         Me.Label2.TabIndex = 3
@@ -171,15 +164,17 @@ Partial Class frmRequestClearance
         '
         'btnSubmit
         '
+        Me.btnSubmit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
         Me.btnSubmit.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
         Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSubmit.FlatAppearance.BorderSize = 0
         Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
         Me.btnSubmit.ForeColor = System.Drawing.Color.White
-        Me.btnSubmit.Location = New System.Drawing.Point(50, 320)
+        Me.btnSubmit.Location = New System.Drawing.Point(50, 360)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(300, 50)
+        Me.btnSubmit.Size = New System.Drawing.Size(500, 50)
         Me.btnSubmit.TabIndex = 4
         Me.btnSubmit.Text = "SUBMIT REQUEST"
         Me.btnSubmit.UseVisualStyleBackColor = False
@@ -188,23 +183,22 @@ Partial Class frmRequestClearance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(400, 500)
+        Me.ClientSize = New System.Drawing.Size(900, 600)
         Me.Controls.Add(Me.pnlContent)
         Me.Controls.Add(Me.pnlHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmRequestClearance"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Request Clearance"
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.pnlContent.ResumeLayout(False)
         Me.pnlContent.PerformLayout()
         Me.ResumeLayout(False)
+
     End Sub
 
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblTitle As Label
-    Friend WithEvents btnClose As Button
     Friend WithEvents pnlContent As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents cbPurpose As ComboBox

@@ -6,11 +6,10 @@ Public Class frmUser
         LoadHistory()
     End Sub
 
-    ' --- SWITCH PANEL FUNCTION (ETO ANG IMPORTANTE PARA DI MAG POP-UP) ---
+    ' --- SWITCH PANEL FUNCTION ---
     Public Sub LoadForm(ByVal form As Object)
-        If pnlContainer.Controls.Count > 0 Then
-            pnlContainer.Controls.RemoveAt(0)
-        End If
+        ' Linisin ang panel bago magload ng bago
+        pnlContainer.Controls.Clear()
 
         Dim f As Form = TryCast(form, Form)
         If f IsNot Nothing Then
@@ -25,11 +24,11 @@ Public Class frmUser
 
     ' --- RELOAD HISTORY (HOME) ---
     Private Sub LoadHistory()
-        ' Linisin ang panel at ibalik ang DataGridView
+        ' Ibalik ang History Card sa container
         pnlContainer.Controls.Clear()
-        pnlContainer.Controls.Add(dgvHistory)
+        pnlContainer.Controls.Add(pnlHistoryCard)
 
-        ' Load Data
+        ' Fetch Data
         Dim sql As String = "SELECT IncidentID, Category, IncidentType, Status, IncidentDate FROM tblIncidents " &
                             "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID DESC"
         Dim dt As DataTable = Session.GetDataTable(sql)
@@ -39,12 +38,10 @@ Public Class frmUser
     ' --- BUTTONS ---
 
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
-        ' Load Concern Form sa loob ng Panel
         LoadForm(New frmReportConcern())
     End Sub
 
     Private Sub btnRequestClearance_Click(sender As Object, e As EventArgs) Handles btnRequestClearance.Click
-        ' Load Clearance Form sa loob ng Panel
         LoadForm(New frmRequestClearance())
     End Sub
 
@@ -56,7 +53,6 @@ Public Class frmUser
     Private Sub dgvHistory_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvHistory.CellDoubleClick
         If e.RowIndex >= 0 Then
             Dim id As Integer = Convert.ToInt32(dgvHistory.Rows(e.RowIndex).Cells("IncidentID").Value)
-            ' Ang Details ay pop-up pa rin para mas madaling basahin
             Dim detailsForm As New frmCaseDetails()
             detailsForm.LoadData(id)
             detailsForm.ShowDialog()

@@ -16,7 +16,6 @@ Partial Class frmReportConcern
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.pnlContent = New System.Windows.Forms.Panel()
         Me.btnSubmit = New System.Windows.Forms.Button()
@@ -33,27 +32,12 @@ Partial Class frmReportConcern
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
-        Me.pnlHeader.Controls.Add(Me.btnClose)
         Me.pnlHeader.Controls.Add(Me.lblTitle)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(500, 60)
+        Me.pnlHeader.Size = New System.Drawing.Size(900, 60)
         Me.pnlHeader.TabIndex = 0
-        '
-        'btnClose
-        '
-        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.FlatAppearance.BorderSize = 0
-        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClose.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.btnClose.ForeColor = System.Drawing.Color.White
-        Me.btnClose.Location = New System.Drawing.Point(450, 10)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(40, 40)
-        Me.btnClose.TabIndex = 1
-        Me.btnClose.Text = "X"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'lblTitle
         '
@@ -79,74 +63,9 @@ Partial Class frmReportConcern
         Me.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContent.Location = New System.Drawing.Point(0, 60)
         Me.pnlContent.Name = "pnlContent"
-        Me.pnlContent.Size = New System.Drawing.Size(500, 440)
+        Me.pnlContent.Padding = New System.Windows.Forms.Padding(40)
+        Me.pnlContent.Size = New System.Drawing.Size(900, 540)
         Me.pnlContent.TabIndex = 1
-        '
-        'btnSubmit
-        '
-        Me.btnSubmit.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
-        Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnSubmit.FlatAppearance.BorderSize = 0
-        Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.btnSubmit.ForeColor = System.Drawing.Color.White
-        Me.btnSubmit.Location = New System.Drawing.Point(50, 350)
-        Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(400, 50)
-        Me.btnSubmit.TabIndex = 6
-        Me.btnSubmit.Text = "SUBMIT REPORT"
-        Me.btnSubmit.UseVisualStyleBackColor = False
-        '
-        'pnlLine2
-        '
-        Me.pnlLine2.BackColor = System.Drawing.Color.Silver
-        Me.pnlLine2.Location = New System.Drawing.Point(50, 310)
-        Me.pnlLine2.Name = "pnlLine2"
-        Me.pnlLine2.Size = New System.Drawing.Size(400, 2)
-        Me.pnlLine2.TabIndex = 5
-        '
-        'txtNarrative
-        '
-        Me.txtNarrative.BackColor = System.Drawing.Color.White
-        Me.txtNarrative.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtNarrative.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtNarrative.Location = New System.Drawing.Point(50, 190)
-        Me.txtNarrative.Multiline = True
-        Me.txtNarrative.Name = "txtNarrative"
-        Me.txtNarrative.Size = New System.Drawing.Size(400, 110)
-        Me.txtNarrative.TabIndex = 4
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label2.ForeColor = System.Drawing.Color.Gray
-        Me.Label2.Location = New System.Drawing.Point(46, 160)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(125, 19)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Narrative / Details :"
-        '
-        'pnlLine1
-        '
-        Me.pnlLine1.BackColor = System.Drawing.Color.Silver
-        Me.pnlLine1.Location = New System.Drawing.Point(50, 110)
-        Me.pnlLine1.Name = "pnlLine1"
-        Me.pnlLine1.Size = New System.Drawing.Size(400, 2)
-        Me.pnlLine1.TabIndex = 2
-        '
-        'cbType
-        '
-        Me.cbType.BackColor = System.Drawing.Color.White
-        Me.cbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cbType.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.cbType.FormattingEnabled = True
-        ' UPDATED LIST TO MATCH FRMBLOTTER
-        Me.cbType.Items.AddRange(New Object() {"Physical Injury", "Theft / Robbery", "Malicious Mischief", "Unjust Vexation", "Threats", "Noise Complaint", "Curfew Violation", "Property Dispute", "Other"})
-        Me.cbType.Location = New System.Drawing.Point(50, 80)
-        Me.cbType.Name = "cbType"
-        Me.cbType.Size = New System.Drawing.Size(400, 28)
-        Me.cbType.TabIndex = 1
         '
         'Label1
         '
@@ -159,16 +78,89 @@ Partial Class frmReportConcern
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Type of Concern:"
         '
+        'cbType
+        '
+        Me.cbType.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.cbType.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.cbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.cbType.FormattingEnabled = True
+        Me.cbType.Location = New System.Drawing.Point(50, 80)
+        Me.cbType.Name = "cbType"
+        Me.cbType.Size = New System.Drawing.Size(500, 29)
+        Me.cbType.TabIndex = 1
+        '
+        'pnlLine1
+        '
+        Me.pnlLine1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.pnlLine1.BackColor = System.Drawing.Color.LightGray
+        Me.pnlLine1.Location = New System.Drawing.Point(50, 115)
+        Me.pnlLine1.Name = "pnlLine1"
+        Me.pnlLine1.Size = New System.Drawing.Size(500, 2)
+        Me.pnlLine1.TabIndex = 2
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.Label2.ForeColor = System.Drawing.Color.Gray
+        Me.Label2.Location = New System.Drawing.Point(46, 160)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(125, 19)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Narrative / Details :"
+        '
+        'txtNarrative
+        '
+        Me.txtNarrative.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.txtNarrative.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.txtNarrative.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtNarrative.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.txtNarrative.Location = New System.Drawing.Point(50, 190)
+        Me.txtNarrative.Multiline = True
+        Me.txtNarrative.Name = "txtNarrative"
+        Me.txtNarrative.Size = New System.Drawing.Size(500, 150)
+        Me.txtNarrative.TabIndex = 4
+        '
+        'pnlLine2
+        '
+        Me.pnlLine2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.pnlLine2.BackColor = System.Drawing.Color.LightGray
+        Me.pnlLine2.Location = New System.Drawing.Point(50, 345)
+        Me.pnlLine2.Name = "pnlLine2"
+        Me.pnlLine2.Size = New System.Drawing.Size(500, 2)
+        Me.pnlLine2.TabIndex = 5
+        '
+        'btnSubmit
+        '
+        Me.btnSubmit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
+        Me.btnSubmit.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
+        Me.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSubmit.FlatAppearance.BorderSize = 0
+        Me.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmit.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSubmit.ForeColor = System.Drawing.Color.White
+        Me.btnSubmit.Location = New System.Drawing.Point(50, 400)
+        Me.btnSubmit.Name = "btnSubmit"
+        Me.btnSubmit.Size = New System.Drawing.Size(500, 50)
+        Me.btnSubmit.TabIndex = 6
+        Me.btnSubmit.Text = "SUBMIT REPORT"
+        Me.btnSubmit.UseVisualStyleBackColor = False
+        '
         'frmReportConcern
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(500, 500)
+        Me.ClientSize = New System.Drawing.Size(900, 600)
         Me.Controls.Add(Me.pnlContent)
         Me.Controls.Add(Me.pnlHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmReportConcern"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Report Concern"
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
@@ -180,7 +172,6 @@ Partial Class frmReportConcern
 
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblTitle As Label
-    Friend WithEvents btnClose As Button
     Friend WithEvents pnlContent As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents cbType As ComboBox
