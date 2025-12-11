@@ -51,6 +51,10 @@ Public Class adminDashboard
         LoadForm(New frmProjects())
     End Sub
 
+    Private Sub btnResidents_Click(sender As Object, e As EventArgs) Handles btnResidents.Click
+        LoadForm(New frmManageResidents())
+    End Sub
+
     Private Sub btnConcerns_Click(sender As Object, e As EventArgs) Handles btnConcerns.Click
         LoadForm(New frmConcerns())
     End Sub

@@ -51,6 +51,7 @@ Partial Class adminDashboard
         Me.btnPrintReport = New System.Windows.Forms.Button()
         Me.btnClearance = New System.Windows.Forms.Button()
         Me.btnConcerns = New System.Windows.Forms.Button()
+        Me.btnResidents = New System.Windows.Forms.Button()
         Me.btnProjects = New System.Windows.Forms.Button()
         Me.btnHome = New System.Windows.Forms.Button()
         Me.pnlLogo = New System.Windows.Forms.Panel()
@@ -325,7 +326,7 @@ Partial Class adminDashboard
         Me.pnlCard4.BackColor = System.Drawing.Color.White
         Me.pnlCard4.Controls.Add(Me.lblTotalConcerns)
         Me.pnlCard4.Controls.Add(Me.Label5)
-        Me.pnlCard4.Controls.Add(Me.Panel4)
+        Me.pnlCard4.Controls.Add(Panel4)
         Me.pnlCard4.Location = New System.Drawing.Point(916, 5)
         Me.pnlCard4.Margin = New System.Windows.Forms.Padding(4, 5, 10, 5)
         Me.pnlCard4.Name = "pnlCard4"
@@ -391,6 +392,7 @@ Partial Class adminDashboard
         Me.pnlSidebar.Controls.Add(Me.btnPrintReport)
         Me.pnlSidebar.Controls.Add(Me.btnClearance)
         Me.pnlSidebar.Controls.Add(Me.btnConcerns)
+        Me.pnlSidebar.Controls.Add(Me.btnResidents)
         Me.pnlSidebar.Controls.Add(Me.btnProjects)
         Me.pnlSidebar.Controls.Add(Me.btnHome)
         Me.pnlSidebar.Controls.Add(Me.pnlLogo)
@@ -412,7 +414,7 @@ Partial Class adminDashboard
         Me.btnLogout.Location = New System.Drawing.Point(0, 802)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(320, 92)
-        Me.btnLogout.TabIndex = 5
+        Me.btnLogout.TabIndex = 6
         Me.btnLogout.Text = "Sign Out"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
@@ -425,11 +427,11 @@ Partial Class adminDashboard
         Me.btnPrintReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPrintReport.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnPrintReport.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnPrintReport.Location = New System.Drawing.Point(0, 491)
+        Me.btnPrintReport.Location = New System.Drawing.Point(0, 583)
         Me.btnPrintReport.Name = "btnPrintReport"
         Me.btnPrintReport.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnPrintReport.Size = New System.Drawing.Size(320, 92)
-        Me.btnPrintReport.TabIndex = 4
+        Me.btnPrintReport.TabIndex = 5
         Me.btnPrintReport.Text = "Print Reports"
         Me.btnPrintReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPrintReport.UseVisualStyleBackColor = False
@@ -443,11 +445,11 @@ Partial Class adminDashboard
         Me.btnClearance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearance.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnClearance.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnClearance.Location = New System.Drawing.Point(0, 399)
+        Me.btnClearance.Location = New System.Drawing.Point(0, 491)
         Me.btnClearance.Name = "btnClearance"
         Me.btnClearance.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnClearance.Size = New System.Drawing.Size(320, 92)
-        Me.btnClearance.TabIndex = 3
+        Me.btnClearance.TabIndex = 4
         Me.btnClearance.Text = "Manage Clearances"
         Me.btnClearance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClearance.UseVisualStyleBackColor = False
@@ -461,14 +463,32 @@ Partial Class adminDashboard
         Me.btnConcerns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConcerns.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnConcerns.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnConcerns.Location = New System.Drawing.Point(0, 307)
+        Me.btnConcerns.Location = New System.Drawing.Point(0, 399)
         Me.btnConcerns.Name = "btnConcerns"
         Me.btnConcerns.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnConcerns.Size = New System.Drawing.Size(320, 92)
-        Me.btnConcerns.TabIndex = 4
+        Me.btnConcerns.TabIndex = 3
         Me.btnConcerns.Text = "Barangay Concerns"
         Me.btnConcerns.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnConcerns.UseVisualStyleBackColor = False
+        '
+        'btnResidents
+        '
+        Me.btnResidents.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
+        Me.btnResidents.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnResidents.FlatAppearance.BorderSize = 0
+        Me.btnResidents.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(52, 73, 94)
+        Me.btnResidents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnResidents.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.btnResidents.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.btnResidents.Location = New System.Drawing.Point(0, 307)
+        Me.btnResidents.Name = "btnResidents"
+        Me.btnResidents.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
+        Me.btnResidents.Size = New System.Drawing.Size(320, 92)
+        Me.btnResidents.TabIndex = 2
+        Me.btnResidents.Text = "Manage Residents"
+        Me.btnResidents.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnResidents.UseVisualStyleBackColor = False
         '
         'btnProjects
         '
@@ -501,7 +521,7 @@ Partial Class adminDashboard
         Me.btnHome.Name = "btnHome"
         Me.btnHome.Padding = New System.Windows.Forms.Padding(27, 0, 0, 0)
         Me.btnHome.Size = New System.Drawing.Size(320, 92)
-        Me.btnHome.TabIndex = 6
+        Me.btnHome.TabIndex = 0
         Me.btnHome.Text = "Home"
         Me.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnHome.UseVisualStyleBackColor = False
@@ -569,6 +589,7 @@ Partial Class adminDashboard
     Friend WithEvents pnlLogo As Panel
     Friend WithEvents lblLogo As Label
     Friend WithEvents btnProjects As Button
+    Friend WithEvents btnResidents As Button
     Friend WithEvents btnConcerns As Button
     Friend WithEvents btnClearance As Button
     Friend WithEvents btnLogout As Button
