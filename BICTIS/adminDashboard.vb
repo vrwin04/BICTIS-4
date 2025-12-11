@@ -11,13 +11,18 @@ Public Class adminDashboard
         lblPageTitle.Text = "Dashboard - " & Session.CurrentUserRole
 
         Try
-            ' Load Stats (Users and Pending Cases)
+            ' 1. Load Filters FIRST.
+            ' We temporarily remove the handler to prevent the event from firing 
+            ' while we are still setting up the items.
+            RemoveHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
+            LoadFilterOptions()
+            AddHandler cbIncidentType.SelectedIndexChanged, AddressOf cbIncidentType_SelectedIndexChanged
+
+            ' 2. Load Stats
             Await LoadStatsAsync()
 
-            ' Load Filters. 
-            ' Setting the index here will trigger cbIncidentType_SelectedIndexChanged
-            ' which will then load the chart naturally.
-            LoadFilterOptions()
+            ' 3. Force the Chart to load now that everything is ready
+            Await LoadChartAsync()
 
         Catch ex As Exception
             MessageBox.Show("Error loading dashboard: " & ex.Message)
@@ -25,7 +30,7 @@ Public Class adminDashboard
     End Sub
 
     Private Async Function LoadStatsAsync() As Task
-        ' Fetch both counts in parallel
+        ' Fetch both counts in parallel for speed
         Dim taskUserCount = Session.GetCountAsync("SELECT COUNT(*) FROM tblResidents WHERE Role='User'")
         Dim taskPending = Session.GetCountAsync("SELECT COUNT(*) FROM tblIncidents WHERE Status='Pending'")
 
@@ -69,8 +74,10 @@ Public Class adminDashboard
 
         cbIncidentType.Items.Add("Other")
 
-        ' This trigger will call LoadChartAsync
-        cbIncidentType.SelectedIndex = 0
+        ' Default Selection
+        If cbIncidentType.Items.Count > 0 Then
+            cbIncidentType.SelectedIndex = 0
+        End If
     End Sub
 
     Private Async Sub cbIncidentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbIncidentType.SelectedIndexChanged
@@ -81,6 +88,9 @@ Public Class adminDashboard
         If chartIncidents Is Nothing Then Exit Function
 
         Dim selection As String = cbIncidentType.Text
+        ' Safety check
+        If String.IsNullOrWhiteSpace(selection) Then selection = "All Incidents"
+
         Dim query As String
         Dim params As New Dictionary(Of String, Object)
         Dim isAllIncidents As Boolean = (selection = "All Incidents")
@@ -101,6 +111,9 @@ Public Class adminDashboard
 
         Dim seriesName As String = If(isAllIncidents, "Incidents", "Status")
         Dim series As New SysChart.Series(seriesName)
+
+        ' *** CRITICAL FIX: Assign the Series to the ChartArea ***
+        series.ChartArea = "ChartArea1"
 
         If isAllIncidents Then
             series.ChartType = SysChart.SeriesChartType.Column
@@ -153,6 +166,7 @@ Public Class adminDashboard
                 End If
             Next
         Else
+            ' Handle empty data gracefully so chart isn't blank
             series.Points.AddXY("No Data", 0)
         End If
 
@@ -166,6 +180,8 @@ Public Class adminDashboard
         Await LoadStatsAsync()
         If cbIncidentType.Items.Count > 0 Then
             cbIncidentType.SelectedIndex = 0
+            ' Force load if index didn't change (e.g. was already 0)
+            Await LoadChartAsync()
         End If
     End Sub
 
