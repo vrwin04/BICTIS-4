@@ -43,6 +43,7 @@ Partial Class adminDashboard
         Me.btnConcerns = New System.Windows.Forms.Button()
         Me.btnBlotter = New System.Windows.Forms.Button()
         Me.btnResidents = New System.Windows.Forms.Button()
+        Me.btnHome = New System.Windows.Forms.Button()
         Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.lblLogo = New System.Windows.Forms.Label()
         Me.pnlBorder.SuspendLayout()
@@ -280,6 +281,7 @@ Partial Class adminDashboard
         Me.pnlSidebar.Controls.Add(Me.btnConcerns)
         Me.pnlSidebar.Controls.Add(Me.btnBlotter)
         Me.pnlSidebar.Controls.Add(Me.btnResidents)
+        Me.pnlSidebar.Controls.Add(Me.btnHome)
         Me.pnlSidebar.Controls.Add(Me.pnlLogo)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
@@ -312,7 +314,7 @@ Partial Class adminDashboard
         Me.btnClearance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearance.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnClearance.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnClearance.Location = New System.Drawing.Point(0, 260)
+        Me.btnClearance.Location = New System.Drawing.Point(0, 320)
         Me.btnClearance.Name = "btnClearance"
         Me.btnClearance.Padding = New System.Windows.Forms.Padding(20, 0, 0, 0)
         Me.btnClearance.Size = New System.Drawing.Size(240, 60)
@@ -330,7 +332,7 @@ Partial Class adminDashboard
         Me.btnConcerns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConcerns.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnConcerns.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnConcerns.Location = New System.Drawing.Point(0, 200)
+        Me.btnConcerns.Location = New System.Drawing.Point(0, 260)
         Me.btnConcerns.Name = "btnConcerns"
         Me.btnConcerns.Padding = New System.Windows.Forms.Padding(20, 0, 0, 0)
         Me.btnConcerns.Size = New System.Drawing.Size(240, 60)
@@ -348,7 +350,7 @@ Partial Class adminDashboard
         Me.btnBlotter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBlotter.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnBlotter.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnBlotter.Location = New System.Drawing.Point(0, 140)
+        Me.btnBlotter.Location = New System.Drawing.Point(0, 200)
         Me.btnBlotter.Name = "btnBlotter"
         Me.btnBlotter.Padding = New System.Windows.Forms.Padding(20, 0, 0, 0)
         Me.btnBlotter.Size = New System.Drawing.Size(240, 60)
@@ -366,7 +368,7 @@ Partial Class adminDashboard
         Me.btnResidents.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResidents.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.btnResidents.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.btnResidents.Location = New System.Drawing.Point(0, 80)
+        Me.btnResidents.Location = New System.Drawing.Point(0, 140)
         Me.btnResidents.Name = "btnResidents"
         Me.btnResidents.Padding = New System.Windows.Forms.Padding(20, 0, 0, 0)
         Me.btnResidents.Size = New System.Drawing.Size(240, 60)
@@ -374,6 +376,24 @@ Partial Class adminDashboard
         Me.btnResidents.Text = "Manage Residents"
         Me.btnResidents.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnResidents.UseVisualStyleBackColor = False
+        '
+        'btnHome
+        '
+        Me.btnHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.btnHome.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnHome.FlatAppearance.BorderSize = 0
+        Me.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHome.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.btnHome.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.btnHome.Location = New System.Drawing.Point(0, 80)
+        Me.btnHome.Name = "btnHome"
+        Me.btnHome.Padding = New System.Windows.Forms.Padding(20, 0, 0, 0)
+        Me.btnHome.Size = New System.Drawing.Size(240, 60)
+        Me.btnHome.TabIndex = 6
+        Me.btnHome.Text = "Home"
+        Me.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnHome.UseVisualStyleBackColor = False
         '
         'pnlLogo
         '
@@ -437,6 +457,7 @@ Partial Class adminDashboard
     Friend WithEvents btnResidents As Button
     Friend WithEvents btnClearance As Button
     Friend WithEvents btnLogout As Button
+    Friend WithEvents btnHome As Button
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblPageTitle As Label
     Friend WithEvents pnlMainContent As Panel

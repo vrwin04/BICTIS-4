@@ -4,7 +4,7 @@ Public Class frmBlotter
     Private Sub frmBlotter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblTitle.Text = "BLOTTER CASES (Admin)"
         LoadDropdowns()
-        LoadIncidents()
+        LoadIncidents() ' Load all initially
     End Sub
 
     Private Sub LoadDropdowns()
@@ -20,17 +20,35 @@ Public Class frmBlotter
 
         cbRespondent.DataSource = Nothing
         cbRespondent.Items.Clear()
+        ' Added "All Departments" for filter viewing
         cbRespondent.Items.AddRange(New String() {"Peace and Order Committee", "Lupon Tagapamayapa", "Barangay Health Office", "Resident (See Narrative)"})
-        cbRespondent.SelectedIndex = 0
+        cbRespondent.SelectedIndex = -1 ' Start empty
     End Sub
 
-    Private Sub LoadIncidents()
+    Private Sub LoadIncidents(Optional filterByRespondent As String = "")
         Dim sql As String = "SELECT i.IncidentID, i.IncidentType, u.FullName AS Complainant, i.Status, i.IncidentDate, i.Narrative " &
                             "FROM tblIncidents i " &
                             "LEFT JOIN tblResidents u ON i.ComplainantID = u.ResidentID " &
-                            "WHERE i.Category='Blotter' " &
-                            "ORDER BY i.IncidentID DESC"
-        dgvCases.DataSource = Session.GetDataTable(sql)
+                            "WHERE i.Category='Blotter' "
+
+        Dim params As New Dictionary(Of String, Object)
+
+        ' Filter logic: Check if the Respondent string exists in the Narrative
+        If Not String.IsNullOrEmpty(filterByRespondent) AndAlso filterByRespondent <> "Resident (See Narrative)" Then
+            sql &= "AND i.Narrative LIKE @resp "
+            params.Add("@resp", "%[Respondent: " & filterByRespondent & "]%")
+        End If
+
+        sql &= "ORDER BY i.IncidentID DESC"
+
+        dgvCases.DataSource = Session.GetDataTable(sql, params)
+    End Sub
+
+    ' *** NEW: Auto-Filter when selecting a Respondent ***
+    Private Sub cbRespondent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRespondent.SelectedIndexChanged
+        If cbRespondent.SelectedIndex <> -1 Then
+            LoadIncidents(cbRespondent.Text)
+        End If
     End Sub
 
     ' *** NEW: Double Click to View Details ***
@@ -76,7 +94,8 @@ Public Class frmBlotter
             txtNarrative.Clear()
             cbIncidentType.SelectedIndex = -1
             cbComplainant.SelectedIndex = -1
-            LoadIncidents()
+            ' Refresh list, keeping current filter
+            LoadIncidents(cbRespondent.Text)
         End If
     End Sub
 
@@ -97,7 +116,7 @@ Public Class frmBlotter
 
         If MessageBox.Show("Mark case as " & newStatus & "? This cannot be undone.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
             Session.ExecuteQuery("UPDATE tblIncidents SET Status='" & newStatus & "' WHERE IncidentID=" & id)
-            LoadIncidents()
+            LoadIncidents(cbRespondent.Text)
             MessageBox.Show("Case updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub

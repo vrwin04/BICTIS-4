@@ -11,14 +11,13 @@ Public Class adminDashboard
         lblPageTitle.Text = "Dashboard - " & Session.CurrentUserRole
 
         Try
-            ' Load Filters first (Fast, no DB)
+            ' Load Stats (Users and Pending Cases)
+            Await LoadStatsAsync()
+
+            ' Load Filters. 
+            ' Setting the index here will trigger cbIncidentType_SelectedIndexChanged
+            ' which will then load the chart naturally.
             LoadFilterOptions()
-
-            ' Run DB tasks concurrently for speed
-            Dim taskStats = LoadStatsAsync()
-            Dim taskChart = LoadChartAsync()
-
-            Await Task.WhenAll(taskStats, taskChart)
 
         Catch ex As Exception
             MessageBox.Show("Error loading dashboard: " & ex.Message)
@@ -69,6 +68,8 @@ Public Class adminDashboard
         cbIncidentType.Items.Add("Curfew Violation")
 
         cbIncidentType.Items.Add("Other")
+
+        ' This trigger will call LoadChartAsync
         cbIncidentType.SelectedIndex = 0
     End Sub
 
@@ -79,7 +80,6 @@ Public Class adminDashboard
     Private Async Function LoadChartAsync() As Task
         If chartIncidents Is Nothing Then Exit Function
 
-        ' We need to manipulate the chart on the UI thread, but fetch data Async
         Dim selection As String = cbIncidentType.Text
         Dim query As String
         Dim params As New Dictionary(Of String, Object)
@@ -160,6 +160,14 @@ Public Class adminDashboard
     End Function
 
     ' --- NAVIGATION BUTTONS ---
+
+    Private Async Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        ' Reload stats and reset chart to "All Incidents"
+        Await LoadStatsAsync()
+        If cbIncidentType.Items.Count > 0 Then
+            cbIncidentType.SelectedIndex = 0
+        End If
+    End Sub
 
     Private Async Sub btnResidents_Click(sender As Object, e As EventArgs) Handles btnResidents.Click
         Dim frm As New frmManageResidents()
