@@ -46,11 +46,16 @@ Public Class adminDashboard
         lblTotalBlotter.Text = blotter.ToString()
         lblTotalConcerns.Text = concerns.ToString()
 
+        ' Pending Cases Color Logic
         If pending > 0 Then
             lblPendingCases.ForeColor = Color.Red
         Else
             lblPendingCases.ForeColor = Color.Green
         End If
+
+        ' FIX: Ensure Text Colors match the Graph Colors
+        lblTotalBlotter.ForeColor = Color.FromArgb(41, 128, 185) ' Blue
+        lblTotalConcerns.ForeColor = Color.FromArgb(192, 57, 43) ' Red
     End Function
 
     Private Sub LoadFilterOptions()
@@ -100,7 +105,8 @@ Public Class adminDashboard
         Dim isAllIncidents As Boolean = (selection = "All Incidents")
 
         If isAllIncidents Then
-            query = "SELECT IncidentType, COUNT(*) as [Count] FROM tblIncidents GROUP BY IncidentType"
+            ' FIX: Group by Category as well so we can check it for coloring
+            query = "SELECT IncidentType, Category, COUNT(*) as [Count] FROM tblIncidents GROUP BY IncidentType, Category"
         Else
             query = "SELECT Status, COUNT(*) as [Count] FROM tblIncidents WHERE IncidentType=@type GROUP BY Status"
             params.Add("@type", selection)
@@ -131,28 +137,22 @@ Public Class adminDashboard
         series.IsValueShownAsLabel = True
 
         ' Define Colors
-        Dim blotterColor As Color = Color.FromArgb(192, 57, 43) ' Red
-        Dim concernColor As Color = Color.FromArgb(41, 128, 185) ' Blue
+        Dim blotterColor As Color = Color.FromArgb(41, 128, 185) ' Blue
+        Dim concernColor As Color = Color.FromArgb(192, 57, 43) ' Red
         Dim neutralColor As Color = Color.Gray
-
-        ' Comprehensive Lists for Color Coding
-        Dim blotterTypes As New List(Of String) From {
-            "Physical Injury", "Theft / Robbery", "Theft", "Property / Land Dispute",
-            "Harassment / Threats", "Threats", "Unjust Vexation", "Malicious Mischief",
-            "Estafa / Swindling", "Libel / Slander", "Gossip / Slander",
-            "Collection of Debt", "Civil Dispute", "Other Civil Dispute",
-            "Property Damage", "Curfew Violation", "Public Disturbance"
-        }
-
-        Dim concernTypes As New List(Of String) From {
-            "Noise Complaint", "Waste Disposal / Trash", "Suspicious Activity",
-            "Broken Street Light / Infrastructure",
-            "Animal Control / Stray Pets", "Sanitation Issue"
-        }
 
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
             For Each row As DataRow In dt.Rows
-                Dim xVal As String = If(isAllIncidents, row("IncidentType").ToString(), row("Status").ToString())
+                Dim xVal As String = ""
+                Dim category As String = ""
+
+                If isAllIncidents Then
+                    xVal = row("IncidentType").ToString()
+                    category = row("Category").ToString() ' Get Category for Coloring
+                Else
+                    xVal = row("Status").ToString()
+                End If
+
                 ' Handle nulls
                 If String.IsNullOrEmpty(xVal) Then xVal = "Unknown"
 
@@ -162,11 +162,11 @@ Public Class adminDashboard
                 Dim pIndex As Integer = series.Points.AddXY(xVal, yVal)
                 Dim p As SysChart.DataPoint = series.Points(pIndex)
 
-                ' --- DISTINCT COLOR CODING ---
+                ' --- COLOR LOGIC BASED ON DATABASE CATEGORY ---
                 If isAllIncidents Then
-                    If blotterTypes.Contains(xVal) Then
+                    If category = "Blotter" Then
                         p.Color = blotterColor
-                    ElseIf concernTypes.Contains(xVal) Then
+                    ElseIf category = "Concern" Then
                         p.Color = concernColor
                     Else
                         p.Color = neutralColor

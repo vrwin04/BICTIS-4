@@ -63,7 +63,7 @@ Public Class frmFileBlotter
         ' Tag the respondent for Admin filtering
         Dim finalNarrative As String = "[Respondent: " & respondentName & "] " & txtNarrative.Text
 
-        ' FIX: Always save as 'Blotter' so it reflects on frmBlotter
+        ' FIX: Always save as 'Blotter' so it reflects on frmBlotter and shows BLUE on graph
         Dim cat As String = "Blotter"
 
         Dim query As String = "INSERT INTO tblIncidents (ComplainantID, RespondentID, IncidentType, Narrative, Status, IncidentDate, Category) " &

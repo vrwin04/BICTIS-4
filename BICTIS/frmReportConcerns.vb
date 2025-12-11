@@ -1,6 +1,5 @@
 ﻿Imports System.Collections.Generic
 
-' FILENAME: frmReportConcerns.vb
 Public Class frmReportConcern
     Private Sub frmReportConcern_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' POPULATE DROPDOWN WITH COMMUNITY CONCERNS ONLY
@@ -25,7 +24,7 @@ Public Class frmReportConcern
             Exit Sub
         End If
 
-        ' Save with Category = 'Concern'
+        ' FIX: Save with Category = 'Concern' so it reflects on frmConcerns and shows RED on graph
         Dim query As String = "INSERT INTO tblIncidents (ComplainantID, RespondentID, IncidentType, Narrative, Status, IncidentDate, Category) " &
                               "VALUES (@uid, 0, @type, @narr, 'Pending', @date, 'Concern')"
 
