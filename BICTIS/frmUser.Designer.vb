@@ -25,6 +25,7 @@ Partial Class frmUser
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.btnRequestClearance = New System.Windows.Forms.Button()
         Me.btnFileBlotter = New System.Windows.Forms.Button()
         Me.btnReport = New System.Windows.Forms.Button()
         Me.pnlLogo = New System.Windows.Forms.Panel()
@@ -120,6 +121,7 @@ Partial Class frmUser
         Me.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(0, 150, 136)
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Controls.Add(Me.btnRefresh)
+        Me.pnlSidebar.Controls.Add(Me.btnRequestClearance)
         Me.pnlSidebar.Controls.Add(Me.btnFileBlotter)
         Me.pnlSidebar.Controls.Add(Me.btnReport)
         Me.pnlSidebar.Controls.Add(Me.pnlLogo)
@@ -150,7 +152,7 @@ Partial Class frmUser
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnRefresh.ForeColor = System.Drawing.Color.White
-        Me.btnRefresh.Location = New System.Drawing.Point(0, 180)
+        Me.btnRefresh.Location = New System.Drawing.Point(0, 230)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
         Me.btnRefresh.Size = New System.Drawing.Size(220, 50)
@@ -158,6 +160,22 @@ Partial Class frmUser
         Me.btnRefresh.Text = "Refresh History"
         Me.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRefresh.UseVisualStyleBackColor = True
+        '
+        'btnRequestClearance
+        '
+        Me.btnRequestClearance.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnRequestClearance.FlatAppearance.BorderSize = 0
+        Me.btnRequestClearance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRequestClearance.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnRequestClearance.ForeColor = System.Drawing.Color.White
+        Me.btnRequestClearance.Location = New System.Drawing.Point(0, 180)
+        Me.btnRequestClearance.Name = "btnRequestClearance"
+        Me.btnRequestClearance.Padding = New System.Windows.Forms.Padding(15, 0, 0, 0)
+        Me.btnRequestClearance.Size = New System.Drawing.Size(220, 50)
+        Me.btnRequestClearance.TabIndex = 6
+        Me.btnRequestClearance.Text = "Request Clearance"
+        Me.btnRequestClearance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRequestClearance.UseVisualStyleBackColor = True
         '
         'btnFileBlotter
         '
@@ -240,6 +258,7 @@ Partial Class frmUser
     Friend WithEvents Label1 As Label
     Friend WithEvents btnReport As Button
     Friend WithEvents btnFileBlotter As Button
+    Friend WithEvents btnRequestClearance As Button
     Friend WithEvents btnRefresh As Button
     Friend WithEvents btnLogout As Button
     Friend WithEvents pnlHeader As Panel

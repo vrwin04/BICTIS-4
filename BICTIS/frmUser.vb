@@ -9,9 +9,9 @@ Public Class frmUser
     Private Sub LoadHistory()
         ' Load both Blotters and Concerns for this user
         Dim sql As String = "SELECT IncidentID, Category, IncidentType, Status, IncidentDate FROM tblIncidents " &
-                            "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID DESC"
+                              "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID DESC"
 
-        ' Use generic GetDataTable (works with both Sync and Async if updated properly)
+        ' Use generic GetDataTable
         Dim dt As DataTable = Session.GetDataTable(sql)
         dgvHistory.DataSource = dt
     End Sub
@@ -28,6 +28,12 @@ Public Class frmUser
         Dim frm As New frmFileBlotter()
         frm.ShowDialog()
         LoadHistory() ' Refresh after closing
+    End Sub
+
+    ' *** NEW: OPEN CLEARANCE FORM ***
+    Private Sub btnRequestClearance_Click(sender As Object, e As EventArgs) Handles btnRequestClearance.Click
+        Dim frm As New frmRequestClearance()
+        frm.ShowDialog()
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
