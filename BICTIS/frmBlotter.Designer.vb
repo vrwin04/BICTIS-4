@@ -40,7 +40,6 @@ Partial Class frmBlotter
         ' NEW SEARCH CONTROLS
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-
         Me.pnlHeader.SuspendLayout()
         Me.pnlEditor.SuspendLayout()
         Me.pnlGrid.SuspendLayout()
@@ -50,7 +49,7 @@ Partial Class frmBlotter
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(44, 62, 80)
-        ' Added Search Controls to Header
+        ' ADDED CONTROLS TO HEADER
         Me.pnlHeader.Controls.Add(Me.Label7)
         Me.pnlHeader.Controls.Add(Me.txtSearch)
         Me.pnlHeader.Controls.Add(Me.btnClose)
@@ -87,7 +86,7 @@ Partial Class frmBlotter
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "BLOTTER MANAGER"
         '
-        ' txtSearch (NEW)
+        'txtSearch (NEW)
         '
         Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtSearch.Location = New System.Drawing.Point(600, 22)
@@ -95,7 +94,7 @@ Partial Class frmBlotter
         Me.txtSearch.Size = New System.Drawing.Size(250, 27)
         Me.txtSearch.TabIndex = 2
         '
-        ' Label7 (NEW)
+        'Label7 (NEW)
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.0!)

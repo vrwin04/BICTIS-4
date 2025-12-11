@@ -88,6 +88,7 @@ Public Class frmBlotter
         If cbIncidentType.Items.Count > 0 Then cbIncidentType.SelectedIndex = 0
     End Sub
 
+    ' --- ITO ANG FUNCTION KAPAG NAG-FILE NG BLOTTER ---
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' Validation
         If cbComplainant.SelectedValue Is Nothing Then
