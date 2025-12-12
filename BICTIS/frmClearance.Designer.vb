@@ -66,7 +66,7 @@ Partial Class frmClearance
         btnPrint.Name = "btnPrint"
         btnPrint.Size = New Size(171, 53)
         btnPrint.TabIndex = 0
-        btnPrint.Text = "APPROVE / PRINT"
+        btnPrint.Text = "APPROVE"
         btnPrint.UseVisualStyleBackColor = False
         ' 
         ' dgvRequests
