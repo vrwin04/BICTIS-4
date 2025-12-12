@@ -14,8 +14,8 @@ Public Class frmClearance
     End Sub
 
     Private Sub LoadRequests()
-        ' Join on ResidentID to get Full Name
-        Dim sql As String = "SELECT c.ClearanceID, c.ResidentID, u.FullName, c.Purpose, c.DateIssued, c.Status " &
+        ' MODIFIED: Added c.DateNeeded to the query
+        Dim sql As String = "SELECT c.ClearanceID, c.ResidentID, u.FullName, c.Purpose, c.DateNeeded, c.DateIssued, c.Status " &
                             "FROM tblClearances c " &
                             "INNER JOIN tblResidents u ON c.ResidentID = u.ResidentID " &
                             "ORDER BY c.Status ASC, c.DateIssued ASC"
@@ -24,6 +24,10 @@ Public Class frmClearance
         ' Hide ID columns if they exist
         If dgvRequests.Columns.Contains("ResidentID") Then dgvRequests.Columns("ResidentID").Visible = False
         If dgvRequests.Columns.Contains("ClearanceID") Then dgvRequests.Columns("ClearanceID").Visible = False
+
+        ' Optional: Rename headers para mas maganda tingnan sa Admin
+        If dgvRequests.Columns.Contains("DateNeeded") Then dgvRequests.Columns("DateNeeded").HeaderText = "Date Needed"
+        If dgvRequests.Columns.Contains("FullName") Then dgvRequests.Columns("FullName").HeaderText = "Resident Name"
     End Sub
 
     ' --- PRINTING / APPROVING LOGIC ---
@@ -34,9 +38,6 @@ Public Class frmClearance
         End If
 
         Dim row As DataGridViewRow = dgvRequests.SelectedRows(0)
-
-        ' --- TINANGGAL NA ANG BLOCKING LOGIC DITO ---
-        ' Hindi na tinitingnan kung may pending case. Diretso approve na.
 
         ' 1. PREPARE DATA FOR PRINTING
         SelectedClearanceID = Convert.ToInt32(row.Cells("ClearanceID").Value)
