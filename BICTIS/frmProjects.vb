@@ -104,4 +104,5 @@ Public Class frmProjects
         txtExpenses.Clear()
         cbStatus.SelectedIndex = -1
     End Sub
+
 End Class

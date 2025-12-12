@@ -43,8 +43,8 @@ Public Class frmUser
         pnlContainer.Controls.Add(pnlHistoryCard)
 
         ' Load Data
-        Dim sql As String = "SELECT IncidentID, Category, IncidentType, Status, IncidentDate FROM tblIncidents " &
-                            "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID DESC"
+        Dim sql As String = "SELECT IncidentID, IncidentType, Status, IncidentDate FROM tblIncidents " &
+                            "WHERE ComplainantID=" & Session.CurrentResidentID & " ORDER BY IncidentID ASC"
         Dim dt As DataTable = Session.GetDataTable(sql)
         dgvHistory.DataSource = dt
     End Sub

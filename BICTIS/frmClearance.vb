@@ -15,7 +15,7 @@ Public Class frmClearance
 
     Private Sub LoadRequests()
         ' Join on ResidentID to get Full Name
-        Dim sql As String = "SELECT c.ClearanceID, c.ResidentID, u.FullName, c.Purpose, c.DateIssued, c.PickupDate, c.Status " &
+        Dim sql As String = "SELECT c.ClearanceID, c.ResidentID, u.FullName, c.Purpose, c.DateIssued, c.Status " &
                             "FROM tblClearances c " &
                             "INNER JOIN tblResidents u ON c.ResidentID = u.ResidentID " &
                             "ORDER BY c.Status ASC, c.DateIssued ASC"
@@ -40,11 +40,6 @@ Public Class frmClearance
         Dim status As String = row.Cells("Status").Value.ToString()
         Dim residentID As Integer = Convert.ToInt32(row.Cells("ResidentID").Value)
 
-        ' 1. CHECK: Schedule First (Assuming this is required)
-        If status = "Pending" Then
-            MessageBox.Show("Please set a Pickup Schedule first before printing.", "Schedule Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
 
         ' 2. CHECK: Pending Cases (Blocker)
         Dim checkQuery As String = "SELECT COUNT(*) FROM tblIncidents WHERE (ComplainantID = @uid) AND Status = 'Pending'"
@@ -116,4 +111,5 @@ Public Class frmClearance
             LoadRequests()
         End If
     End Sub
+
 End Class

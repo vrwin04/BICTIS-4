@@ -15,295 +15,308 @@ Partial Class frmProjects
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.pnlEditor = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.cbStatus = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtExpenses = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtBudget = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtProjectName = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.pnlGrid = New System.Windows.Forms.Panel()
-        Me.dgvProjects = New System.Windows.Forms.DataGridView()
-        Me.pnlHeader.SuspendLayout()
-        Me.pnlEditor.SuspendLayout()
-        Me.pnlGrid.SuspendLayout()
-        CType(Me.dgvProjects, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'pnlHeader
-        '
-        Me.pnlHeader.BackColor = System.Drawing.Color.FromArgb(52, 152, 219)
-        Me.pnlHeader.Controls.Add(Me.lblTitle)
-        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
-        Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(1000, 70)
-        Me.pnlHeader.TabIndex = 0
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(20, 20)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(248, 30)
-        Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "PROJECT MONITORING"
-        '
-        'pnlEditor
-        '
-        Me.pnlEditor.BackColor = System.Drawing.Color.White
-        Me.pnlEditor.Controls.Add(Me.Label6)
-        Me.pnlEditor.Controls.Add(Me.btnUpdate)
-        Me.pnlEditor.Controls.Add(Me.btnAdd)
-        Me.pnlEditor.Controls.Add(Me.cbStatus)
-        Me.pnlEditor.Controls.Add(Me.Label5)
-        Me.pnlEditor.Controls.Add(Me.txtDescription)
-        Me.pnlEditor.Controls.Add(Me.Label4)
-        Me.pnlEditor.Controls.Add(Me.txtExpenses)
-        Me.pnlEditor.Controls.Add(Me.Label3)
-        Me.pnlEditor.Controls.Add(Me.txtBudget)
-        Me.pnlEditor.Controls.Add(Me.Label2)
-        Me.pnlEditor.Controls.Add(Me.txtProjectName)
-        Me.pnlEditor.Controls.Add(Me.Label1)
-        Me.pnlEditor.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlEditor.Location = New System.Drawing.Point(600, 70)
-        Me.pnlEditor.Name = "pnlEditor"
-        Me.pnlEditor.Padding = New System.Windows.Forms.Padding(20)
-        Me.pnlEditor.Size = New System.Drawing.Size(400, 530)
-        Me.pnlEditor.TabIndex = 1
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(52, 152, 219)
-        Me.Label6.Location = New System.Drawing.Point(20, 20)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(142, 25)
-        Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Project Details"
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.BackColor = System.Drawing.Color.FromArgb(46, 204, 113)
-        Me.btnUpdate.FlatAppearance.BorderSize = 0
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnUpdate.ForeColor = System.Drawing.Color.White
-        Me.btnUpdate.Location = New System.Drawing.Point(25, 470)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(350, 45)
-        Me.btnUpdate.TabIndex = 11
-        Me.btnUpdate.Text = "UPDATE SELECTED"
-        Me.btnUpdate.UseVisualStyleBackColor = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right, System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(52, 152, 219)
-        Me.btnAdd.FlatAppearance.BorderSize = 0
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.btnAdd.ForeColor = System.Drawing.Color.White
-        Me.btnAdd.Location = New System.Drawing.Point(25, 410)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(350, 45)
-        Me.btnAdd.TabIndex = 10
-        Me.btnAdd.Text = "ADD NEW PROJECT"
-        Me.btnAdd.UseVisualStyleBackColor = False
-        '
-        'cbStatus
-        '
-        Me.cbStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbStatus.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cbStatus.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.cbStatus.FormattingEnabled = True
-        Me.cbStatus.Location = New System.Drawing.Point(25, 360)
-        Me.cbStatus.Name = "cbStatus"
-        Me.cbStatus.Size = New System.Drawing.Size(350, 28)
-        Me.cbStatus.TabIndex = 9
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label5.ForeColor = System.Drawing.Color.Gray
-        Me.Label5.Location = New System.Drawing.Point(22, 335)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(93, 19)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "Project Status"
-        '
-        'txtDescription
-        '
-        Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDescription.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtDescription.Location = New System.Drawing.Point(25, 230)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(350, 90)
-        Me.txtDescription.TabIndex = 7
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label4.ForeColor = System.Drawing.Color.Gray
-        Me.Label4.Location = New System.Drawing.Point(22, 205)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(124, 19)
-        Me.Label4.TabIndex = 6
-        Me.Label4.Text = "Project Description"
-        '
-        'txtExpenses
-        '
-        Me.txtExpenses.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtExpenses.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.txtExpenses.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtExpenses.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtExpenses.Location = New System.Drawing.Point(25, 170)
-        Me.txtExpenses.Name = "txtExpenses"
-        Me.txtExpenses.Size = New System.Drawing.Size(350, 20)
-        Me.txtExpenses.TabIndex = 5
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label3.ForeColor = System.Drawing.Color.Gray
-        Me.Label3.Location = New System.Drawing.Point(22, 145)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(96, 19)
-        Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Total Expenses"
-        '
-        'txtBudget
-        '
-        Me.txtBudget.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtBudget.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.txtBudget.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtBudget.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtBudget.Location = New System.Drawing.Point(25, 110)
-        Me.txtBudget.Name = "txtBudget"
-        Me.txtBudget.Size = New System.Drawing.Size(350, 20)
-        Me.txtBudget.TabIndex = 3
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label2.ForeColor = System.Drawing.Color.Gray
-        Me.Label2.Location = New System.Drawing.Point(22, 85)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(117, 19)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Budget Allocation"
-        '
-        'txtProjectName
-        '
-        Me.txtProjectName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtProjectName.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.txtProjectName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtProjectName.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtProjectName.Location = New System.Drawing.Point(25, 50)
-        Me.txtProjectName.Name = "txtProjectName"
-        Me.txtProjectName.Size = New System.Drawing.Size(350, 20)
-        Me.txtProjectName.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(22, 25)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(91, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Project Name"
-        '
-        'pnlGrid
-        '
-        Me.pnlGrid.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlGrid.Controls.Add(Me.dgvProjects)
-        Me.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlGrid.Location = New System.Drawing.Point(0, 70)
-        Me.pnlGrid.Name = "pnlGrid"
-        Me.pnlGrid.Padding = New System.Windows.Forms.Padding(20)
-        Me.pnlGrid.Size = New System.Drawing.Size(600, 530)
-        Me.pnlGrid.TabIndex = 2
-        '
-        'dgvProjects
-        '
-        Me.dgvProjects.AllowUserToAddRows = False
-        Me.dgvProjects.AllowUserToDeleteRows = False
-        Me.dgvProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvProjects.BackgroundColor = System.Drawing.Color.White
-        Me.dgvProjects.BorderStyle = System.Windows.Forms.BorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(52, 152, 219)
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        Me.dgvProjects.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvProjects.ColumnHeadersHeight = 40
-        Me.dgvProjects.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvProjects.EnableHeadersVisualStyles = False
-        Me.dgvProjects.Location = New System.Drawing.Point(20, 20)
-        Me.dgvProjects.Name = "dgvProjects"
-        Me.dgvProjects.ReadOnly = True
-        Me.dgvProjects.RowHeadersVisible = False
-        Me.dgvProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProjects.Size = New System.Drawing.Size(560, 490)
-        Me.dgvProjects.TabIndex = 0
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64)
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(235, 245, 251)
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-        Me.dgvProjects.RowsDefaultCellStyle = DataGridViewCellStyle2
-        '
-        'frmProjects
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1000, 600)
-        Me.Controls.Add(Me.pnlGrid)
-        Me.Controls.Add(Me.pnlEditor)
-        Me.Controls.Add(Me.pnlHeader)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "frmProjects"
-        Me.Text = "frmProjects"
-        Me.pnlHeader.ResumeLayout(False)
-        Me.pnlHeader.PerformLayout()
-        Me.pnlEditor.ResumeLayout(False)
-        Me.pnlEditor.PerformLayout()
-        Me.pnlGrid.ResumeLayout(False)
-        CType(Me.dgvProjects, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        pnlHeader = New Panel()
+        lblTitle = New Label()
+        pnlEditor = New Panel()
+        Label6 = New Label()
+        btnUpdate = New Button()
+        btnAdd = New Button()
+        cbStatus = New ComboBox()
+        Label5 = New Label()
+        txtDescription = New TextBox()
+        Label4 = New Label()
+        txtExpenses = New TextBox()
+        Label3 = New Label()
+        txtBudget = New TextBox()
+        Label2 = New Label()
+        txtProjectName = New TextBox()
+        Label1 = New Label()
+        pnlGrid = New Panel()
+        dgvProjects = New DataGridView()
+        pnlHeader.SuspendLayout()
+        pnlEditor.SuspendLayout()
+        pnlGrid.SuspendLayout()
+        CType(dgvProjects, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' pnlHeader
+        ' 
+        pnlHeader.BackColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        pnlHeader.Controls.Add(lblTitle)
+        pnlHeader.Dock = DockStyle.Top
+        pnlHeader.Location = New Point(0, 0)
+        pnlHeader.Margin = New Padding(4, 5, 4, 5)
+        pnlHeader.Name = "pnlHeader"
+        pnlHeader.Size = New Size(1333, 108)
+        pnlHeader.TabIndex = 0
+        ' 
+        ' lblTitle
+        ' 
+        lblTitle.AutoSize = True
+        lblTitle.Font = New Font("Segoe UI", 16F, FontStyle.Bold)
+        lblTitle.ForeColor = Color.White
+        lblTitle.Location = New Point(27, 31)
+        lblTitle.Margin = New Padding(4, 0, 4, 0)
+        lblTitle.Name = "lblTitle"
+        lblTitle.Size = New Size(316, 37)
+        lblTitle.TabIndex = 0
+        lblTitle.Text = "PROJECT MONITORING"
+        ' 
+        ' pnlEditor
+        ' 
+        pnlEditor.BackColor = Color.White
+        pnlEditor.Controls.Add(Label6)
+        pnlEditor.Controls.Add(btnUpdate)
+        pnlEditor.Controls.Add(btnAdd)
+        pnlEditor.Controls.Add(cbStatus)
+        pnlEditor.Controls.Add(Label5)
+        pnlEditor.Controls.Add(txtDescription)
+        pnlEditor.Controls.Add(Label4)
+        pnlEditor.Controls.Add(txtExpenses)
+        pnlEditor.Controls.Add(Label3)
+        pnlEditor.Controls.Add(txtBudget)
+        pnlEditor.Controls.Add(Label2)
+        pnlEditor.Controls.Add(txtProjectName)
+        pnlEditor.Controls.Add(Label1)
+        pnlEditor.Dock = DockStyle.Right
+        pnlEditor.Location = New Point(800, 108)
+        pnlEditor.Margin = New Padding(4, 5, 4, 5)
+        pnlEditor.Name = "pnlEditor"
+        pnlEditor.Padding = New Padding(27, 31, 27, 31)
+        pnlEditor.Size = New Size(533, 815)
+        pnlEditor.TabIndex = 1
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Segoe UI", 14F, FontStyle.Bold)
+        Label6.ForeColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        Label6.Location = New Point(27, 31)
+        Label6.Margin = New Padding(4, 0, 4, 0)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(180, 32)
+        Label6.TabIndex = 12
+        Label6.Text = "Project Details"
+        ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        btnUpdate.BackColor = Color.FromArgb(CByte(46), CByte(204), CByte(113))
+        btnUpdate.FlatAppearance.BorderSize = 0
+        btnUpdate.FlatStyle = FlatStyle.Flat
+        btnUpdate.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        btnUpdate.ForeColor = Color.White
+        btnUpdate.Location = New Point(34, 732)
+        btnUpdate.Margin = New Padding(4, 5, 4, 5)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(467, 69)
+        btnUpdate.TabIndex = 11
+        btnUpdate.Text = "UPDATE SELECTED"
+        btnUpdate.UseVisualStyleBackColor = False
+        ' 
+        ' btnAdd
+        ' 
+        btnAdd.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        btnAdd.BackColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        btnAdd.FlatAppearance.BorderSize = 0
+        btnAdd.FlatStyle = FlatStyle.Flat
+        btnAdd.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        btnAdd.ForeColor = Color.White
+        btnAdd.Location = New Point(34, 646)
+        btnAdd.Margin = New Padding(4, 5, 4, 5)
+        btnAdd.Name = "btnAdd"
+        btnAdd.Size = New Size(467, 69)
+        btnAdd.TabIndex = 10
+        btnAdd.Text = "ADD NEW PROJECT"
+        btnAdd.UseVisualStyleBackColor = False
+        ' 
+        ' cbStatus
+        ' 
+        cbStatus.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        cbStatus.BackColor = Color.WhiteSmoke
+        cbStatus.DropDownStyle = ComboBoxStyle.DropDownList
+        cbStatus.FlatStyle = FlatStyle.Flat
+        cbStatus.Font = New Font("Segoe UI", 11F)
+        cbStatus.FormattingEnabled = True
+        cbStatus.Location = New Point(33, 342)
+        cbStatus.Margin = New Padding(4, 5, 4, 5)
+        cbStatus.Name = "cbStatus"
+        cbStatus.Size = New Size(468, 33)
+        cbStatus.TabIndex = 9
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Segoe UI", 10F)
+        Label5.ForeColor = Color.Gray
+        Label5.Location = New Point(29, 303)
+        Label5.Margin = New Padding(4, 0, 4, 0)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(114, 23)
+        Label5.TabIndex = 8
+        Label5.Text = "Project Status"
+        ' 
+        ' txtDescription
+        ' 
+        txtDescription.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        txtDescription.BackColor = Color.WhiteSmoke
+        txtDescription.BorderStyle = BorderStyle.None
+        txtDescription.Font = New Font("Segoe UI", 11F)
+        txtDescription.Location = New Point(33, 429)
+        txtDescription.Margin = New Padding(4, 5, 4, 5)
+        txtDescription.Multiline = True
+        txtDescription.Name = "txtDescription"
+        txtDescription.Size = New Size(467, 72)
+        txtDescription.TabIndex = 7
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Font = New Font("Segoe UI", 10F)
+        Label4.ForeColor = Color.Gray
+        Label4.Location = New Point(29, 393)
+        Label4.Margin = New Padding(4, 0, 4, 0)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(154, 23)
+        Label4.TabIndex = 6
+        Label4.Text = "Project Description"
+        ' 
+        ' txtExpenses
+        ' 
+        txtExpenses.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        txtExpenses.BackColor = Color.WhiteSmoke
+        txtExpenses.BorderStyle = BorderStyle.None
+        txtExpenses.Font = New Font("Segoe UI", 11F)
+        txtExpenses.Location = New Point(33, 255)
+        txtExpenses.Margin = New Padding(4, 5, 4, 5)
+        txtExpenses.Name = "txtExpenses"
+        txtExpenses.Size = New Size(469, 25)
+        txtExpenses.TabIndex = 5
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Font = New Font("Segoe UI", 10F)
+        Label3.ForeColor = Color.Gray
+        Label3.Location = New Point(29, 216)
+        Label3.Margin = New Padding(4, 0, 4, 0)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(120, 23)
+        Label3.TabIndex = 4
+        Label3.Text = "Total Expenses"
+        ' 
+        ' txtBudget
+        ' 
+        txtBudget.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        txtBudget.BackColor = Color.WhiteSmoke
+        txtBudget.BorderStyle = BorderStyle.None
+        txtBudget.Font = New Font("Segoe UI", 11F)
+        txtBudget.Location = New Point(33, 165)
+        txtBudget.Margin = New Padding(4, 5, 4, 5)
+        txtBudget.Name = "txtBudget"
+        txtBudget.Size = New Size(469, 25)
+        txtBudget.TabIndex = 3
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Segoe UI", 10F)
+        Label2.ForeColor = Color.Gray
+        Label2.Location = New Point(29, 127)
+        Label2.Margin = New Padding(4, 0, 4, 0)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(146, 23)
+        Label2.TabIndex = 2
+        Label2.Text = "Budget Allocation"
+        ' 
+        ' txtProjectName
+        ' 
+        txtProjectName.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+        txtProjectName.BackColor = Color.WhiteSmoke
+        txtProjectName.BorderStyle = BorderStyle.None
+        txtProjectName.Font = New Font("Segoe UI", 11F)
+        txtProjectName.Location = New Point(33, 77)
+        txtProjectName.Margin = New Padding(4, 5, 4, 5)
+        txtProjectName.Name = "txtProjectName"
+        txtProjectName.Size = New Size(469, 25)
+        txtProjectName.TabIndex = 1
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 10F)
+        Label1.ForeColor = Color.Gray
+        Label1.Location = New Point(29, 38)
+        Label1.Margin = New Padding(4, 0, 4, 0)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(114, 23)
+        Label1.TabIndex = 0
+        Label1.Text = "Project Name"
+        ' 
+        ' pnlGrid
+        ' 
+        pnlGrid.BackColor = Color.WhiteSmoke
+        pnlGrid.Controls.Add(dgvProjects)
+        pnlGrid.Dock = DockStyle.Fill
+        pnlGrid.Location = New Point(0, 108)
+        pnlGrid.Margin = New Padding(4, 5, 4, 5)
+        pnlGrid.Name = "pnlGrid"
+        pnlGrid.Padding = New Padding(27, 31, 27, 31)
+        pnlGrid.Size = New Size(800, 815)
+        pnlGrid.TabIndex = 2
+        ' 
+        ' dgvProjects
+        ' 
+        dgvProjects.AllowUserToAddRows = False
+        dgvProjects.AllowUserToDeleteRows = False
+        dgvProjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        dgvProjects.BackgroundColor = Color.White
+        dgvProjects.BorderStyle = BorderStyle.None
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(52), CByte(152), CByte(219))
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 10F, FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = Color.White
+        dgvProjects.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        dgvProjects.ColumnHeadersHeight = 40
+        dgvProjects.Dock = DockStyle.Fill
+        dgvProjects.EnableHeadersVisualStyles = False
+        dgvProjects.Location = New Point(27, 31)
+        dgvProjects.Margin = New Padding(4, 5, 4, 5)
+        dgvProjects.Name = "dgvProjects"
+        dgvProjects.ReadOnly = True
+        dgvProjects.RowHeadersVisible = False
+        dgvProjects.RowHeadersWidth = 51
+        DataGridViewCellStyle2.BackColor = Color.White
+        DataGridViewCellStyle2.Font = New Font("Segoe UI", 10F)
+        DataGridViewCellStyle2.ForeColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        DataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(CByte(235), CByte(245), CByte(251))
+        DataGridViewCellStyle2.SelectionForeColor = Color.Black
+        dgvProjects.RowsDefaultCellStyle = DataGridViewCellStyle2
+        dgvProjects.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvProjects.Size = New Size(746, 753)
+        dgvProjects.TabIndex = 0
+        ' 
+        ' frmProjects
+        ' 
+        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1333, 923)
+        Controls.Add(pnlGrid)
+        Controls.Add(pnlEditor)
+        Controls.Add(pnlHeader)
+        FormBorderStyle = FormBorderStyle.None
+        Margin = New Padding(4, 5, 4, 5)
+        Name = "frmProjects"
+        Text = "frmProjects"
+        pnlHeader.ResumeLayout(False)
+        pnlHeader.PerformLayout()
+        pnlEditor.ResumeLayout(False)
+        pnlEditor.PerformLayout()
+        pnlGrid.ResumeLayout(False)
+        CType(dgvProjects, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
 
     End Sub
 
